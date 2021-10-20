@@ -1,0 +1,4 @@
+zone #REVERSEDOMAINNAME#.in-addr.arpa {
+        primary 127.0.0.1;
+        key dhcpupdate;
+}

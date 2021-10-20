@@ -1,0 +1,15 @@
+#!/bin/bash
+############ Script that check live hosts for installation
+source /acpc/adm/bin/checker
+
+source /acpc/adm/bin/getSettings
+NoOfPC=`getNoOfPCs`	
+for i in `seq 1 $NoOfPC`
+do
+HOSTNAME="team$i"
+RES=`hostIsBad $HOSTNAME`
+if [ $RES -le 0 ]
+ then
+   /acpc/adm/bin/checkHost $HOSTNAME
+ fi
+done

@@ -1,0 +1,11 @@
+server #DNSSERVER#
+zone #DOMAINNAME# 
+update add #HOSTNAME#.#DOMAINNAME#. 302400 IN A #IPADD#
+update add _kerberos.#DOMAINNAME#.	302400 IN CNAME control.#DOMAINNAME#.
+update add _kerberos.#DOMAINNAME#.	302400 IN TXT     "ACPC.GLOBAL"
+update add _kerberos._udp.#DOMAINNAME#.	302400 IN SRV     0 0 88 control.#DOMAINNAME#.
+update add _kerberos._tcp.#DOMAINNAME#.	302400 IN SRV     0 0 88 control.#DOMAINNAME#.
+update add _kerberos-adm._udp.#DOMAINNAME#.	302400 IN SRV     0 0 749 control.#DOMAINNAME#.
+update add _kerberos-master._udp.#DOMAINNAME#.	302400 IN SRV     0 0 749 control.#DOMAINNAME#.
+update add _ldap._tcp.#DOMAINNAME#.	302400	IN	SRV	0 0 389 control.#DOMAINNAME#.
+send

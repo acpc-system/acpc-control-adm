@@ -1,0 +1,187 @@
+#!/bin/bash
+##Script to configure the contest parameters.
+## The script must be run before any setup
+# 1: Configuration files are missing
+# 2: Invalid option
+echo "ACPC contest configurator"
+echo "Written by: Eng. Ahmed Mohamed ElSayed"
+echo "             ahmed.elsayed@acpc.global"
+echo "At any stage,press ctrl-c to break    "
+echo "======================================"
+
+source  /acpc/adm/bin/getSettings
+source  /acpc/adm/bin/setSettings
+source /acpc/adm/bin/checker 
+
+function printValues {
+echo "$1 : " "$2"
+echo "$3 : " "$4"
+echo "$5 : " "$6"
+echo "$7 : " "$8"
+for i in `seq 1 8`
+do
+shift
+done
+echo "$1 : " "$2"
+echo "$3 : " "$4"
+echo "$5 : " "$6"
+echo "$7 : " "$8"
+for i in `seq 1 8`
+do
+shift
+done
+echo "$1 : " "$2"
+echo "$3 : " "$4"
+echo "$5 : " "$6"
+echo "$7 : " "$8"
+for i in `seq 1 8`
+do
+shift
+done
+echo "$1 : " "$2"
+echo "$3 : " "$4"
+}
+
+######################### Check for the config files
+ConfigFiles=`checkForConfigFiles`
+if [ `echo $ConfigFiles | wc -l` -gt 1 ] #Some file(s) are not found
+then
+echo "Error, Followng file is  missing."
+echo "   $ConfigFiles"
+echo "Can't continue, exiting"
+exit 1
+fi
+
+PC2MAC=`getPC2MAC`
+JudgeMAC=`getJudgeMAC`
+PrintMAC=`getPrintMAC`
+WebMAC=`getWebMAC`
+NoOfPC=`getNoOfPCs`
+Subnet=`getSubnet`
+docsurl=`getdocsurl`
+scoreboardtitle=`getscoreboardtitle`
+scoreboardurl=`getscoreboardurl`
+subnetmask=`getsubnetmask`
+dnsservers=`getdnsservers`
+gateway=`getgateway`
+rangestart=`getrangestart`
+rangeend=`getrangeend`
+firstserverip=`getfirstserverip`
+siteid=`getsiteid`
+domainname=`getdomainname`
+keyboardlayout=`getkeyboardlayout`
+
+if [ $# -eq 0 ]	### Not unattended configuration
+then
+NoOfPC=`getValue "Number of contestants PCs without spare" $NoOfPC `
+Subnet=`getValue "Contest subnet" $Subnet`
+subnetmask=`getValue "Contest subnet mask" $subnetmask`
+dnsservers=`getValue "Contest DNS" $dnsservers`
+gateway=`getValue "Contest gateway" $gateway`
+domainname=`getValue "Domain name" $domainname`
+rangestart=`getValue "1St contestant IP" $rangestart`
+rangeend=`getValue "Last Contestant IP" $rangeend`
+docsurl=`getValue "STL Doc url -without domain" $docsurl`
+scoreboardtitle=`getValue "Scoreboard title" "$scoreboardtitle"`
+scoreboardurl=`getValue "Scoreboard URL -Without domain" $scoreboardurl`
+firstserverip=`getValue "1St server IP" $firstserverip`
+siteid=`getValue "SiteID" $siteid`
+keyboardlayout=`getOptions "Keyboard layout (E/F)?" "E" "F"`
+#keyboardlayout="F"
+echo "=--------You have enterd---------------------------="
+
+else
+if [ $1 != "--no-interactive" ]
+then
+	echo "Invalid options..."
+	echo " use without any parameters to manually configure the contest"
+	echo "   or use --no-interactive for unattended configuration"
+	exit 2
+fi
+fi
+printValues "Number of contestants PCs without spare" "$NoOfPC" \
+"Contest subnet" "$Subnet" \
+"Contest subnet mask" "$subnetmask" \
+"Contest DNS" "$dnsservers" \
+"Contest gateway" "$gateway" \
+"Contest domainname" "$domainname" \
+"1St contestant IP" "$rangestart" \
+"Last Contestant IP" "$rangeend" \
+"STL Doc url -without domain" "$docsurl" \
+"Scoreboard title" "$scoreboardtitle" \
+"Scoreboard URL -Without domain" "$scoreboardurl" \
+"1St server IP" "$firstserverip" \
+"SiteID" "$siteid" \
+"Keyboard layout" "$keyboardlayout"
+
+Answer=`getOptions "Save (Y/N)?" "Y" "N"`
+if [ $Answer == "N" ]
+then
+echo "Discarded...."
+exit 0
+fi
+####################### Start saving the settings
+echo "Saving...."
+echo "Writting to contest parameter files.."
+setNoOfPCs "$NoOfPC"
+setSubnet "$Subnet"
+setdocsurl "$docsurl"
+setdomainname "$domainname"
+setscoreboardtitle "$scoreboardtitle"
+setscoreboardurl "$scoreboardurl"
+setsubnetmask "$subnetmask"
+setdnsservers "$dnsservers"
+setgateway "$gateway"
+setrangestart "$rangestart"
+setrangeend "$rangeend"
+setfirstserverip "$firstserverip"
+setsiteid "$siteid"
+setkeyboardlayout "$keyboardlayout"
+echo "Clearing any unneeded accounts"
+eraseTeams
+eraseJudges
+eraseWeb
+erasePrint
+erasePC2
+eraseUnivLogos
+rm /acpc/adm/var/*.pdf
+rm /acpc/adm/var/*_prac*
+rm /acpc/adm/var/*_comp*
+echo "Creating Teams,Judges,PC2,Web,Print accounts"
+createTeams
+createJudges
+CreateWeb
+CreatePrint
+CreatePC2
+echo "Generating accounts PC2,Shell script, and PDF file"
+perl /acpc/adm/bin/genPDF.perl $NoOfPC "Practice Session" prac
+perl /acpc/adm/bin/genPDF.perl $NoOfPC "Competition Session" comp
+chmod +x /acpc/adm/var/$domainname_*_unix
+chown administrator /acpc/adm/var/$domainname_*
+chmod go-rwx /acpc/adm/var/$domainname_*
+echo "Configuring keyboard and timezone"
+setKeyBoardLayout
+echo "Updating needed shortcuts"
+setShortcutsOptions
+echo "Configuring DHCP Service"
+setDHCPOptions
+echo "Configuring BIND Service"
+setBINDOptions
+echo "Configuring Apache2 Service"
+setApache2Options
+echo "Configuring SSH keys and services"
+###setSSHOptions
+echo "Configuring firewall settings for all"
+setFirewallOptions
+#echo "Updateing NIS"
+#updateNIS
+
+echo "Permitting access to control web server virtual directory"
+setPermitAccess htaccess.conf
+setPermitAccess rolesaccess.conf
+setPermitAccess ubuntuaccess.conf
+systemctl restart apache2
+
+echo "Done configuring the contest parameters"
+echo "     After installing every thing, dont forget to run prepare contest script"
+### Configure time zone/coutry in preseed files in all roles

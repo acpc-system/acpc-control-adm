@@ -1,0 +1,124 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 30- update the mirror list
+
+ apt-get update
+
+### 31- Add eclipse for publish scoreboard
+
+wget http://control//prog/common/IDEs/eclipse/eclipse-cpp-photon-R-linux-gtk.tar.gz
+wget http://control//prog/common/IDEs/eclipse/eclipse-java-photon-R-linux-gtk.tar.gz 
+tar zxf eclipse-cpp-photon-R-linux-gtk.tar.gz
+tar zxf eclipse-java-photon-R-linux-gtk.tar.gz
+mv eclipse /usr/local
+
+### 40- Install gnome-panel to deal with shortcuts
+	##Disable gnome-initial-setuo
+ 	apt-get -y purge gnome-initial-setup  
+ apt-get -y install debconf-utils firewalld
+ apt-get -y --force-yes install --no-install-recommends gnome-panel
+
+
+### 70- Downloading cups configuration files
+ wget http://control/prog/common/cupsd.conf
+ mv cupsd.conf /etc/cups
+
+###75- Disable what is new and welcome screen
+ wget http://control/adm/roles/pc2/custom.conf
+ mv custom.conf /etc/gdm3/custom.conf
+
+### 90- Downloading PC2, and extract it
+ wget http://control/prog/common/pc2.tar.gz
+ tar zxf pc2.tar.gz
+ REL=`ls -ld pc2-* | awk ' { print $9 } ' | cut -d'-' -f 2`
+ mv pc2-$REL /usr/local/
+ ln -s  /usr/local/pc2-$REL /usr/local/pc2
+ chmod +x /usr/local/pc2/bin/pc2*
+ cat /usr/local/pc2/pc2v9.ini | sed 's/localhost/pc2/g' > /tmp/pc2v9.ini
+ cp /tmp/pc2v9.ini /usr/local/pc2/pc2v9.ini
+ rm /tmp/pc2v9.ini
+
+### 100- Downloading gnome-settings-daemon.desktop to set the background img
+ wget http://control/roles/pc2/setbg.desktop
+ wget http://control/roles/pc2/setspan.desktop
+ mkdir -p /home/administrator/.config/autostart
+ cp set*.desktop /home/administrator/.config/autostart
+ rm set*.desktop
+ chmod +x /home/administrator/.config/autostart/set*.desktop
+ chown -R administrator /home/administrator/*
+ chown -R administrator /home/administrator/.config
+
+
+### 130- Get the configProfile, and addit to the startup
+ wget http://control/roles/pc2/configProfile
+ cp configProfile /etc/systemd/system
+ chmod +x /etc/systemd/system/configProfile
+ wget http://control/roles/pc2/configProfile.service
+ mv configProfile.service /lib/systemd/system
+ systemctl enable configProfile.service
+ rm configProfile
+
+
+### 140 - Setting up environment variables
+echo "SHELL=/bin/bash">>/etc/environment
+echo "export SHELL">>/etc/environment
+
+### 141- Download bcompare and install it
+ wget http://control/prog/common/bcompare-4.2.5.23088_i386.deb
+ dpkg -i bcompare-4.2.5.23088_i386.deb
+ apt -y -f install
+ rm bcompare-4.2.5.23088_i386.deb
+
+### 150- Add a file contains pc2 external validator
+echo '/usr/sbin/doTask {:infile} {:outfile} {:ansfile} {:resfile} {:basename} {:mainfile} {:siteid} {:timelimit} {:languageletter}' > /home/pc2/Desktop/PC2_External_Validator
+
+
+### 155- Download summry.xsl to /usr/local/pc2/data/xsl
+wget http://control/roles/pc2/summary.xsl
+mv summary.xsl /usr/local/pc2/data/xsl/summary.xsl
+
+### 156 - Download publish scoreboard and untar it in Desktop
+ wget http://control/prog/common/PublishScore.tar
+tar -xf PublishScore.tar
+mv PublishScore /home/pc2/Desktop
+
+ 
+## 160- Disable NTP
+timedatectl set-ntp off
+
+### 161- Disable online upgrade check
+rm /etc/update-motd.d/91-release-upgrade
+
+### 162: Create the pc2s group
+groupadd -g 3000 pc2s
+
+######190- configure 1st time start
+touch /1sttime
+
+rm finalize
+
+exit 0

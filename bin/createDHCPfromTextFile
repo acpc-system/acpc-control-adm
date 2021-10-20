@@ -1,0 +1,16 @@
+#!/bin/bash
+MACS=`cat /tmp/macs`
+STARTIP=110
+TEAMN=51
+for M in $MACS
+do
+echo "host team$TEAMN {"
+echo -e "\t hardware ethernet $M;"
+echo -e "\t fixed-address 172.20.16.$STARTIP;"
+echo -e "\t option host-name \"team$TEAMN\";"
+echo -e "\t option domain-name \"acpc.global\";"
+echo -e "\t ddns-hostname \"team$TEAMN\";"
+echo "}"
+TEAMN=`expr $TEAMN + 1`
+STARTIP=`expr $STARTIP + 1`
+done

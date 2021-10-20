@@ -1,0 +1,174 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 30- update the mirror list
+
+ 	apt-get update
+
+### 40- Install gnome-panel to deal with shortcuts
+	##Disable gnome-initial-setuo
+ 	apt-get -y purge gnome-initial-setup 
+ 	apt-get -y install autofs debconf-utils x11vnc firewalld gnome-calculator make
+ 	apt-get -y --force-yes install --no-install-recommends gnome-panel
+
+
+### 50-Install 3rd party IDEs
+#New IDEs version according to icpc 
+	wget http://control//prog/common/IDEs/eclipse/eclipse-cpp-photon-R-linux-gtk.tar.gz
+	wget http://control//prog/common/IDEs/eclipse/eclipse-java-photon-R-linux-gtk.tar.gz
+	wget http://control//prog/common/IDEs/intellij/ideaIC-2018.1.4.tar.gz
+	wget http://control//prog/common/IDEs/pycharm/pycharm-community-2018.1.4.tar.gz
+#Netbeans removed in 2019 version
+#	wget http://control//prog/common/IDEs/netbeans/netbeans-8.0.2-cpp-linux.sh 
+#	wget http://control//prog/common/IDEs/netbeans/netbeans-8.0.2-javase-linux.sh
+	wget http://control//prog/common/IDEs/clion/CLion-2018.1.5.tar.gz
+	wget http://control//prog/common/IDEs/kotlin/kotlin-native-linux-1.3.41.tar.gz
+	tar zxf CLion-2018.1.5.tar.gz
+	tar zxf kotlin-native-linux-1.3.41.tar.gz
+        tar zxf eclipse-cpp-photon-R-linux-gtk.tar.gz
+        tar zxf eclipse-java-photon-R-linux-gtk.tar.gz
+        tar zxf ideaIC-2018.1.4.tar.gz
+        tar zxf pycharm-community-2018.1.4.tar.gz
+	mv eclipse /usr/local
+	mv idea-IC-181.5087.20 /usr/local/idea-IC
+	mv pycharm-community-2018.1.4 /usr/local/pycharm
+	mv clion-2018.1.5 /usr/local/clion
+	mv kotlin-native-linux-1.3.41 /usr/local/kotlin
+#	sh /usr/local/clion/bin/clion.sh --silent
+#Netbeans removed in 2019 version
+#	sh netbeans-8.0.2-cpp-linux.sh --silent 
+#	sh netbeans-8.0.2-javase-linux.sh --silent 
+#	rm netbeans-8.0.2-cpp-linux.sh
+#	rm netbeans-8.0.2-javase-linux.sh
+	rm CLion-2018.1.5.tar.gz
+	######### Install codeblcoks
+#	X=`curl -s http://control/api/getCodeblocks.cgi`
+#	for i in $X
+#	do
+#		wget http://control/prog/common/IDEs/codeblocks/$i >/dev/null 2>&1
+#	done
+	#dpkg -i *.deb		> /finalize.logs 2>&1
+	#apt -f -y install	>> /finalize.logs 2>&1
+
+#### 60- Install lightd
+DEBIAN_FRONTEND=noninteractive apt-get -y install lightdm
+echo "/usr/sbin/lightdm" > /etc/X11/default-display-manager
+systemctl restart lightdm
+systemctl enable lightdm
+mkdir /etc/x11vnc
+x11vnc -storepasswd acpcacpc /etc/x11vnc/passwd
+
+
+### 70- Downloading cups configuration files
+ wget http://control/prog/common/cupsd.conf
+ mv cupsd.conf /etc/cups
+
+###75- Disable what is new and welcome screen
+ wget http://control/adm/roles/contestant/custom.conf
+ mv custom.conf /etc/gdm3/custom.conf
+
+### 90- Downloading PC2, and extract it
+ wget http://control/prog/common/pc2.tar.gz
+ tar zxf pc2.tar.gz
+ REL=`ls -ld pc2-* | awk ' { print $9 } ' | cut -d'-' -f 2`
+ mv pc2-$REL /usr/local/
+ ln -s  /usr/local/pc2-$REL /usr/local/pc2
+ chmod -x /usr/local/pc2/bin/pc2*
+ chmod +x /usr/local/pc2/bin/pc2team
+ cat /usr/local/pc2/pc2v9.ini | sed 's/localhost/pc2/g' > /tmp/pc2v9.ini
+ cp /tmp/pc2v9.ini /usr/local/pc2/pc2v9.ini
+ rm /tmp/pc2v9.ini
+
+### 100- Downloading gnome-settings-daemon.desktop to set the background img
+ wget http://control/roles/contestant/setbg.desktop
+ wget http://control/roles/contestant/setspan.desktop
+ mkdir -p /home/administrator/.config/autostart
+ cp set*.desktop /home/administrator/.config/autostart
+ rm set*.desktop
+ chmod +x /home/administrator/.config/autostart/set*.desktop
+ wget http://control/prog/common/bg.jpg
+ cp bg.jpg /etc/bg.jpg
+ rm bg.jpg
+ #####Change Login Screen Background
+ wget http://control/prog/common/loginbg.jpg
+ cp loginbg.jpg /etc/loginbg.jpg
+ cp /etc/loginbg.jpg /usr/share/backgrounds/warty-final-ubuntu.png
+ rm loginbg.jpg
+ chown -R administrator /home/administrator/*
+ chown -R administrator /home/administrator/.config
+
+
+### 101- Downloading Kill Process for Codeblocks on Desktop
+ wget http://control/prog/common/killBlock
+ cp killBlock /usr/sbin
+ chmod +x /usr/sbin/killBlock 
+
+
+### 110- Create backup directory , and configure autofs
+ mkdir /backup
+ wget http://control/roles/contestant/backupwork
+ cp backupwork /usr/sbin
+ chmod +x /usr/sbin/backupwork
+ rm backupwork
+
+
+### 130- Get the configProfile, and addit to the startup
+ wget http://control/roles/contestant/configProfile
+ cp configProfile /etc/systemd/system
+ chmod +x /etc/systemd/system/configProfile
+ wget http://control/roles/contestant/configProfile.service
+ mv configProfile.service /lib/systemd/system
+ systemctl enable configProfile.service
+ rm configProfile
+
+### 140 - Setting up environment variables
+echo "SHELL=/bin/bash">>/etc/environment
+echo "export SHELL">>/etc/environment
+
+
+### 150- Remove 
+chmod o-x /usr/bin/x11vnc
+chmod o-x /usr/bin/x11perf     
+chmod o-x /usr/bin/x11perfcomp
+
+## 160- Disable NTP
+timedatectl set-ntp off
+
+### 161- Disable online upgrade check
+rm /etc/update-motd.d/91-release-upgrade
+
+###162- Adding backupwork timer 
+wget http://control/roles/contestant/backupwork.service
+wget http://control/roles/contestant/backupwork.timer
+mv backupwork.service backupwork.timer /etc/systemd/system
+chmod +x /etc/systemd/system/backupwork.*
+systemctl enable backupwork.timer
+
+######190- configure 1st time start
+touch /1sttime
+rm /finalize
+
+exit 0

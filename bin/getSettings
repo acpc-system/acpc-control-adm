@@ -1,0 +1,113 @@
+#!/bin/bash
+##### To get mac address of host from dhcp file
+function getMacFromDHCP {
+OLDHOST=$1
+OLDN=`grep -rns "$OLDHOST {" /acpc/adm/etc/dhcp/dhcpd.conf.hosts|cut -d":" -f1`
+OLDMACN=`expr $OLDN + 1`
+OLDMACLINE=`cat /acpc/adm/etc/dhcp/dhcpd.conf.hosts | sed -n "$OLDMACN p"`
+OLDMAC=`echo $OLDMACLINE | cut -d" " -f3|sed "s/;//g"`
+echo $OLDMAC
+}
+
+function getIPFromDHCP {
+OLDHOST=$1
+OLDN=`grep -rns "$OLDHOST {" /acpc/adm/etc/dhcp/dhcpd.conf.hosts|cut -d":" -f1`
+OLDMACN=`expr $OLDN + 2`
+OLDMACLINE=`cat /acpc/adm/etc/dhcp/dhcpd.conf.hosts | sed -n "$OLDMACN p"`
+OLDIP=`echo $OLDMACLINE | cut -d" " -f2|sed "s/;//g"`
+echo $OLDIP
+}
+
+############# Script to read files contents
+function getOptions {
+Message=$1
+OPT1=$2
+OPT2=$3
+CONT=1
+while [ $CONT -eq 1 ];do
+read -p "$Message" VALUE
+if [ -n $VALUE ]
+then
+if [[ $VALUE == "$OPT1" ]] || [[ $VALUE == "$OPT2" ]]
+then
+ CONT=0
+fi
+fi
+done
+echo $VALUE
+}
+
+function getValue {
+Message=$1
+DefaultValue=$2
+read -p "$Message [$DefaultValue] : "  VALUE
+if [ -n "$VALUE" ]
+then
+	echo $VALUE
+else
+	echo $DefaultValue
+fi
+}
+
+function getPC2MAC {
+cat /acpc/adm/etc/pc2mac
+}
+
+function getJudgeMAC {
+cat /acpc/adm/etc/judgesmac
+}
+
+function getPrintMAC {
+cat /acpc/adm/etc/printmac
+}
+
+function getWebMAC {
+cat /acpc/adm/etc/webmac
+}
+
+function getNoOfPCs {
+cat /acpc/adm/etc/noofpc
+}
+
+function getSubnet {
+cat /acpc/adm/etc/subnet
+}
+
+function getdomainname {
+cat /acpc/adm/etc/domain
+}
+
+function getdocsurl {
+cat /acpc/adm/etc/docsurl
+}
+function getscoreboardtitle {
+cat /acpc/adm/etc/scoreboardtitle
+}
+function getscoreboardurl {
+cat /acpc/adm/etc/scoreboardurl
+}
+function getsubnetmask {
+cat /acpc/adm/etc/subnetmask
+}
+function getdnsservers {
+cat /acpc/adm/etc/dnsservers
+}
+function getgateway {
+cat /acpc/adm/etc/gateway
+}
+function getrangestart {
+cat /acpc/adm/etc/rangestart
+}
+function getrangeend {
+cat /acpc/adm/etc/rangeend
+}
+function getfirstserverip {
+cat /acpc/adm/etc/firstserverip
+}
+function getsiteid {
+cat /acpc/adm/etc/siteid
+}
+function getkeyboardlayout {
+cat /acpc/adm/etc/kblayout
+}
+

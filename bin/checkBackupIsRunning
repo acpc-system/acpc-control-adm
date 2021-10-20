@@ -1,0 +1,21 @@
+#!/bin/bash
+################## Script that check which team has no backup script running
+########################### or has not mount remote backup directory from web 
+source /acpc/adm/bin/checker
+source /acpc/adm/bin/getSettings
+NoOfPC=`getNoOfPCs`
+for i in `seq 1 $NoOfPC`
+do
+HOSTNAME="team$i"
+RES=`hostIsBad $HOSTNAME`
+if [ $RES -le 0 ]	##### That host is not bad host
+then
+echo "Checking for $HOSTNAME"
+RES=`checkForBackup $HOSTNAME`
+RESC=`echo $RES | wc -l`
+if [ $RESC -le 0 ]
+then
+echo "asd"
+fi
+done
+

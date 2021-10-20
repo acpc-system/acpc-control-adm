@@ -1,0 +1,16 @@
+#!/bin/bash
+#################### Script executes a custom commands from the file customCommand
+#################### Update the customCommand as your needs
+##################### This script takes 2 parameters, starting team, ending team.
+if [ $# -ne 2 ]
+then
+	echo "Invalid paramters"
+	echo "Usage [ Starting team #] [Ending team #]"
+	exit 1
+fi
+for i in `seq $1 $2`
+do
+TEAM="team$i"
+echo "Working with $TEAM"
+./customCommand $TEAM
+done

@@ -1,0 +1,59 @@
+TASK : 
+#changes in packages https://icpc.baylor.edu/worldfinals/programming-environment 
+#Update control image to match softwares in the link 
+#Compiler versions : to be matched to the ones used in icpc ( java , c++ , jdk same version as icpc) : DONE
+
+DONE #Netbeans : removed this year 
+
+Python package: extra packages in icpc that we didnt include last year, to be included 
+python2.7 and python3 installed
+Modules missing ? NO
+#modules verified same as icpc / see list in this folder
+
+Exact version of 
+python2 : 
+Python 2.7.15rc1 (default, Apr 15 2018, 21:51:34)
+[GCC 7.3.0] on linux2
+#icpc python2.7.13 , same gcc 
+python3 :
+Python 3.6.5 (default, Apr  1 2018, 05:46:30)
+[GCC 7.3.0] on linux
+#icpc python 3.6.6
+
+
+C version : gcc (Ubuntu 7.3.0-16ubuntu3) 7.3.0
+C++ version : g++ (Ubuntu 7.3.0-16ubuntu3) 7.3.0
+#icpc same 
+
+Java version : openjdk version "10.0.1" 2018-04-17
+OpenJDK Runtime Environment (build 10.0.1+10-Ubuntu-3ubuntu1)
+OpenJDK Server VM (build 10.0.1+10-Ubuntu-3ubuntu1, mixed mode)
+#icpc version 10.0.2
+
+IDE : 
+
+pycharm : 2018.01 
+#icpc 2018.02
+intellij : 2018.01
+#icpc 2018.02
+eclipse : updated from oxygen 3 to photon 4
+#does not have pydev installed 
+#same as icpc photon 
+codeblock : was broken , fixed and moved to 16.01 
+#same as icpc 16.01
+
+clion : 18.01 
+#problem with licence at install can not be parsed, must use free trial or give it in text file to students with instruction to use
+#licence from jetbrains only valid till september 2019
+#icpc version 18.02
+kotlin  :not installed yet 
+
+
+Postponed 
+Kotlin : ask fouad to be included or not
+Clion : licence issue needs a fix ( licence available now only till september 2019 ) 
+
+
+
+
+

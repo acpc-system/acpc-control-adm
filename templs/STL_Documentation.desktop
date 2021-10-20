@@ -1,0 +1,11 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon[en_US]=totem
+Name[en_US]=STL Documentation
+Exec=/usr/bin/firefox #STLURL#
+Name=STL Documentation
+Icon=/usr/share/pixmaps/evolution-data-server/category_hot-contacts_16.png

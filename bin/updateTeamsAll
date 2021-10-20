@@ -1,0 +1,29 @@
+#!/bin/bash
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+for i in `seq 1 $NOOFPCS`
+do
+TEAM="team$i"
+echo "Working with $TEAM"
+#ssh $TEAM "userdel -r team1;hostnamectl set-hostname $TEAM;rm /etc/acpcHostName;firewall-cmd --permanent --add-service=mdns;firewall-cmd --permanent --add-port=631/tcp;firewall-cmd --permanent --add-port=631/udp;firewall-cmd --reload;lpinfo -h print;lpinfo -v"
+#ssh $TEAM "userdel -r team1;hostnamectl set-hostname $TEAM;rm /etc/acpcHostName;/etc/systemd/system/configProfile" 
+
+#scp /home/administrator/bg.jpg $TEAM:/etc
+#scp /acpc/adm/roles/contestant/iptables.rules $TEAM:/tmp
+#ssh $TEAM "chmod +x /tmp/iptables.rules;/tmp/iptables.rules;" 
+#ssh $TEAM "cp /etc/bg.jpg /usr/share/backgrounds/warty-final-ubuntu.png"
+
+
+#ssh $TEAM "rm -Rf /usr/local/netbeans*;rm /home/$TEAM/Desktop/Netbeans*.desktop"
+#scp /acpc/prog/common/IDEs/netbeans/netbeans-8.0.2-javase-linux.sh $TEAM:/
+#scp /acpc/prog/common/IDEs/netbeans/netbeans-8.0.2-cpp-linux.sh $TEAM:/
+#ssh $TEAM "sh /netbeans-8.0.2-javase-linux.sh --silent; sh /netbeans-8.0.2-cpp-linux.sh --silent" 
+#scp /acpc/prog/common/FrenchKeyboad.desktop $TEAM:/home/$TEAM/Desktop
+#ssh $TEAM "chown $TEAM:$TEAM /home/$TEAM/Desktop/FrenchKeyboad.desktop"
+#scp /tmp/netbeans $TEAM:/
+#ssh $TEAM "chmod +x /netbeans;"
+#scp /acpc/prog/common/Calculator.desktop $TEAM:/home/$TEAM/Desktop
+#ssh $TEAM "apt -y install gnome-calculator make;chmod +x /home/$TEAM/Desktop/Calculator.desktop;chown $TEAM:$TEAM /home/$TEAM/Desktop/Calculator.desktop"
+ssh $TEAM "/netbeans " &
+done

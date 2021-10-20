@@ -1,0 +1,23 @@
+#!/bin/bash
+############### Script to generate a random number from 1 to N
+function getRandomTeamN {
+TOTALNEEDED=$1
+ARR=""
+N=`expr $TOTALNEEDED + 1`
+CO=1
+while [ $CO -le $TOTALNEEDED ]
+do
+CN=$RANDOM
+R=`expr $CN % $N`
+L=`echo $ARR |grep ":$R:"|wc -l`
+if [ $R -gt 0 ]
+then
+if [ $L -le 0 ]
+then
+	echo "$R"
+	CO=`expr $CO + 1`
+	ARR="$ARR:$R:"
+fi
+fi
+done
+}

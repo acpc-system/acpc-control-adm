@@ -1,0 +1,25 @@
+#!/bin/bash
+#### Check if the acpcHostname is found, read it and compare to the current hostname
+### If, they are the same, dont do anything
+### If, the file is not found,this means 1st time run the PC,
+###	add to it current hostname, create the home directory and set profile settings, and if there is a backup, restore it
+### else, if it is found anad has a value different than the current,
+###	delete the home directory for the old user,
+###	And repeat the steps as the file is not found
+
+################################ Script is written by:
+############# Eng. Ahmed M. ElSayed
+###############   ahmed.elsayed@acpcacpc.org
+
+#### The next section, executes any commands only for the 1st time the pc start after install
+if [ -f /1sttime ] 
+then
+#151- Download firewalld direct rules, as permanent 
+wget http://control/roles/webserver/iptables.rules > /firewall.logs 2>&1
+chmod +x iptables.rules >> /firewall.logs 2>&1
+systemctl restart firewalld     >> /firewall.logs 2>&1
+./iptables.rules        >> /firewall.logs 2>&1
+rm iptables.rules       >> /firewall.logs 2>&1
+rm /1sttime
+firewall-cmd --reload
+fi

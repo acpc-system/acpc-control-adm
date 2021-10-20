@@ -1,0 +1,157 @@
+#!/bin/bash
+#### Script with functions that checks for any thing
+function checkForBackup {
+HOSTNAME=$1
+MSG=""
+MOUNTPOINT=`ssh root@$HOSTNAME "df -kh | grep 'web:/backup/'|wc -l"`
+if [ $MOUNTPOINT -le 0 ]
+then
+ echo "0"
+else
+ echo "1"
+fi
+}
+
+function checkForConfigFiles {
+echo ""
+if [ ! -f /acpc/adm/etc/configfilelist ] 
+then
+ echo "/acpc/adm/etc/configfilelist"
+ exit 1
+fi
+FILES=`cat /acpc/adm/etc/configfilelist`
+for f in $FILES 
+do
+ if [ ! -f /acpc/adm/etc/$f ]
+ then
+   echo "$f"
+   exit 1
+ fi
+done
+}
+
+function hostIsBad {
+HOSTNAME=`echo "$1"|sed 's/team//g'`
+if [ ! -f /acpc/adm/etc/badpcs ]
+then
+ echo "2"
+else
+ EXIST=`grep "^$HOSTNAME$" /acpc/adm/etc/badpcs|wc -l`
+ if [ $EXIST -ge 1 ]
+ then
+  echo "1"
+ else
+  echo "0"
+ fi
+fi
+}
+
+function checkHostNIS {
+HOSTNAME=$1
+RES=`ssh root@$HOSTNAME "id $HOSTNAME" 2>/dev/null|wc -l`
+if [ $RES -ge 1 ]
+then
+	echo "1"
+else
+	echo "0"
+fi
+}
+
+function checkHostNetBeans {
+HOSTNAME=$1
+RES=`ssh root@$HOSTNAME "ls -l /usr/local/netbeans-8.0.2/bin/netbeans" 2>/dev/null | wc -l`
+if [ $RES -ge 1 ]
+then
+	echo "1"
+else
+	echo "0"
+fi
+
+}
+
+function checkHostName {
+HOSTNAME=$1
+RES=`ssh root@$HOSTNAME "hostname"`
+if [ $HOSTNAME != $RES ]
+then
+ echo "0"
+else
+ echo "1"
+fi
+}
+
+function checkShortCuts {
+HOSTNAME=$1
+CO=`ssh $HOSTNAME  "ls -l /home/$HOSTNAME/Desktop/ | wc -l"`
+if [ $CO -le 3 ] 
+then
+	echo "0"
+else
+	echo "1"
+fi
+}
+
+function checkSamples {
+HOSTNAME=$1
+CO=`ssh $HOSTNAME  "mount|grep samples  | wc -l"`
+if [ $CO -eq 0 ]
+then
+        echo "0"
+else
+        echo "1"
+fi
+}
+
+function CheckHostInstallation {
+HOSTNAME=$1
+ERR=0
+#NISV=`checkHostNIS $HOSTNAME`
+#MSG=""
+#if [ $NISV -le 0 ]
+#then
+	#MSG="1:No NIS"
+	#ERR=1
+#fi
+
+#NETBEANS=`checkHostNetBeans $HOSTNAME`
+#if [ $NETBEANS -le 0 ]
+#then
+	#MSG="1:$MSG , NO Net beans"
+        #ERR=1
+#fi
+
+SHORTCUTS=`checkShortCuts $HOSTNAME`
+if [ $SHORTCUTS -eq 0 ]
+then
+        MSG="$MSG , Incomplete shortcuts"
+        ERR=1
+fi
+
+SAMPLES=`checkSamples $HOSTNAME`
+if [ $SAMPLES -eq 0 ]
+then
+	MSG="$MSG , Samples is not mounted"
+        ERR=1
+fi
+
+HOSTNAMEM=`checkHostName $HOSTNAME`
+if [ $HOSTNAMEM -eq 0 ]
+then
+	MSG="$MSG , Hostname not match"
+	ERR=1
+fi
+
+BACKUP=`checkForBackup $HOSTNAME`
+if [ $BACKUP -eq 0 ]
+then
+        MSG="$MSG , Backup not running"
+        ERR=1
+fi
+
+if [ $ERR -eq 0 ]
+then
+echo "0:NOMSG"
+else
+echo "1:$MSG"
+fi
+}

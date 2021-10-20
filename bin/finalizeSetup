@@ -1,0 +1,13 @@
+#!/bin/bash
+###################### Script must be run after setting up every thing
+## Add here any extra job to do after setting up every thing
+#1-Create home directory in web server to create backup directories
+source /acpc/adm/bin/getSettings
+
+echo "Creating home directories in web server for backup"
+NoOfPC=`getNoOfPCs`
+for i in `seq 1 $NoOfPC`
+do
+HOSTNAME="team$i"
+ssh root@web "mkdir /backup/$HOSTNAME"
+done

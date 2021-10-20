@@ -1,0 +1,93 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 30- update the mirror list
+
+ apt-get update
+
+### 40- Install gnome-panel to deal with shortcuts
+	##Disable gnome-initial-setuo
+ 	apt-get -y purge gnome-initial-setup 
+ apt-get -y install autofs debconf-utils  firewalld
+ apt-get -y --force-yes install --no-install-recommends gnome-panel
+
+
+### 70- Downloading cups configuration files
+ wget http://control/prog/common/cupsd.conf
+ mv cupsd.conf /etc/cups
+
+###75- Disable what is new and welcome screen
+ wget http://control/adm/roles/printserver/custom.conf
+ mv custom.conf /etc/gdm3/custom.conf
+
+### 100- Downloading gnome-settings-daemon.desktop to set the background img
+ wget http://control/roles/printserver/setbg.desktop
+ wget http://control/roles/printserver/setspan.desktop
+ mkdir -p /home/administrator/.config/autostart
+ cp set*.desktop /home/administrator/.config/autostart
+ rm set*.desktop
+ chmod +x /home/administrator/.config/autostart/set*.desktop
+ wget http://control/prog/common/bg.jpg
+ cp bg.jpg /etc/bg.jpg
+ rm bg.jpg
+ #####Change Login Screen Background
+ wget http://control/prog/common/loginbg.jpg
+cp loginbg.jpg /etc/loginbg.jpg
+ cp /etc/loginbg.jpg /usr/share/backgrounds/warty-final-ubuntu.png
+ rm loginbg.jpg
+ chown -R administrator /home/administrator/*
+ chown -R administrator /home/administrator/.config
+
+ ### 110- Configuring the banner page:
+ cd /usr/share/cups/banners
+ cp confidential confidential.original
+ echo 'Job ID: {?job-id}' > confidential
+ echo 'From User: {?job-originating-user-name}' >> confidential
+ echo 'From Computer: {?job-originating-host-name}' >> confidential
+ systemctl restart cups
+ cd -
+
+### 130- Get the configProfile, and addit to the startup
+ wget http://control/roles/printserver/configProfile
+ cp configProfile /etc/systemd/system
+ chmod +x /etc/systemd/system/configProfile
+ wget http://control/roles/printserver/configProfile.service
+ mv configProfile.service /lib/systemd/system
+ systemctl enable configProfile.service
+ rm configProfile
+
+## 160- Disable NTP
+timedatectl set-ntp off
+
+### 161- Disable online upgrade check
+rm /etc/update-motd.d/91-release-upgrade
+
+
+######190- configure 1st time start
+touch /1sttime
+rm /finalize
+
+exit 0

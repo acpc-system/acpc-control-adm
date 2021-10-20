@@ -1,0 +1,15 @@
+dn: uid=#LOGNAME#,ou=Users,dc=acpc,dc=global
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: #LOGNAME#
+sn: ACPC
+givenName: #LOGNAME#
+cn: ACPC #LOGNAME#
+displayName: ACPC #LOGNAME#
+uidNumber: #USERID#
+gidNumber: 5000
+userPassword: johnldap
+gecos: ACPC #LOGNAME#
+loginShell: /bin/bash
+homeDirectory: /home/#LOGNAME#

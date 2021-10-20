@@ -1,0 +1,7 @@
+Alias /stldocs /var/www/stldocs
+<Directory /var/www/stldocs>
+        Options Indexes FollowSymLinks
+        Order allow,deny
+        Allow from all
+		Require all granted
+</Directory>

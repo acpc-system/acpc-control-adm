@@ -1,0 +1,124 @@
+#!/bin/bash
+#######################The parameters
+#{:infile} {:outfile} {:ansfile} {:resfile} {:basename} {:mainfile} {:siteid} {:timelimit} {:languagename}
+####################################
+
+
+function postError {
+FILE1=$1
+FILE2=$2
+bcompare $FILE1 $FILE2 &
+}
+
+
+function reFormat {
+INFILE=$1
+tOUTFILE=$2
+##### Replace spaces with none
+cat $INFILE | sed  's/\t//g' | tr '\n' ' ' | tr '\r' ' '|sed 's/ //g' |awk '{ print tolower($0) } ' > $tOUTFILE
+}
+
+echo "infile : $1" > /tmp/pc2par
+echo "outfile : $2" >> /tmp/pc2par
+echo "ansfile : $3" >> /tmp/pc2par
+echo "resfile : $4" >> /tmp/pc2par
+echo "basename : $5" >> /tmp/pc2par
+echo "mainfile : $6" >> /tmp/pc2par
+echo "siteid : $7" >> /tmp/pc2par
+echo "timelimit : $8" >> /tmp/pc2par
+echo "languagename : $9" >> /tmp/pc2par
+echo "User : $USER" >> /tmp/pc2par
+EXECDIR="/home/$USER/executesite$7$USER"
+echo "Execute : $EXECDIR" >> /tmp/pc2par
+CONTOUTDIR="/home/$USER/Desktop/lastrun"
+echo "Contestant output dir : $CONTOUTDIR"
+###### Check of the Contestant output directory 
+### if not found, create an empty one
+### if found, clear its content
+if [ -d $CONTOUTDIR ]
+then
+	rm -Rf $CONTOUTDIR/* 2> /dev/null
+fi
+BASENAME=$5
+INFILE=$1
+OUTFILE=$2
+ANSFILE=$3
+RESFILE=$4
+TIMELIMIT=$8
+mkdir $CONTOUTDIR
+JUDGETESTCASEDIR="/home/$USER/JudgeCases"
+echo "Debug 1 $EXECDIR/$BASENAME.exe" >> /tmp/pc2par
+echo "Debug 2 $JUDGETESTCASEDIR/$INFILE " >> /tmp/pc2par
+echo "Debug 3 $CONTOUTDIR" >> /tmp/pc2par
+echo "Debug 4 $CONTOUTDIR/$OUTFILE" >> /tmp/pc2par
+if [ -f $EXECDIR/$BASENAME.exe ]
+then
+echo "Solution is a C++" >> /tmp/pc2par
+############### CPP Solution
+cp $EXECDIR/$BASENAME.exe $JUDGETESTCASEDIR/$INFILE $CONTOUTDIR/ 
+cd $CONTOUTDIR
+#$CONTOUTDIR/$BASENAME.exe  > $CONTOUTDIR/$OUTFILE
+timeout -s 9 $TIMELIMIT /usr/sbin/getProcess "$CONTOUTDIR/$BASENAME.exe" $CONTOUTDIR $OUTFILE EXITCODE $EXECDIR/estderr.pc2
+TIMEOUTEXITCODE=$?
+else
+echo "Solution is a JAVA" >> /tmp/pc2par
+############### Java Solution
+cp $EXECDIR/*.class $JUDGETESTCASEDIR/$INFILE $CONTOUTDIR/
+cd $CONTOUTDIR
+#java -Xmx1024m -cp $CONTOUTDIR $BASENAME > $CONTOUTDIR/$OUTFILE
+timeout -s 9 $TIMELIMIT /usr/sbin/getProcess "java -Xmx1024m -cp $CONTOUTDIR $BASENAME" $CONTOUTDIR $OUTFILE EXITCODE $EXECDIR/estderr.pc2
+TIMEOUTEXITCODE=$?
+fi
+############### Check for Time limit exceeded error
+if [ $TIMEOUTEXITCODE -ne 0 ]
+then
+echo '<?xml version="1.0"?>' > $EXECDIR/$RESFILE
+LINE="<result outcome =  \"No - Time Limit Exceeded\" security = \"$RESFILE\"></result>"
+echo $LINE >> $EXECDIR/$RESFILE
+exit 0
+fi
+
+#bcompare ~/Desktop/work/ay7aga/a.out ~/FullTestData/$Y
+EXITCODE=`cat $CONTOUTDIR/EXITCODE`
+
+
+############### Check for the exit code
+if [ $EXITCODE -ne 0 ]
+then
+echo '<?xml version="1.0"?>' > $EXECDIR/$RESFILE
+LINE="<result outcome =  \"No - Run-time Error\" security = \"$RESFILE\"></result>"
+echo $LINE >> $EXECDIR/$RESFILE
+exit 0
+fi
+
+################## Comparing the contestant output and Judge output
+
+diff $CONTOUTDIR/$OUTFILE $JUDGETESTCASEDIR/$ANSFILE >/dev/null
+RES=$?
+echo "Result : $RES " >> /tmp/pc2par
+
+echo '<?xml version="1.0"?>' > $EXECDIR/$RESFILE
+if [ $RES -eq 0 ]
+then
+LINE="<result outcome =  \"accepted\" security = \"$RESFILE\"></result>"
+echo $LINE >> $EXECDIR/$RESFILE
+exit 0
+fi
+reFormat $CONTOUTDIR/$OUTFILE $CONTOUTDIR/USEROUT
+reFormat $JUDGETESTCASEDIR/$ANSFILE $CONTOUTDIR/JUDGEOUT
+diff $CONTOUTDIR/USEROUT $CONTOUTDIR/JUDGEOUT >/dev/null
+RES=$?
+if [ $RES -eq 0 ]
+then
+LINE="<result outcome =  \"No - Output Format Error\" security = \"$RESFILE\"></result>"
+echo $LINE >> $EXECDIR/$RESFILE
+postError "$CONTOUTDIR/$OUTFILE" "$JUDGETESTCASEDIR/$ANSFILE"
+exit 0
+fi
+LINE="<result outcome =  \"No - Wrong Answer\" security = \"$RESFILE\"></result>"
+echo $LINE >> $EXECDIR/$RESFILE
+postError "$CONTOUTDIR/$OUTFILE" "$JUDGETESTCASEDIR/$ANSFILE"
+
+
+#{:infile} {:outfile} {:ansfile} {:resfile}
+

@@ -1,0 +1,149 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 20- update the mirror list
+
+ wget http://control/prog/common/sources.list
+ cp sources.list /etc/apt
+ rm sources.list
+
+
+### 30- update the mirror list
+
+ apt-get update
+
+### 40- Install editors (Geany, netbeans, eclipse, codeblocks)
+
+
+ apt-get -y --force-yes install geany eclipse codeblocks eclipse-cdt g++ autofs debconf-utils portmap  2> /var/log/acmPackages 
+#apt-get -y --force-yes install nis
+ apt-get -y --force-yes install --no-install-recommends gnome-panel
+ wget http://control/prog/common/netbeans-8.0.2-javaee-linux.sh
+ sh netbeans-8.0.2-javaee-linux.sh --silent 
+ wget http://control/prog/common/netbeans-8.0.2-cpp-linux.sh
+ sh netbeans-8.0.2-cpp-linux.sh --silent 
+ rm  netbeans-8.0.2-javaee-linux.sh
+ rm  netbeans-8.0.2-cpp-linux.sh
+
+
+### 50- Disbale guest login, and change the login to manual
+ echo "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+ echo "greeter-show-manual-login=true" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+
+### 60- Download iptablesload script, and iptables rules files
+ wget http://control/roles/contestant/iptables.rules
+ wget http://control/prog/common/iptablesload
+ mv iptables.rules /etc/
+ mv iptablesload /etc/network/if-pre-up.d
+ chmod +x /etc/network/if-pre-up.d/iptablesload
+
+### 70- Downloading cups configuration files
+ wget http://control/prog/common/cupsd.conf
+ mv cupsd.conf /etc/cups
+
+### 80- Configure nis client
+
+ if [ -f /etc/yp.conf ] 
+ then
+  rm /etc/yp.conf
+ fi
+ echo "ACMACPC" > /etc/defaultdomain
+ apt-get -y --force-yes install portmap
+ echo "ACMACPC" > /tmp/nis.seed
+ debconf-set-selections /tmp/nis.seed
+ apt-get -y --force-yes install nis
+ echo "domain ACMACPC server control" > /etc/yp.conf
+ wget http://control/prog/common/nis
+ cp nis /etc/default/nis 
+ rm nis
+ wget http://control/prog/common/nsswitch.conf
+ cp nsswitch.conf /etc
+ rm nsswitch.conf
+ update-rc.d portmap defaults
+ update-rc.d ypbind defaults
+ domainname ACMACPC
+ ypdomainname ACMACPC
+ service portmap restart
+ service ypbind restart
+
+ echo "+::::::" >> /etc/passwd
+ echo "+::::::::" >> /etc/shadow
+ echo "+:::" >> /etc/group
+ ### Chancing the administrator uid to 750 .. anyid less than 1000
+ usermod -u 750 administrator
+ chown -R administrator /home/administrator
+
+
+### 90- Downloading PC2, and extract it
+ wget http://control/prog/common/pc2-9.3beta-3364.tar.gz
+ tar zxf pc2-9.3beta-3364.tar.gz
+ mv pc2-9.3beta /usr/local/
+ chmod -x /usr/local/pc2-9.3beta/bin/pc2*
+ chmod +x /usr/local/pc2-9.3beta/bin/pc2team
+ cat /usr/local/pc2-9.3beta/pc2v9.ini | sed 's/localhost/pc2/g' > /tmp/pc2v9.ini
+ cp /tmp/pc2v9.ini /usr/local/pc2-9.3beta/pc2v9.ini
+ rm /tmp/pc2v9.ini
+ ln -s /usr/local/pc2-9.3beta /usr/local/pc2
+
+### 100- Downloading gnome-settings-daemon.desktop to set the background img
+ wget http://control/roles/contestant/setbg.desktop
+ wget http://control/roles/contestant/setspan.desktop
+ mkdir -p /home/administrator/.config/autostart
+ cp set*.desktop /home/administrator/.config/autostart
+ rm set*.desktop
+ chmod +x /home/administrator/.config/autostart/set*.desktop
+ wget http://control/prog/common/bg.jpg
+ cp bg.jpg /etc/bg.jpg
+ rm bg.jpg
+ chown -R administrator /home/administrator/*
+ chown -R administrator /home/administrator/.config
+
+
+### 110- Create backup directory , and configure autofs
+ mkdir /backup
+ wget http://control/roles/contestant/backupwork
+ cp backupwork /usr/sbin
+ chmod +x /usr/sbin/backupwork
+ rm backupwork
+
+
+### 120- Remove #NetworkManager# from the interfaces file
+ apt-get -y --force-yes remove --purge network-manager-gnome network-manager
+ cat /etc/network/interfaces | sed 's/#NetworkManager#//g'  > interfaces
+ cp interfaces /etc/network/interfaces
+ rm interfaces
+ 
+### 130- Get the configProfile, and addit to the startup
+ wget http://control/roles/contestant/configProfile
+ cp configProfile /etc/init.d
+ chmod +x /etc/init.d/configProfile
+ rm configProfile
+ cat /etc/rc.local | sed 's/exit 0/\/etc\/init.d\/configProfile/g' > rc.local
+ echo "exit 0" >> /tmp/rc.local
+ cp /tmp/rc.local /etc/rc.local
+ rm /tmp/rc.local
+
+exit 0

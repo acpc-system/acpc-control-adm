@@ -1,0 +1,35 @@
+#!/bin/bash
+############### You have to pass two files name
+############# 1- The input file that downloaded from ICPC
+############  2- The output file 
+############### It reads input files and create seats for contestants table
+if [ $# -lt 2 ]
+then
+	echo "Invalid files"
+	exit 1
+fi
+EFILE="/acpc/adm/etc/emptyTables";
+if [ ! -f $EFILE ]
+then
+echo "Sorry, Empty tables file emptyTables is not exist"
+exit 2
+fi
+IFILE=$1
+OFILE=$2
+TEAMS=`cat $IFILE | sed 's/^0\t//g'`
+CO=1
+IFS=$'\n'
+for l in $TEAMS
+do
+CONT=1
+while [ $CONT -eq 1 ]
+do
+N=`grep "^$CO:" $EFILE | wc -l`
+if [ $N -eq 0 ]
+then
+echo -e "$CO\t$l" >> $OFILE
+CONT=0
+fi
+CO=`expr $CO + 1`
+done
+done

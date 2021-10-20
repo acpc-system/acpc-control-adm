@@ -1,0 +1,116 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 20- update the mirror list
+
+ wget http://control/prog/common/sources.list
+ cp sources.list /etc/apt
+ rm sources.list
+
+
+### 30- update the mirror list
+
+ apt-get update
+
+### 40- Install editors (Geany, netbeans, eclipse, codeblocks)
+
+
+ apt-get -y --force-yes install --no-install-recommends gnome-panel vncviewer
+
+
+### 50- Disbale guest login, and change the login to manual
+ echo "allow-guest=false" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+ echo "greeter-show-manual-login=true" >> /usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf
+
+### 60- Download iptablesload script, and iptables rules files
+ wget http://control/roles/coachview/iptables.rules
+ wget http://control/prog/common/iptablesload
+ mv iptables.rules /etc/
+ mv iptablesload /etc/network/if-pre-up.d
+ chmod +x /etc/network/if-pre-up.d/iptablesload
+
+### 80- Configure nis client
+
+ if [ -f /etc/yp.conf ] 
+ then
+  rm /etc/yp.conf
+ fi
+ echo "ACMACPC" > /etc/defaultdomain
+ apt-get -y --force-yes install portmap
+ echo "ACMACPC" > /tmp/nis.seed
+ debconf-set-selections /tmp/nis.seed
+ apt-get -y --force-yes install nis
+ echo "domain ACMACPC server control" > /etc/yp.conf
+ wget http://control/prog/common/nis
+ cp nis /etc/default/nis 
+ rm nis
+ wget http://control/prog/common/nsswitch.conf
+ cp nsswitch.conf /etc
+ rm nsswitch.conf
+ update-rc.d portmap defaults
+ update-rc.d ypbind defaults
+ domainname ACMACPC
+ ypdomainname ACMACPC
+ service portmap restart
+ service ypbind restart
+
+ echo "+::::::" >> /etc/passwd
+ echo "+::::::::" >> /etc/shadow
+ echo "+:::" >> /etc/group
+ ### Chancing the administrator uid to 750 .. anyid less than 1000
+ usermod -u 750 administrator
+ chown -R administrator /home/administrator
+
+
+### 100- Downloading gnome-settings-daemon.desktop to set the background img
+ 
+ wget http://control/roles/coachview/setbg.desktop
+ wget http://control/roles/coachview/setspan.desktop
+ mkdir -p /home/administrator/.config/autostart
+ cp set*.desktop /home/administrator/.config/autostart
+ rm set*.desktop
+ chmod +x /home/administrator/.config/autostart/set*.desktop
+ wget http://contro/prog/common/bg.jpg
+ cp bg.jpg /etc/bg.jpg
+ rm bg.jpg
+ chown -R administrator /home/administrator/*
+ chown -R administrator /home/administrator/.config
+ mkdir /home/view
+ chown -R view /home/view
+
+### 110- download the vncviewer desktop
+ wget http://control/prog/common/vncviewer.desktop
+ cp vncviewer.desktop /home/view
+ chmod +x /home/view/vncviewer.desktop
+ rm vncviewer.desktop
+
+### 120- Remove #NetworkManager# from the interfaces file
+ apt-get -y --force-yes remove --purge network-manager-gnome network-manager
+ cat /etc/network/interfaces | sed 's/#NetworkManager#//g'  > interfaces
+ cp interfaces /etc/network/interfaces
+ rm interfaces
+ 
+exit 0

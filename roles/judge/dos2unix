@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $# -lt 2 ]
+then
+echo "Invalid parameters|"
+echo "Pass the source and destination directory"
+exit 1
+fi
+SRCDIR=$1
+DSTDIR=$2
+FILES=`ls -l $SRCDIR |sed '1d' | awk ' { print $9 } '`
+for f in $FILES
+do
+echo "Transforming $SRCDIR/$f to $DSTDIR/$f"
+tr -d '\015'  < $SRCDIR/$f  > $DSTDIR/$f
+done

@@ -1,0 +1,105 @@
+host team1 {
+	hardware ethernet 00:50:56:28:1A:A0;
+	fixed-address 172.20.16.100;
+	option host-name "team1";
+	option domain-name "aecpc.eg";
+	ddns-hostname "team1";
+}
+host team2 {
+	hardware ethernet 00:50:56:39:20:54;
+	fixed-address 172.20.16.101;
+	option host-name "team2";
+	option domain-name "aecpc.eg";
+	ddns-hostname "team2";
+}
+host team3 {
+	hardware ethernet 00:50:56:39:20:53;
+	fixed-address 172.20.16.102;
+	option host-name "team3";
+	option domain-name "aecpc.eg";
+	ddns-hostname "team3";
+}
+host pc2 {
+	hardware ethernet B8:AE:ED:BB:DF:B6;
+	fixed-address 172.20.16.10;
+	option host-name "pc2";
+	option domain-name "aecpc.eg";
+	ddns-hostname "pc2";
+}
+host judge1 {
+	hardware ethernet A0:8C:FD:DA:12:D8;
+	fixed-address 172.20.16.11;
+	option host-name "judge1";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge1";
+}
+host judge2 {
+	hardware ethernet A0:8C:FD:DA:12:D4;
+	fixed-address 172.20.16.12;
+	option host-name "judge2";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge2";
+}
+host judge3 {
+	hardware ethernet A0:8C:FD:D6:E1:45;
+	fixed-address 172.20.16.13;
+	option host-name "judge3";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge3";
+}
+host judge4 {
+	hardware ethernet A0:8C:FD:DA:12:C1;
+	fixed-address 172.20.16.14;
+	option host-name "judge4";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge4";
+}
+host judge5 {
+	hardware ethernet A0:8C:FD:D6:E1:Fa;
+	fixed-address 172.20.16.15;
+	option host-name "judge5";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge5";
+}
+host judge6 {
+	hardware ethernet A0:8C:FD:D6:E1:Fb;
+	fixed-address 172.20.16.16;
+	option host-name "judge6";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge6";
+}
+host judge7 {
+	hardware ethernet A0:8C:FD:D6:E1:Fc;
+	fixed-address 172.20.16.17;
+	option host-name "judge7";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge7";
+}
+host judge8 {
+	hardware ethernet A0:8C:FD:D6:E1:Fd;
+	fixed-address 172.20.16.18;
+	option host-name "judge8";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge8";
+}
+host judge9 {
+	hardware ethernet A0:8C:FD:D6:E1:Fe;
+	fixed-address 172.20.16.19;
+	option host-name "judge9";
+	option domain-name "aecpc.eg";
+	ddns-hostname "judge9";
+}
+host print {
+	hardware ethernet A0:8C:FD:D6:E1:46;
+	fixed-address 172.20.16.20;
+	option host-name "print";
+	option domain-name "aecpc.eg";
+	ddns-hostname "print";
+}
+host web {
+	hardware ethernet A0:8C:FD:D6:E2:15;
+	fixed-address 172.20.16.21;
+	option host-name "web";
+	option domain-name "aecpc.eg";
+	ddns-hostname "web";
+}

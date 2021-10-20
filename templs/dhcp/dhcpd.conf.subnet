@@ -1,0 +1,6 @@
+subnet #SUBNET#.0 netmask 255.255.255.0 {
+	range #SUBNET#.#STARTIP# #SUBNET#.#ENDIP#;
+	option routers #SUBNET#.#GATEWAY#;
+	filename "pxelinux.0";
+	next-server #SUBNET#.2;
+}

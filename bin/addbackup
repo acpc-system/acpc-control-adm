@@ -1,0 +1,9 @@
+ X=`curl -s http://control/api/getContestant.cgi`
+ N=`echo $X| cut -d= -f 2`
+ for i in `seq 101 $N`
+ do
+         mkdir /backup/team$i
+         myUID=`expr 2000 + $i`
+         chown -R $myUID /backup/team$i
+ done
+

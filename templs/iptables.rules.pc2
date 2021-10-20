@@ -1,0 +1,7 @@
+firewall-cmd --permanent --add-port=50002/tcp
+firewall-cmd --permanent --add-service=mdns
+firewall-cmd --permanent --direct --add-rule ipv4 filter INTPUT 0 -p tcp -m iprange  --dst-range #PRINTSTART#-#PRINTEND# --dport 631 ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p udp -m iprange  --dst-range #PRINTSTART#-#PRINTEND# --dport 631 ACCEPT
+firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="#CONTROLHOST#/32" port protocol="tcp" port="22" accept'
+firewall-cmd --permanent --remove-service=ssh
+firewall-cmd --reload

@@ -1,0 +1,7 @@
+firewall-cmd --permanent --add-service=ipp
+firewall-cmd --permanent --add-service=ipp-client
+firewall-cmd --permanent --add-service=mdns
+firewall-cmd --permanent --add-port=631/tcp
+firewall-cmd --permanent --zone=public --add-rich-rule='rule family="ipv4" source address="172.20.16.2/32" port protocol="tcp" port="22" accept'
+firewall-cmd --permanent --remove-service=ssh
+firewall-cmd --reload

@@ -1,0 +1,9 @@
+firewall-cmd --permanent --add-service=http
+firewall-cmd --permanent --add-port=111/tcp
+firewall-cmd --permanent --add-port=2000/tcp
+firewall-cmd --permanent --add-port=2001/tcp
+firewall-cmd --permanent --add-port=2049/tcp
+firewall-cmd --permanent --add-port=111/udp
+firewall-cmd --permanent --add-port=2000/udp
+firewall-cmd --permanent --add-port=2002/udp
+firewall-cmd --permanent --add-port=2049/udp

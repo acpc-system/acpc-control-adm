@@ -1,0 +1,131 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          finalize
+# Required-Start:    $local_fs $remote_fs $network $syslog $named
+# Required-Stop:     $local_fs $remote_fs $network $syslog $named
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# X-Interactive:     true
+# Short-Description: Start/stop apache2 web server
+### END INIT INFO
+
+######################################### Finalize script
+# Is used to perform any additional tasks Just after the machine rebooted after
+#   installation
+########################################
+
+cd /tmp
+
+### 10- Download the server public key
+
+wget http://control/prog/common/authorized_keys
+mkdir /root/.ssh
+sudo cp authorized_keys /root/.ssh
+sudo rm authorized_keys
+
+### 30- update the mirror list
+
+ apt-get update
+
+### 40- Install editors (Geany, netbeans, eclipse, codeblocks)
+
+
+ apt-get -y --force-yes install nfs-kernel-server apache2 firewalld
+ systemctl enable nfs-kernel-server
+ systemctl enable apache2
+
+
+### 70- Downloading cups configuration files
+ wget http://control/prog/common/cupsd.conf
+ mv cupsd.conf /etc/cups
+
+### 90- Creating backupdirectory & scoreboard & stldocs & samples
+ mkdir /backup /var/www/scoreboard /var/www/stldocs /home/samples /home/JudgeCases
+
+### 100- Adding /backup to exportfs
+ echo "/backup *(rw,no_root_squash,no_subtree_check)" >> /etc/exports
+ echo "/var/www/scoreboard pc2(rw,no_root_squash,no_subtree_check)" >> /etc/exports
+ X=`curl -s http://control/api/getJudge.cgi`
+ N=`echo $X| cut -d= -f 2`
+ for i in `seq 1 $N`
+ do
+   echo "/home/samples judge$i(rw,no_root_squash,no_subtree_check)">> /etc/exports
+   echo "/home/JudgeCases judge$i(rw,no_root_squash,no_subtree_check)">> /etc/exports
+ done
+ echo "/home/samples *(ro,no_root_squash,no_subtree_check)">> /etc/exports 
+ X=`curl -s http://control/api/getContestant.cgi`
+ N=`echo $X| cut -d= -f 2`
+ for i in `seq 1 $N`
+ do
+	 mkdir /backup/team$i
+	 myUID=`expr 2000 + $i`
+	 chown -R $myUID /backup/team$i
+ done
+  systemctl restart nfs-kernel-server 
+
+
+### 110-Enable Scoreboard virtual directory
+ wget http://control/roles/webserver/htaccess.scoreboard
+ cp htaccess.scoreboard /etc/apache2/sites-enabled
+ rm htaccess.scoreboard
+
+### 120- Ebale STLDocs virtual directory
+ wget http://control/roles/webserver/htaccess.stldocs
+ cp htaccess.stldocs /etc/apache2/sites-enabled
+ rm htaccess.stldocs
+
+### 130- Prepare STLDocs
+ wget http://control/prog/common/stldocs.tar
+ cd /var/www/stldocs
+ tar xf /tmp/stldocs.tar
+ cd /tmp
+ rm stldocs.tar
+
+### 140- Add the virtual directory to apache2 
+ sed -e '2 a Include /etc/apache2/sites-enabled/htaccess.stldocs' -e '2 a Include /etc/apache2/sites-enabled/htaccess.scoreboard' /etc/apache2/sites-enabled/000-default.conf > /tmp/000-default.conf
+ cp /tmp/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+ rm /tmp/000-default.conf
+ systemctl restart apache2
+
+### 150-Adjust permissions
+ chgrp -R 3000 /home/samples /home/JudgeCases
+ chmod g+s,g+w /home/samples /home/JudgeCases
+ chmod 775 /home/samples /home/JudgeCases
+ chown 4000 /var/www/scoreboard
+
+### 160- creates css and images directories, and then download css and png files to created directories
+mkdir /var/www/scoreboard/css /var/www/scoreboard/images
+wget http://control/roles/webserver/scoreboard/css/bootstrap.css
+wget http://control/roles/webserver/scoreboard/css/bootstrap-responsive.min.css
+wget http://control/roles/webserver/scoreboard/css/style.css
+wget http://control/roles/webserver/scoreboard/images/flag.png
+wget http://control/roles/webserver/scoreboard/images/logo.png
+mv *.css /var/www/scoreboard/css
+mv *.png /var/www/scoreboard/images
+
+############ 170- configuring nfs ports
+
+wget http://control/roles/webserver/nfs-kernel-server
+cp nfs-kernel-server /etc/default
+
+wget http://control/roles/webserver/30-ports-nfs.conf
+mv 30-ports-nfs.conf /etc/sysctl.d/
+sysctl --system
+
+
+
+############ 180-setup configProfile
+### 130- Get the configProfile, and addit to the startup
+ wget http://control/roles/webserver/configProfile
+ cp configProfile /etc/systemd/system
+ chmod +x /etc/systemd/system/configProfile
+ wget http://control/roles/webserver/configProfile.service
+ mv configProfile.service /lib/systemd/system
+ systemctl enable configProfile.service
+ rm configProfile
+
+######190- configure 1st time start
+touch /1sttime
+
+exit 0

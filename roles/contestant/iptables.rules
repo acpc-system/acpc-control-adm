@@ -1,0 +1,12 @@
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp --dport 22 -j DROP
+firewall-cmd --permanent --add-service=mdns
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp -m iprange  --dst-range 172.20.16.20-172.20.16.20 --dport 631 ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p udp -m iprange  --dst-range 172.20.16.20-172.20.16.20 --dport 631 ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter INTPUT 0 -p tcp -m iprange  --dst-range 172.20.16.20-172.20.16.20 --dport 631 ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter INPUT 0 -p udp -m iprange  --dst-range 172.20.16.20-172.20.16.20 --dport 631 ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp -d 172.20.16.21 --match multiport --dport 80,111,2000,2001,2049 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p udp -d 172.20.16.21 --match multiport --dport 111,2000,2002,2049 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp -d 172.20.16.2 --dport 80 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p udp -d 172.20.16.2 --dport 53 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -p tcp -d 172.20.16.10 --dport 50002 -j ACCEPT
+firewall-cmd --permanent --direct --add-rule ipv4 filter OUTPUT 0 -j DROP

@@ -1,0 +1,7 @@
+host #HOSTNAME# {
+	hardware ethernet #HOSTMAC#;
+	fixed-address #HOSTIP#;
+	option host-name "#HOSTNAME#";
+	option domain-name "#DOMAINNAME#";
+	ddns-hostname "#HOSTNAME#";
+}

@@ -1,0 +1,7 @@
+for i in `seq 1 2`
+do sudo ssh root@judge$i "echo '172.20.16.13    print.local' >> /etc/hosts";
+done
+
+sudo ssh root@pc2 "echo '172.20.16.13    print.local' >> /etc/hosts";
+
+

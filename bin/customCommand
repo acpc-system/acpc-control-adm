@@ -1,0 +1,10 @@
+################ Please do not edit here
+if [ $# -ne 1 ]
+then
+	echo "Invalid paramters"
+	echo "Node name to exexcute"
+	exit 1
+fi
+
+################################################ Starting editing here
+ssh $1 "mount web:/home/samples /home/$1/Desktop/samples"

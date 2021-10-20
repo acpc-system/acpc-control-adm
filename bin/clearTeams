@@ -1,0 +1,18 @@
+#!/bin/bash
+source /acpc/adm/bin/checker
+source /acpc/adm/bin/getSettings
+N=`getNoOfPCs`
+for i in `seq 1 $N`
+#for i in `seq  1 48`
+do
+HOST="team$i"
+HN="$1"
+if [ `hostIsBad $HN` -eq 0 ]
+then
+ echo "Cleaning $HOST"
+ echo "         *Cleaning home directory,acpcHostname, and any related files"
+ sudo ssh root@$HOST "rm -Rf /home/$HOST /etc/acpcHostname;find /tmp -user $HOST -exec rm {} \;" > /dev/null 2>&1
+ echo "         *Cleaning the backup directory"
+ #sudo ssh root@web "rm -Rf /backup/$HOST/*" > /dev/null 2>&1
+fi
+done

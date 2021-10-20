@@ -1,0 +1,14 @@
+#!/bin/bash
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+for i in `seq 49 185`
+do
+TEAM="team$i"
+#TEAM=$1
+echo "Working with $TEAM"
+#ssh $TEAM "userdel -r team1;hostnamectl set-hostname $TEAM;rm /etc/acpcHostName;firewall-cmd --permanent --add-service=mdns;firewall-cmd --permanent --add-port=631/tcp;firewall-cmd --permanent --add-port=631/udp;firewall-cmd --reload;lpinfo -h print;lpinfo -v"
+#ssh $TEAM "firewall-cmd --permanent --add-service=mdns;firewall-cmd --permanent --add-port=631/tcp;firewall-cmd --permanent --add-port=631/udp;firewall-cmd --reload;lpinfo -h print;lpinfo -v"
+ssh $TEAM "lpstat -a"
+#ssh $TEAM "rm /etc/acpcHostname;/etc/systemd/system/configProfile;rm /home/$TEAM/Desktop/*.1" 
+done

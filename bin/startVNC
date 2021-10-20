@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in `seq 1 108`
+do 
+TEAM="team$i"
+echo "$TEAM"
+ssh $TEAM "x11vnc -shared -viewonly -forever -display :0 -auth /var/run/lightdm/root/:0 -loop " &
+done

@@ -1,0 +1,23 @@
+#!/bin/bash
+######################### Script that set the mac adderss for a host
+######################## The scripts take host name and the mac them, and optional, no if you do not want to restart dhcp service
+########################   and then restart dhcp
+if [ $# -lt 2 ]
+then
+	echo "Invalid host name and mac"
+	exit 1
+fi
+HOSTNAME=$1
+HOSTMAC=$2
+source /acpc/adm/bin/getSettings
+## 1- Get old host mac address
+OLDMAC=`getMacFromDHCP $HOSTNAME`
+tNEWDHCP=`cat /acpc/adm/etc/dhcp/dhcpd.conf.hosts|sed -e "s/$OLDMAC;/$HOSTMAC;/g"`
+NEWDHCP=`echo "$tNEWDHCP"`
+echo "$NEWDHCP" > /tmp/newDHCPFILE
+cp /tmp/newDHCPFILE /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+rm /tmp/newDHCPFILE
+if [ $3 != "n" ] 
+then
+systemctl restart isc-dhcp-server
+fi

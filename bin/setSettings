@@ -1,0 +1,509 @@
+#!/bin/bash
+############# Script to read files contents
+source /acpc/adm/bin/getSettings
+
+function setHostPassword {
+if [ ! $# -eq 2 ] 
+then
+	exit 1
+fi
+HOST=$1
+PASSWORD=$2
+HPASS=`openssl passwd -1 $PASSWORD`
+ssh root@$HOST "usermod -p '${HPASS}' $HOST"
+}
+
+
+function setDenyAccess {
+CONFFILE=$1
+echo "Order deny,allow" > /acpc/adm/etc/apache2/$CONFFILE
+echo "Deny from all" >>  /acpc/adm/etc/apache2/$CONFFILE
+}
+
+function setPermitAccess {
+CONFFILE=$1
+echo "Order allow,deny" > /acpc/adm/etc/apache2/$CONFFILE
+echo "Allow from all" >>  /acpc/adm/etc/apache2/$CONFFILE
+#added for 14
+echo "Require all granted" >>  /acpc/adm/etc/apache2/$CONFFILE
+}
+
+
+function setKeyBoardLayout {
+keyboardlayout=`getkeyboardlayout`
+if [ $keyboardlayout == "E" ]
+then
+echo 'd-i keyboard-configuration/layoutcode string us' > /acpc/prog/common/keyboard.cfg
+else
+echo 'd-i keyboard-configuration/layoutcode string fr' > /acpc/prog/common/keyboard.cfg
+echo 'd-i keymap select fr(latin9)' >> /acpc/prog/common/keyboard.cfg
+fi
+
+}
+
+function addDomain {
+### Function that add the domain to the server in the url
+DOMAINNAME=$1
+URL=$2
+IFS="/"
+read -ra ARR <<< "$URL"
+CO=1
+for i in "${ARR[@]}"
+do 
+if [ $CO -ge 4 ]
+ then
+  newURL="$newURL/$i"
+ fi
+if [ $CO -eq 3 ]
+ then
+  CO=4
+  SERVERNAME="$i"
+ fi
+if [ $CO -lt 3 ]
+ then
+  CO=`expr $CO + 1`
+ fi
+
+done
+echo "http://$SERVERNAME.$DOMAINNAME$newURL"
+}
+
+
+function setShortcutsOptions {
+DOMAINNAME=`getdomainname`
+STLURL=`getdocsurl`
+SCOREBOARDURL=`getscoreboardurl`
+SCOREBOARDTITLE=`getscoreboardtitle`
+nSTLURL=`addDomain $DOMAINNAME $STLURL|sed 's/\//\\\\\//g'`
+nSCOREBOARDURL=`addDomain $DOMAINNAME $SCOREBOARDURL|sed 's/\//\\\\\//g'`
+STLFILE=`cat /acpc/adm/templs/STL_Documentation.desktop| sed "s/#STLURL#/$nSTLURL/g"`
+echo "$STLFILE" > /tmp/STL_Documentation.desktop
+cp /tmp/STL_Documentation.desktop /acpc/prog/common/STL_Documentation.desktop
+rm /tmp/STL_Documentation.desktop
+
+SBFILE=`cat /acpc/adm/templs/ScoreBoard.desktop| sed -e "s/#SCOREBOARDURL#/$nSCOREBOARDURL/g" -e "s/#SHORTCUTNAME#/$SCOREBOARDTITLE/g"`
+echo "$SBFILE" > /tmp/ScoreBoard.desktop
+cp /tmp/ScoreBoard.desktop /acpc/prog/common/ScoreBoard.desktop
+rm /tmp/ScoreBoard.desktop
+}
+
+
+function setJudgeFirewall {
+FIRSTSERVERIP=`getfirstserverip`
+oSUBNET=`getSubnet`
+PC2IP="$oSUBNET.$FIRSTSERVERIP"
+CONTROLIP=`host control | head -1| awk ' { print $4 } ' `
+IPT=`cat /acpc/adm/templs/iptables.rules.judge| sed -e "s/#CONTROLHOST#/$CONTROLIP/g" `
+echo "$IPT" > /tmp/iptables.rules
+cp /tmp/iptables.rules /acpc/adm/roles/judge/iptables.rules
+rm /tmp/iptables.rules
+}
+
+function setWebServerFirewall {
+oSUBNET=`getSubnet`
+CONTROLIP=`host control | head -1| awk ' { print $4 } ' `
+IPT=`cat /acpc/adm/templs/iptables.rules.webserver| sed "s/#CONTROLIP#/$CONTROLIP/g
+"`
+echo "$IPT" > /tmp/iptables.rules
+cp /tmp/iptables.rules /acpc/adm/roles/webserver/iptables.rules
+rm /tmp/iptables.rules
+}
+
+function setPC2Firewall {
+oSUBNET=`getSubnet`
+CONTROLIP=`host control | head -1| awk ' { print $4 } ' `
+IPT=`cat /acpc/adm/templs/iptables.rules.pc2| sed "s/#CONTROLHOST#/$CONTROLIP/g
+"`
+echo "$IPT" > /tmp/iptables.rules
+cp /tmp/iptables.rules /acpc/adm/roles/pc2/iptables.rules
+rm /tmp/iptables.rules
+}
+
+function setTeamFirewall {
+oSUBNET=`getSubnet`
+CONTROLIP=`host control | head -1| awk ' { print $4 } ' `
+PC2IP=`getIPFromDHCP pc2`
+WEBIP=`getIPFromDHCP web`
+N=`cat /acpc/adm/etc/printmac|wc -l`
+if [ $N -eq 1 ]
+then
+        PRINTSERVERNAME="print"
+        PRINTIP=`getIPFromDHCP print`
+	LASTOCTET=`echo $PRINTIP| cut -d'.' -f4`
+	ENDIP="${oSUBNET}.${LASTOCTET}"
+	#echo "$PRINTIP to $ENDIP"
+else
+	PRINTSERVERNAME="print1"
+        PRINTIP=`getIPFromDHCP $PRINTSERVERNAME`
+	N=`expr $N - 1`
+        LASTOCTET=`echo $PRINTIP| cut -d'.' -f4`
+	LASTOCTET=`expr $LASTOCTET + $N`
+        ENDIP="${oSUBNET}.${LASTOCTET}"
+fi
+
+#IPT=`cat /acpc/adm/templs/iptables.rules.team| sed -e "s/#WEBSERVER#/$WEBIP/g" -e "s/#PRINTSTART#/$PRINTIP/g"  -e "s/#PRINTEND#/$ENDIP/g" -e "s/#CONTROLSERVER#/$CONTROLIP/g" -e "s/#PC2SERVER#/$PC2IP/g"`
+echo "CONTRL : $CONTROLIP"
+IPT=`cat /acpc/adm/templs/iptables.rules.team| sed -e "s/#WEBSERVER#/$WEBIP/g" -e "s/#PRINTSTART#/$PRINTIP/g"  -e "s/#PRINTEND#/$ENDIP/g"  -e "s/#PC2SERVER#/$PC2IP/g"  -e "s/#CONTROLHOST#/$CONTROLIP/g"`
+echo "$IPT" > /tmp/iptables.rules
+cp /tmp/iptables.rules /acpc/adm/roles/contestant/iptables.rules
+rm /tmp/iptables.rules
+}
+
+function setPrintServerFirewall {
+oSUBNET=`getSubnet`
+CONTROLIP=`host control | head -1| awk ' { print $4 } ' `
+IPT=`cat /acpc/adm/templs/iptables.rules.printserver| sed "s/#CONTROLHOST#/$CONTROLIP/g
+"`
+echo "$IPT" > /tmp/iptables.rules
+cp /tmp/iptables.rules /acpc/adm/roles/printserver/iptables.rules
+rm /tmp/iptables.rules
+}
+
+function setFirewallOptions {
+setWebServerFirewall
+setPC2Firewall
+setJudgeFirewall
+setTeamFirewall
+setPrintServerFirewall
+}
+
+function generateSSHfor {
+USERNAME=$1
+HOMEDIR=$2
+if [ -f /tmp/id_dsa ]
+then
+ rm /tmp/id_dsa
+fi
+if [ -f /tmp/id_dsa.pub ]
+then
+ rm /tmp/id_dsa.pub
+fi
+if [ ! -d $HOMEDIR/.ssh ]
+then
+  mkdir $HOMEDIR/.ssh
+else
+ if [ -f $HOMEDIR/.ssh/id_dsa ]
+ then
+  rm $HOMEDIR/.ssh/id_dsa*
+ fi
+ if [ -f $HOMEDIR/.ssh/known_hosts ]
+ then
+  rm $HOMEDIR/.ssh/known_hosts
+ fi
+fi
+ssh-keygen -q -N "" -t dsa -f /tmp/id_dsa
+cp /tmp/id_dsa* $HOMEDIR/.ssh
+chown $USERNAME  $HOMEDIR/.ssh/*
+rm /tmp/id_dsa*
+}
+
+function setSSHOptions {
+### Create the keys
+####### 1- Creating keys for root
+generateSSHfor root /root
+#su administrator
+#generateSSHfor administrator /home/administrator
+cp /root/.ssh/id_dsa.pub /tmp/authorized_keys
+#cat /home/administrator/.ssh/id_dsa.pub >> /tmp/authorized_keys
+cp /tmp/authorized_keys /acpc/prog/common/authorized_keys
+rm /tmp/authorized_keys
+}
+
+function setApache2Options {
+DOMAINNAME=`getdomainname`
+SERVERNAME="control.$DOMAINNAME"
+ADMINEMAIL="admin@$DOMAINNAME"
+CONFFILE=`cat /acpc/adm/templs/apache2/server.conf|sed -e "s/#SERVERNAME#/$SERVERNAME/g" -e "s/#ADMINEMAIL#/$ADMINEMAIL/g"`
+echo "$CONFFILE" > /tmp/server.conf
+cp /tmp/server.conf /acpc/adm/etc/apache2/server.conf
+rm /tmp/server.conf
+systemctl restart apache2
+}
+
+function setBINDOptions {
+### Clear /var/lib/bind
+rm /var/lib/bind/*
+DOMAINNAME=`getdomainname`
+### Getting the subnet
+oSUBNET=`getSubnet`
+SUBNET=`getSubnet|awk ' BEGIN { FS="." } { print $3"."$2"."$1}'`
+
+### Configuring acls file
+ACLFILE=`cat /acpc/adm/templs/bind/acls.conf| sed "s/#SUBNET#/$oSUBNET/g"`
+echo "$ACLFILE" > /acpc/adm/etc/bind/acls.conf
+
+### Configuring Forwarding zone definition
+ZONEFILE=`cat /acpc/adm/templs/bind/acpcDomain.conf| sed "s/#DOMAINNAME#/$DOMAINNAME/g"`
+echo "$ZONEFILE" > /acpc/adm/etc/bind/acpcDomain.conf
+
+### Configuring Reverse zone definition
+RZONEFILE=`cat /acpc/adm/templs/bind/acpcReverseDomain.conf | sed "s/#REVERSEDOMAINNAME#/$SUBNET/g"`
+echo "$RZONEFILE" > /acpc/adm/etc/bind/acpcReverseDomain.conf
+
+### Configure Forward zone file records
+ZONEFILEJ=`cat /acpc/adm/templs/bind/BINDZonefile|sed "s/#DOMAINNAME#/$DOMAINNAME/g"`
+echo "$ZONEFILEJ" > /var/lib/bind/$DOMAINNAME
+
+###aConfigure Reverse zone file record
+RZONEFILE=`cat /acpc/adm/templs/bind/BINDRZonefile|sed "s/#REVERSEDOMAINNAME#/$SUBNET/g"`
+echo "$RZONEFILE" > /var/lib/bind/$SUBNET.in-addr.arpa
+
+### Restarting bind service
+echo "..Restarting BIND"
+systemctl restart bind9
+sleep 2
+### Add control server to the DDNS
+KEY=`grep secret /acpc/adm/etc/bind/dhcpupdate.conf | awk ' { print $2 } ' | sed -e "s/\"//g" -e "s/;//g"`
+CONTROLIP="$oSUBNET.2"
+CONTROLHOST="control"
+ADDFILE=`cat /acpc/adm/templs/bind/addControl2DDNS|sed -e "s/#DNSSERVER#/$CONTROLIP/g" -e "s/#DOMAINNAME#/$DOMAINNAME/g" -e "s/#HOSTNAME#/$CONTROLHOST/g" -e "s/#IPADD#/$CONTROLIP/g"`
+echo "$ADDFILE" > /tmp/addfile
+nsupdate -y dhcpupdate:$KEY -v /tmp/addfile 
+ADDRFILE=`cat /acpc/adm/templs/bind/addRControl2DDNS|sed -e "s/#DNSSERVER#/$CONTROLIP/g" -e "s/#HOSTFQDN#/$CONTROLHOST/g" -e "s/#REVERSESUBNET#/$SUBNET/g" -e "s/#HOSTIP#/2/g"`
+echo "$ADDRFILE" > /tmp/addrfile
+nsupdate -y dhcpupdate:$KEY -v /tmp/addrfile 
+#rm /tmp/addfile
+#rm /tmp/addrfile
+systemctl restart bind9
+
+
+}
+
+function generateDHCPHOST {
+SUFFIX=$1 
+MAC=$2
+IPADD=$3 
+OMAINNAME=$4
+Entry=`cat /acpc/adm/templs/dhcp/dhcpd.conf.hosts | sed -e "s/#HOSTNAME#/$SUFFIX/g" -e "s/#HOSTMAC#/$MAC/g" -e "s/#HOSTIP#/$IPADD/g" -e "s/#DOMAINNAME#/$DOMAINNAME/g"`
+echo "$Entry"
+}
+
+function generateDHCPHosts {
+SUFFIX=$1
+SUBNET=$2
+STARTIP=$3
+MACFILE=$4
+TMPFILE=$5
+DOMAINNAME=$6
+MACS=`cat /acpc/adm/etc/$MACFILE`
+MACCOUNTER=`echo "$MACS" | wc -l `
+if [ -f $TMPFILE ]
+then
+ rm $TMPFILE
+fi
+if [ $MACCOUNTER -eq 1 ] && [ $SUFFIX != "judge" ] 
+then
+	HOSTENTRY=`generateDHCPHOST $SUFFIX $MACS "$SUBNET.$STARTIP" $DOMAINNAME`
+	echo "$HOSTENTRY" > $TMPFILE
+else
+CO=$STARTIP
+i=1
+for M in $MACS
+do
+ HOSTNAME="$SUFFIX$i"
+ HOSTENTRY=`generateDHCPHOST $HOSTNAME $M "$SUBNET.$CO" $DOMAINNAME`
+ echo "$HOSTENTRY" >> $TMPFILE
+ CO=`expr $CO + 1`
+ i=`expr $i + 1`
+done
+fi
+echo "$MACCOUNTER"
+}
+
+
+
+function setDHCPOptions {
+#$## Getting the domainname
+DOMAINNAME=`getdomainname`
+### Getting the subnet
+oSUBNET=`getSubnet`
+SUBNET=`getSubnet|awk ' BEGIN { FS="." } { print $3"."$2"."$1}'`
+STARTIP=`getrangestart`
+ENDIP=`getrangeend`
+GATEWAY=`getgateway`
+FIRSTSERVERIP=`getfirstserverip`
+####1-Set domainupdate and reversedomain update files
+DOMAINUPDATE=`cat /acpc/adm/templs/dhcp/domainupdate|sed "s/#DOMAINNAME#/$DOMAINNAME/g"`
+REVERSEDOMAINIPDATE=`cat /acpc/adm/templs/dhcp/reversedomainupdate|sed "s/#REVERSEDOMAINNAME#/$SUBNET/g"`
+echo "$DOMAINUPDATE" > /tmp/domainupdate
+echo "$REVERSEDOMAINIPDATE" > /tmp/reversedomainupdate
+cp /tmp/domainupdate /acpc/adm/etc/dhcp/domainupdate
+cp /tmp/reversedomainupdate /acpc/adm/etc/dhcp/reversedomainupdate
+rm /tmp/domainupdate /tmp/reversedomainupdate
+ 
+### Configure dhcp options in dhcpd.conf.options
+DHCPOPTIONS=`cat /acpc/adm/templs/dhcp/dhcpd.conf.options | sed -e "s/#DOMAINNAME#/$DOMAINNAME/g" -e "s/#REVERSEDOMAINNAME#/$SUBNET/g" -e "s/#SUBNET#/$oSUBNET/g" -e "s/#DNSSERVER#/$oSUBNET.2/g" ` 
+echo "$DHCPOPTIONS" > /tmp/dhcpd.conf.options
+cp /tmp/dhcpd.conf.options /acpc/adm/etc/dhcp/dhcpd.conf.options
+rm /tmp/dhcpd.conf.options
+
+### Configure DHCP subnet
+DHCPSUBNET=`sed -e "s/#SUBNET#/$oSUBNET/g" -e "s/#STARTIP#/$STARTIP/g" -e "s/#ENDIP#/$ENDIP/g" -e "s/#GATEWAY#/$GATEWAY/g" /acpc/adm/templs/dhcp/dhcpd.conf.subnet`
+echo "$DHCPSUBNET" > /tmp/dhcpd.conf.subnet
+cp /tmp/dhcpd.conf.subnet /acpc/adm/etc/dhcp/dhcpd.conf.subnet
+rm /tmp/dhcpd.conf.subnet
+
+
+### Generates teams,judges,printers,web dhcp hosts file
+#rm /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+N=`generateDHCPHosts "team" "$oSUBNET" "$STARTIP" "contestantmac" "/tmp/teamhosts" "$DOMAINNAME"`
+N=`generateDHCPHosts "pc2" "$oSUBNET" "$FIRSTSERVERIP" "pc2mac" "/tmp/pc2host" "$DOMAINNAME"`
+JUDGEIP=`expr $FIRSTSERVERIP + 1`
+N=`generateDHCPHosts "judge" "$oSUBNET" "$JUDGEIP" "judgesmac" "/tmp/judgehosts" "$DOMAINNAME"`
+PRINTIP=`expr $JUDGEIP + $N`
+N=`generateDHCPHosts "print" "$oSUBNET" "$PRINTIP" "printmac" "/tmp/printhosts" "$DOMAINNAME"`
+WEBIP=`expr $PRINTIP + $N`
+N=`generateDHCPHosts "web" "$oSUBNET" "$WEBIP" "webmac" "/tmp/webhosts" "$DOMAINNAME"`
+
+### Update the original DHCP.CONF.HOSTS file
+cp /tmp/teamhosts /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+cat /tmp/pc2host >> /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+cat /tmp/judgehosts >> /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+cat /tmp/printhosts >> /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+cat /tmp/webhosts >> /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+rm /tmp/*host
+rm /tmp/*hosts
+### Configure IP  for the control server
+CIP="$oSUBNET.2"
+#INFS=`cat /acpc/adm/templs/interfaces | sed -e "s/#CONTROLIP#/$CIP/g" -e "s/#SUBNET#/255.255.255.0/g" -e "s/#DOMAINNAME#/$DOMAINNAME/g"`
+nmcli con mod Internal ipv4.dns-search $DOMAINNAME
+nmcli con mod Internal ipv4.addresses $CIP/24
+#echo "$INFS" > /tmp/interfaces
+#cp /tmp/interfaces /etc/network/interfaces
+#/etc/init.d/networking restart
+#rm  /tmp/interfaces
+### Restarting DHCP service
+nmcli con up Internal
+systemctl restart  isc-dhcp-server
+
+}
+
+function createTeams {
+N=`cat /acpc/adm/etc/noofpc`
+for i in `seq 1 $N`
+do
+useradd team$i
+done
+}
+
+function createJudges {
+N=`wc -l /acpc/adm/etc/judgesmac|awk ' { print $1 } '`
+#Removed in LCPC2015 according to Ahmad's and Coach 
+#request while they were fixing PC2 External Validator
+#if [ $N -eq 1 ]
+#then
+# useradd judge
+#else
+groupadd judges
+for i in `seq 1 $N`
+do
+# this will create a judge and set its primary group judges
+useradd judge$i -g judges
+done
+#fi
+}
+
+function CreateWeb {
+useradd web
+}
+
+function CreatePrint {
+useradd print
+}
+
+
+function CreatePC2 {
+useradd pc2
+}
+
+function deleteAccounts {
+Username=$1
+Pattern="^$Username[0-9]*"
+PASSLINES=`grep "$Pattern" /etc/passwd|awk 'BEGIN { FS=":" } { print $1 }'`
+for ACC in $PASSLINES
+do
+ userdel $ACC
+done
+}
+
+function updateNIS {
+CUR=`pwd`
+cd /var/yp
+make
+cd $CUR
+}
+
+function eraseUnivLogos {
+rm -Rf /acpc/adm/images/univ_logos/*
+}
+
+function eraseTeams {
+deleteAccounts team
+}
+
+function eraseJudges {
+deleteAccounts judge
+groupdel judges
+}
+
+function eraseWeb {
+deleteAccounts web
+}
+
+function erasePrint {
+deleteAccounts print
+}
+
+function erasePC2 {
+deleteAccounts pc2
+}
+
+
+function setNoOfPCs {
+echo $1 > /acpc/adm/etc/noofpc
+}
+
+
+function setdomainname {
+echo $1 > /acpc/adm/etc/domain
+}
+
+function setSubnet {
+echo $1 > /acpc/adm/etc/subnet
+}
+
+function setdocsurl {
+echo $1 > /acpc/adm/etc/docsurl
+}
+function setscoreboardtitle {
+echo $1 >/acpc/adm/etc/scoreboardtitle
+}
+function setscoreboardurl {
+echo $1 >/acpc/adm/etc/scoreboardurl
+}
+function setsubnetmask {
+echo $1 >/acpc/adm/etc/subnetmask
+}
+function setdnsservers {
+echo $1 >/acpc/adm/etc/dnsservers
+}
+function setgateway {
+echo $1 >/acpc/adm/etc/gateway
+}
+function setrangestart {
+echo $1 >/acpc/adm/etc/rangestart
+}
+function setrangeend {
+echo $1 >/acpc/adm/etc/rangeend
+}
+function setfirstserverip {
+echo $1 >/acpc/adm/etc/firstserverip
+}
+function setsiteid {
+echo $1 >/acpc/adm/etc/siteid
+}
+
+function setkeyboardlayout {
+echo $1 > /acpc/adm/etc/kblayout
+}
+

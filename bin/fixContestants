@@ -1,0 +1,23 @@
+#!/bin/bash
+for i in ` seq   1 36 `
+do
+TEAM="team$i"
+echo "Working with $TEAM"
+#ssh $TEAM "rm -Rf /home/$TEAM/Desktop/work/* /home/$TEAM/.eclipse"
+ssh $TEAM "shutdown now"
+#ssh $TEAM "rm /etc/bg.jpg"
+#scp /sc/* $TEAM:/home/$TEAM/Desktop
+#ssh $TEAM "nmcli con mod aecpc ipv4.dns-search aecpc.eg; nmcli con up aecpc"
+#ssh $TEAM "nmcli con mod aecpc ipv4.dns 172.20.16.2;nmcli con mod aecpc ipv4.dns-search aecpc.eg;nmcli con up aecpc"
+#ssh $TEAM "hostnamectl set-hostname $TEAM;rm /etc/acpcHostname;systemctl restart configProfile;"
+#ssh $TEAM "rm /home/$TEAM/Desktop/*.1;"
+#ssh $TEAM "chown $TEAM /home/$TEAM/Desktop/*"
+#ssh $TEAM "mount web:/home/samples /home/$TEAM/Desktop/samples;mount web:/backup/$TEAM /backup"
+#scp /acpc/prog/common/IDEs/eclipse/eclipse-cpp-oxygen-3a-linux-gtk.tar.gz /acpc/prog/common/IDEs/eclipse/eclipse-java-oxygen-3a-linux-gtk.tar.gz  $TEAM:/tmp
+#ssh $TEAM "cd /tmp;rm -R /usr/local/eclipse;cd /usr/local/;tar zxf /tmp/eclipse-cpp-oxygen-3a-linux-gtk.tar.gz;tar zxf /tmp/eclipse-java-oxygen-3a-linux-gtk.tar.gz"
+#scp removeAllOtherTeams $TEAM:/tmp
+#ssh $TEAM "chmod +x /tmp/removeAllOtherTeams;/tmp/removeAllOtherTeams $TEAM"
+#scp disableNTFS $TEAM:/tmp
+#ssh $TEAM "chmod +x /tmp/disableNTFS;/tmp/disableNTFS $TEAM"
+#ssh $TEAM "systemctl unmask sleep.target suspend.target hybrid-sleep.target"
+done

@@ -1,0 +1,6 @@
+subnet 172.20.16.0 netmask 255.255.255.0 {
+	range 172.20.16.100 172.20.16.150;
+	option routers 172.20.16.5;
+	filename "pxelinux.0";
+	next-server 172.20.16.2;
+}

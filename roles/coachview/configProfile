@@ -1,0 +1,53 @@
+#!/bin/bash
+#### Check if the acpcHostname is found, read it and compare to the current hostname
+### If, they are the same, dont do anything
+### If, the file is not found,this means 1st time run the PC,
+###	add to it current hostname, create the home directory and set profile settings, and if there is a backup, restore it
+### else, if it is found anad has a value different than the current,
+###	delete the home directory for the old user,
+###	And repeat the steps as the file is not found
+
+################################ Script is written by:
+############# Eng. Ahmed M. ElSayed
+###############   ahmed.elsayed@acpcacpc.org
+
+
+function restoreData {
+oldHostName=$1
+curHostName=$2
+if [ -d /backup/$oldHostName/cur ]
+then
+cp -r /backup/$oldHostName/cur/work/* /home/$curHostName/Desktop/work
+chown -R $curHostName:$curHostName /home/$curHostName/Desktop/work
+fi
+}
+
+function createUserProfile {
+curHostName=`hostname`
+mkdir -p /home/$curHostName/Desktop/work
+######################## We have here to create the desktop shortcuts
+mkdir -p /home/$curHostName/.config/autostart
+cp /home/administrator/.config/autostart/set*.desktop /home/$curHostName/.config/autostart
+chmod +x /home/$curHostName/.config/autostart/set*.desktop
+chown -R $curHostName:$curHostName /home/$curHostName
+chown -R $curHostName:$curHostName /home/$curHostName/.config
+echo $curHostName > /etc/acpcHostname
+### Downloading all shortcuts
+cd /home/$curHostName/Desktop
+wget http://control/prog/common/cups.desktop
+sudo chown administrator *.desktop
+chmod +rx *.desktop
+}
+
+curHostName=`hostname`
+if [ ! -f /etc/acpcHostname ]
+then
+	createUserProfile
+	exit 0
+fi
+oldHostName=`cat /etc/acpcHostname`
+if [ $oldHostName != $curHostName ]
+then
+ rm -Rf /home/$oldHostName
+ createUserProfile
+fi

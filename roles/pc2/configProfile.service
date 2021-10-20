@@ -1,0 +1,12 @@
+[Unit]
+Description=Config Profile service
+After=network-online.target
+Requires=network-online.target
+ 
+[Service]
+ExecStart=/etc/systemd/system/configProfile
+StandardOutput=null
+ 
+[Install]
+WantedBy=multi-user.target
+Alias=configProfile.service

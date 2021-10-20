@@ -1,0 +1,23 @@
+#!/bin/bash
+############################## Accept a file name for a file contains mac addresses
+############################## Sets the mac for a team name starting with CO
+########### Accept 2 parameters, 
+#########		1- File name
+#########		2- Starting counter
+if [ $# -ne 2 ]
+then
+	echo "Invalid paramters"
+	echo "Parameters are : [MAC addresses File Name] [StartingCounter]"
+	exit 1
+fi
+
+MACS=`cat $1`
+CO=1
+for m in $MACS
+do
+		TEAM="team$CO"
+		echo "Set $TEAM with $m"
+		CO=`expr $CO + 1`
+		./setHostMAC $TEAM $m n
+done
+systemctl restart isc-dhcp-server

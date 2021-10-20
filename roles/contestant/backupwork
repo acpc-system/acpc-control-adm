@@ -1,0 +1,19 @@
+#!/bin/bash
+####################### Script to backup work directory to /backup/hostname/cur/work
+#################### Written by Eng. Ahmed M. ElSayed
+###################### ahmed.elsayed@acpcacpc.org
+
+curHostName=`hostname`
+if [ -d /backup/$curHostName ]
+then
+ if [ -h /backup/$curHostName/cur ]
+  then
+   rm /backup/$curHostName/cur
+  fi 
+ curDir=`date| sed -e 's/ /_/g' -e 's/:/_/g'`
+ mkdir -p /backup/$curHostName/$curDir/work
+ ln -s /backup/$curHostName/$curDir /backup/$curHostName/cur
+ cp -R /home/$curHostName/Desktop/work/* /backup/$curHostName/$curDir/work
+fi
+
+

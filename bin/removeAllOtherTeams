@@ -1,0 +1,8 @@
+#!/bin/bash
+T=$1
+TEAMS=`grep "^team[0-9]*:" /etc/passwd|grep -v $T| cut -d":" -f 1`
+for T in $TEAMS
+do
+		userdel -r $T
+done
+

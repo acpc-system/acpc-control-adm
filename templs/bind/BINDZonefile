@@ -1,0 +1,12 @@
+$ORIGIN .
+$TTL 86400	; 1 day
+#DOMAINNAME#			IN SOA	localhost. root.localhost. (
+				13         ; serial
+				604800     ; refresh (1 week)
+				86400      ; retry (1 day)
+				2419200    ; expire (4 weeks)
+				86400      ; minimum (1 day)
+				)
+			NS	localhost.
+$ORIGIN #DOMAINNAME#.
+$TTL 602400	; 3 days 12 hours

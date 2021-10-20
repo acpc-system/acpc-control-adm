@@ -1,0 +1,5 @@
+ddns-domainname "#DOMAINNAME#";
+ddns-rev-domainname "#REVERSEDOMAINNAME#.in-addr.arpa";
+option broadcast-address #SUBNET#.255;
+option domain-name "#DOMAINNAME#";
+option domain-name-servers #DNSSERVER#;
