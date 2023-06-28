@@ -9,11 +9,11 @@ Shell scripts, php scripts, perl scripts, and configuration files used to admini
 * |-templs
 * |-tmp
 * |-var
-* |-yml
-*   |-jammy
-*     |-efi
-*        |-desktop
-*        |server
-*     |-legacy
-*        |-desktop
-*        |-server
+* |-yml	: Directory contains all yaml files for autoinstallation
+*   |-jammy	:	Distribution name
+*     |-efi	:	Architecture for UEFI boot systems
+*        |-desktop	:	Type
+*        |server	:	Type
+*     |-legacy	:	Architecture for legacy boot systems
+*        |-desktop	:	Type
+*        |-server	:	Type
