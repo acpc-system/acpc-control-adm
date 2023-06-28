@@ -12,8 +12,8 @@ Shell scripts, php scripts, perl scripts, and configuration files used to admini
 * |-yml
 *   |-jammy
 *     |-efi
-*     |-desktop
+*        |-desktop
 *        |server
-*      |-legacy
+*     |-legacy
 *        |-desktop
 *        |-server
