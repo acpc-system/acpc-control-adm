@@ -5,15 +5,15 @@ Shell scripts, php scripts, perl scripts, and configuration files used to admini
 * |-bin
 * |-etc
 * |-images
-|-roles
-|-templs
-|-tmp
-|-var
-|-yml
-  |-jammy
-     |-efi
-       |-desktop
-       |server
-     |-legacy
-       |-desktop
-       |-server
+* |-roles
+* |-templs
+* |-tmp
+* |-var
+* |-yml
+*   |-jammy
+*      |-efi
+*        |-desktop
+*        |server
+*      |-legacy
+*        |-desktop
+*        |-server
