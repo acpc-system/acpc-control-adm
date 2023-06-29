@@ -31,7 +31,7 @@ autoinstall:
       enp0s3:
         dhcp4: true
     version: 2
-  proxy: http://172.20.16.2:3142
+  proxy: http://10.0.0.9:3142
   source:
     id: ubuntu-server
     search_drivers: false
