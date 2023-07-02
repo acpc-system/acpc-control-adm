@@ -2,6 +2,7 @@
 use PDF::Create;
 use feature qw(say);
 my @PasswordDomain=("A".."H","J"."N","P".."Q","1".."9","!","@","%","^");
+my $STARTTEAM;
 if ( $#ARGV == -1 ) {
 	print "Insufficient patamers \n";
 	print "genPDF.perl <No of users> <Header> <File suffix>\n";
@@ -10,6 +11,7 @@ if ( $#ARGV == -1 ) {
 	print "The generated PDF will be <Domain>_<File Suffix>_unix";
         exit 0;
 }
+$STARTTEAM=$ARGV[3] || 1;
 
 open (my $MYFILE, '/acpc/adm/etc/domain');
 $DOMAIN=<$MYFILE>;
@@ -37,7 +39,7 @@ $Font=$acpcPDF->font('BaseFont' => 'Helvetica');
 open($PC2File,">$PC2File");
 print $PC2File "site\taccount\tpassword\tpermdisplay\tpermlogin\t\n";
 open($UnixFile,">$UNIXFile");
-for (my $i=1; $i<=$N;$i++) {
+for (my $i=$STARTTEAM; $i<=$N+$STARTTEAM-1;$i++) {
 my $Page=$A4Page->new_page;
 $Page->stringc($Font,40,300,650,$PRACCOMP);
 $USERNAME="team$i";
@@ -76,10 +78,10 @@ close($TeamFile);
 print $PC2File "$SITEID\t$USERNAME\t$PASSWORD\ttrue\ttrue\n";
 ######################## 324 * 135
 ########################## scaled to 65 * 27
-if ( -e "/acpc/adm/images/team.gif" ) {
-	my $Pic=$acpcPDF->image("/acpc/adm/images/team.gif");
-	$Page->image('image'=>$Pic,'xscale' => 0.1, 'yscale' => 0.1, 'xpos' => 90, 'ypos' => 710 );
-}
+#if ( -e "/acpc/adm/images/team.gif" ) {
+#my $Pic=$acpcPDF->image("/acpc/adm/images/team.gif");
+#$Page->image('image'=>$Pic,'xscale' => 1.4, 'yscale' => 1.4, 'xpos' => 90, 'ypos' => 680 );
+#}
 
 
 if ( -e "/acpc/adm/images/host.gif" ) {

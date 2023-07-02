@@ -1,0 +1,364 @@
+host team1 {
+	hardware ethernet 50:eb:f6:97:13:4a;
+	fixed-address 172.20.17.1;
+	option host-name "team1";
+	option domain-name "acpc.global";
+	ddns-hostname "team1";
+}
+host team2 {
+	hardware ethernet 50:eb:f6:98:ae:82;
+	fixed-address 172.20.17.2;
+	option host-name "team2";
+	option domain-name "acpc.global";
+	ddns-hostname "team2";
+}
+host team3 {
+	hardware ethernet 50:eb:f6:96:e3:de;
+	fixed-address 172.20.17.3;
+	option host-name "team3";
+	option domain-name "acpc.global";
+	ddns-hostname "team3";
+}
+host team4 {
+	hardware ethernet 50:eb:f6:98:ac:4f;
+	fixed-address 172.20.17.4;
+	option host-name "team4";
+	option domain-name "acpc.global";
+	ddns-hostname "team4";
+}
+host team5 {
+	hardware ethernet 50:eb:f6:98:aa:2d;
+	fixed-address 172.20.17.5;
+	option host-name "team5";
+	option domain-name "acpc.global";
+	ddns-hostname "team5";
+}
+host team6 {
+	hardware ethernet 50:eb:f6:98:aa:82;
+	fixed-address 172.20.17.6;
+	option host-name "team6";
+	option domain-name "acpc.global";
+	ddns-hostname "team6";
+}
+host team7 {
+	hardware ethernet 50:eb:f6:98:ae:86;
+	fixed-address 172.20.17.7;
+	option host-name "team7";
+	option domain-name "acpc.global";
+	ddns-hostname "team7";
+}
+host team8 {
+	hardware ethernet 50:eb:f6:98:aa:ba;
+	fixed-address 172.20.17.8;
+	option host-name "team8";
+	option domain-name "acpc.global";
+	ddns-hostname "team8";
+}
+host team9 {
+	hardware ethernet 50:eb:f6:98:af:14;
+	fixed-address 172.20.17.9;
+	option host-name "team9";
+	option domain-name "acpc.global";
+	ddns-hostname "team9";
+}
+host team10 {
+	hardware ethernet 50:eb:f6:98:aa:c5;
+	fixed-address 172.20.17.10;
+	option host-name "team10";
+	option domain-name "acpc.global";
+	ddns-hostname "team10";
+}
+host team11 {
+	hardware ethernet 50:eb:f6:98:aa:88;
+	fixed-address 172.20.17.11;
+	option host-name "team11";
+	option domain-name "acpc.global";
+	ddns-hostname "team11";
+}
+host team12 {
+	hardware ethernet 50:eb:f6:98:ae:8a;
+	fixed-address 172.20.17.12;
+	option host-name "team12";
+	option domain-name "acpc.global";
+	ddns-hostname "team12";
+}
+host team13 {
+	hardware ethernet 50:eb:f6:98:ae:61;
+	fixed-address 172.20.17.13;
+	option host-name "team13";
+	option domain-name "acpc.global";
+	ddns-hostname "team13";
+}
+host team14 {
+	hardware ethernet 50:eb:f6:98:ae:1f;
+	fixed-address 172.20.17.14;
+	option host-name "team14";
+	option domain-name "acpc.global";
+	ddns-hostname "team14";
+}
+host team15 {
+	hardware ethernet 50:eb:f6:97:12:85;
+	fixed-address 172.20.17.15;
+	option host-name "team15";
+	option domain-name "acpc.global";
+	ddns-hostname "team15";
+}
+host team16 {
+	hardware ethernet 50:eb:f6:97:12:8f;
+	fixed-address 172.20.17.16;
+	option host-name "team16";
+	option domain-name "acpc.global";
+	ddns-hostname "team16";
+}
+host team17 {
+	hardware ethernet 50:eb:f6:98:a9:d9;
+	fixed-address 172.20.17.17;
+	option host-name "team17";
+	option domain-name "acpc.global";
+	ddns-hostname "team17";
+}
+host team18 {
+	hardware ethernet 50:eb:f6:98:aa:2f;
+	fixed-address 172.20.17.18;
+	option host-name "team18";
+	option domain-name "acpc.global";
+	ddns-hostname "team18";
+}
+host team19 {
+	hardware ethernet 50:eb:f6:98:aa:f3;
+	fixed-address 172.20.17.19;
+	option host-name "team19";
+	option domain-name "acpc.global";
+	ddns-hostname "team19";
+}
+host team20 {
+	hardware ethernet 50:eb:f6:98:aa:30;
+	fixed-address 172.20.17.20;
+	option host-name "team20";
+	option domain-name "acpc.global";
+	ddns-hostname "team20";
+}
+host team21 {
+	hardware ethernet 50:eb:f6:97:13:4f;
+	fixed-address 172.20.17.21;
+	option host-name "team21";
+	option domain-name "acpc.global";
+	ddns-hostname "team21";
+}
+host team22 {
+	hardware ethernet 50:eb:f6:98:ac:41;
+	fixed-address 172.20.17.22;
+	option host-name "team22";
+	option domain-name "acpc.global";
+	ddns-hostname "team22";
+}
+host team23 {
+	hardware ethernet 50:eb:f6:98:aa:83;
+	fixed-address 172.20.17.23;
+	option host-name "team23";
+	option domain-name "acpc.global";
+	ddns-hostname "team23";
+}
+host team24 {
+	hardware ethernet 50:eb:f6:98:af:03;
+	fixed-address 172.20.17.24;
+	option host-name "team24";
+	option domain-name "acpc.global";
+	ddns-hostname "team24";
+}
+host team25 {
+	hardware ethernet 50:eb:f6:98:ae:de;
+	fixed-address 172.20.17.25;
+	option host-name "team25";
+	option domain-name "acpc.global";
+	ddns-hostname "team25";
+}
+host team26 {
+	hardware ethernet 50:eb:f6:96:fd:20;
+	fixed-address 172.20.17.26;
+	option host-name "team26";
+	option domain-name "acpc.global";
+	ddns-hostname "team26";
+}
+host team27 {
+	hardware ethernet 50:eb:f6:98:aa:08;
+	fixed-address 172.20.17.27;
+	option host-name "team27";
+	option domain-name "acpc.global";
+	ddns-hostname "team27";
+}
+host team28 {
+	hardware ethernet 50:eb:f6:98:aa:2e;
+	fixed-address 172.20.17.28;
+	option host-name "team28";
+	option domain-name "acpc.global";
+	ddns-hostname "team28";
+}
+host team29 {
+	hardware ethernet 50:eb:f6:98:aa:8c;
+	fixed-address 172.20.17.29;
+	option host-name "team29";
+	option domain-name "acpc.global";
+	ddns-hostname "team29";
+}
+host team30 {
+	hardware ethernet 50:eb:f6:98:ae:e4;
+	fixed-address 172.20.17.30;
+	option host-name "team30";
+	option domain-name "acpc.global";
+	ddns-hostname "team30";
+}
+host team31 {
+	hardware ethernet 50:eb:f6:98:ac:3d;
+	fixed-address 172.20.17.31;
+	option host-name "team31";
+	option domain-name "acpc.global";
+	ddns-hostname "team31";
+}
+host team32 {
+	hardware ethernet 50:eb:f6:98:ae:1c;
+	fixed-address 172.20.17.32;
+	option host-name "team32";
+	option domain-name "acpc.global";
+	ddns-hostname "team32";
+}
+host team33 {
+	hardware ethernet 50:eb:f6:97:13:2b;
+	fixed-address 172.20.17.33;
+	option host-name "team33";
+	option domain-name "acpc.global";
+	ddns-hostname "team33";
+}
+host team34 {
+	hardware ethernet 50:eb:f6:98:ac:3e;
+	fixed-address 172.20.17.34;
+	option host-name "team34";
+	option domain-name "acpc.global";
+	ddns-hostname "team34";
+}
+host team35 {
+	hardware ethernet 50:eb:f6:97:13:65;
+	fixed-address 172.20.17.35;
+	option host-name "team35";
+	option domain-name "acpc.global";
+	ddns-hostname "team35";
+}
+host team36 {
+	hardware ethernet 50:eb:f6:96:e3:cb;
+	fixed-address 172.20.17.36;
+	option host-name "team36";
+	option domain-name "acpc.global";
+	ddns-hostname "team36";
+}
+host team37 {
+	hardware ethernet 50:eb:f6:98:ae:2e;
+	fixed-address 172.20.17.37;
+	option host-name "team37";
+	option domain-name "acpc.global";
+	ddns-hostname "team37";
+}
+host team38 {
+	hardware ethernet 50:eb:f6:97:13:45;
+	fixed-address 172.20.17.38;
+	option host-name "team38";
+	option domain-name "acpc.global";
+	ddns-hostname "team38";
+}
+host team39 {
+	hardware ethernet 50:eb:f6:98:ae:1a;
+	fixed-address 172.20.17.39;
+	option host-name "team39";
+	option domain-name "acpc.global";
+	ddns-hostname "team39";
+}
+host team40 {
+	hardware ethernet 50:eb:f6:98:ad:6a;
+	fixed-address 172.20.17.40;
+	option host-name "team40";
+	option domain-name "acpc.global";
+	ddns-hostname "team40";
+}
+host team41 {
+	hardware ethernet 50:eb:f6:98:ad:f3;
+	fixed-address 172.20.17.41;
+	option host-name "team41";
+	option domain-name "acpc.global";
+	ddns-hostname "team41";
+}
+host team42 {
+	hardware ethernet 50:eb:f6:98:ac:35;
+	fixed-address 172.20.17.42;
+	option host-name "team42";
+	option domain-name "acpc.global";
+	ddns-hostname "team42";
+}
+host team43 {
+	hardware ethernet 50:eb:f6:98:aa:05;
+	fixed-address 172.20.17.43;
+	option host-name "team43";
+	option domain-name "acpc.global";
+	ddns-hostname "team43";
+}
+host team44 {
+	hardware ethernet 50:eb:f6:98:aa:84;
+	fixed-address 172.20.17.44;
+	option host-name "team44";
+	option domain-name "acpc.global";
+	ddns-hostname "team44";
+}
+host team45 {
+	hardware ethernet 50:eb:f6:97:13:c6;
+	fixed-address 172.20.17.45;
+	option host-name "team45";
+	option domain-name "acpc.global";
+	ddns-hostname "team45";
+}
+host team46 {
+	hardware ethernet 50:eb:f6:97:13:4c;
+	fixed-address 172.20.17.46;
+	option host-name "team46";
+	option domain-name "acpc.global";
+	ddns-hostname "team46";
+}
+host team47 {
+	hardware ethernet 50:eb:f6:98:af:0d;
+	fixed-address 172.20.17.47;
+	option host-name "team47";
+	option domain-name "acpc.global";
+	ddns-hostname "team47";
+}
+host team48 {
+	hardware ethernet 50:eb:f6:97:11:37;
+	fixed-address 172.20.17.48;
+	option host-name "team48";
+	option domain-name "acpc.global";
+	ddns-hostname "team48";
+}
+host team49 {
+	hardware ethernet 50:eb:f6:97:13:4e;
+	fixed-address 172.20.17.49;
+	option host-name "team49";
+	option domain-name "acpc.global";
+	ddns-hostname "team49";
+}
+host team50 {
+	hardware ethernet 50:eb:f6:96:e3:d6;
+	fixed-address 172.20.17.50;
+	option host-name "team50";
+	option domain-name "acpc.global";
+	ddns-hostname "team50";
+}
+host team51 {
+	hardware ethernet 50:eb:f6:96:e3:c1;
+	fixed-address 172.20.17.51;
+	option host-name "team51";
+	option domain-name "acpc.global";
+	ddns-hostname "team51";
+}
+host team52 {
+	hardware ethernet 50:eb:f6:96:fd:22;
+	fixed-address 172.20.17.52;
+	option host-name "team52";
+	option domain-name "acpc.global";
+	ddns-hostname "team52";
+}

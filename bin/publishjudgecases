@@ -1,0 +1,11 @@
+#!/bin/bash
+for i in $(seq 2 20 )
+do
+TEAM="judge${i}"
+echo "${TEAM}==="
+ssh root@${TEAM} "rm -R /home/${TEAM}/Desktop/JudgeCases/*"
+#ssh root@${TEAM} "rm -R /home/${TEAM}/Desktop/samples/*"
+scp -r /tmp/JudgeCases/* root@${TEAM}:/home/${TEAM}/Desktop/JudgeCases
+#scp -r /tmp/samples/* root@${TEAM}:/home/${TEAM}/Desktop/samples
+ssh root@${TEAM} "chown -R ${TEAM} /home/${TEAM}/*"
+done

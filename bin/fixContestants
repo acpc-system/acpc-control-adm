@@ -1,10 +1,10 @@
 #!/bin/bash
-for i in ` seq   1 36 `
+for i in ` seq   1 157`
 do
 TEAM="team$i"
 echo "Working with $TEAM"
 #ssh $TEAM "rm -Rf /home/$TEAM/Desktop/work/* /home/$TEAM/.eclipse"
-ssh $TEAM "shutdown now"
+#ssh $TEAM "shutdown now"
 #ssh $TEAM "rm /etc/bg.jpg"
 #scp /sc/* $TEAM:/home/$TEAM/Desktop
 #ssh $TEAM "nmcli con mod aecpc ipv4.dns-search aecpc.eg; nmcli con up aecpc"
@@ -19,5 +19,6 @@ ssh $TEAM "shutdown now"
 #ssh $TEAM "chmod +x /tmp/removeAllOtherTeams;/tmp/removeAllOtherTeams $TEAM"
 #scp disableNTFS $TEAM:/tmp
 #ssh $TEAM "chmod +x /tmp/disableNTFS;/tmp/disableNTFS $TEAM"
-#ssh $TEAM "systemctl unmask sleep.target suspend.target hybrid-sleep.target"
+#ssh $TEAM "systemctl disable sleep.target suspend.target hybrid-sleep.target"
+ssh root@$TEAM "chown -R ${TEAM} /home/${TEAM}"
 done

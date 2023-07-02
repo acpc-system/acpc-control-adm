@@ -1,0 +1,8 @@
+#!/bin/bash
+for i in $(seq 201 298)
+do
+TEAM="team${i}"
+echo "${TEAM}==="
+ssh root@${TEAM} "rm /home/${TEAM}/Desktop/samples/*"
+scp -r /tmp/samples/* root@${TEAM}:/home/${TEAM}/Desktop/samples
+done

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+for i in $(seq 1 52)
+do
+echo "working with team${i}"
+ssh root@team${i} "reboot"
+done
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+for i in `seq 201 298`
+do
+TEAM="team$i"
+#TEAM=$1
+echo "Working with $TEAM"
+ssh root@$TEAM "shutdown now"
+
+done

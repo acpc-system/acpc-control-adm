@@ -1,0 +1,35 @@
+#!/bin/bash
+#### Script generates a customized DHCP.CONF file to stdout.
+### if you want to leave an emptuy table, just leave an empty line in contestantmac file
+#### if you want to change team count from 1 to 101 and so one, change in the HCO -le if conditions to meet your requirments
+HCO=53
+IP=152
+while read MAC
+do
+	if [ ! -z ${MAC} ]
+	then
+		if [ ${MAC} != "CHANGE" ] 
+		then
+			HOSTNAME="team${HCO}"
+			echo "host ${HOSTNAME} {"
+		        echo -e "\thardware ethernet ${MAC};"
+		        echo -e "\tfixed-address 172.20.16.${IP};"
+		        echo -e "\toption host-name \"${HOSTNAME}\";"
+		        echo -e "\toption domain-name \"acpc.global\";"
+		        echo -e "\tddns-hostname \"${HOSTNAME}\";"
+			echo "}"
+			IP=$(expr ${IP} + 1)
+		else
+			if [ ${HCO} -le 100 ] 
+			then
+				HCO=100
+			else
+				if [ ${HCO} -le 300 ]
+				then
+					HCO=300
+				fi
+			fi
+		fi
+	fi
+	HCO=$(expr ${HCO} + 1)
+done < /home/administrator/Saudimac

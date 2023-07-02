@@ -82,7 +82,7 @@ fi
 
 function checkShortCuts {
 HOSTNAME=$1
-CO=`ssh $HOSTNAME  "ls -l /home/$HOSTNAME/Desktop/ | wc -l"`
+CO=`ssh root@$HOSTNAME  "ls -l /home/$HOSTNAME/Desktop/ | wc -l"`
 if [ $CO -le 3 ] 
 then
 	echo "0"
@@ -93,7 +93,7 @@ fi
 
 function checkSamples {
 HOSTNAME=$1
-CO=`ssh $HOSTNAME  "mount|grep samples  | wc -l"`
+CO=`ssh root@$HOSTNAME  "mount|grep samples  | wc -l"`
 if [ $CO -eq 0 ]
 then
         echo "0"

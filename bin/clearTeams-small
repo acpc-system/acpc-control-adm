@@ -2,7 +2,7 @@
 source /acpc/adm/bin/checker
 source /acpc/adm/bin/getSettings
 N=`getNoOfPCs`
-for i in `seq 1 52 ` 
+for i in `seq 1 157` 
 #for i in `seq  1 48`
 do
 HOST="team$i"

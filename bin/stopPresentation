@@ -1,0 +1,18 @@
+#!/bin/bash
+## Script stops the presentation
+if [ ${#} -ne 2 ]
+then
+	echo "Invalid parameters"
+	exit 1
+fi
+for i in $(seq ${1} ${2})
+do
+TEAM="team${i}"
+echo -n "Stopping presentation at ${TEAM} "
+ssh root@${TEAM} "pkill -9 client.sh && pkill -9 java"
+#IDS=$(ssh root@${TEAM} "ps -ef|grep presentation | awk ' { print $2 }' | sed '$d'")
+#ssh root@${TEAM} "kill $(ps -ef|grep presentation | awk ' { print $2 }' | sed '$d')"
+echo " done"
+
+done
+exit 0

@@ -1,0 +1,77 @@
+host judge201 {
+	hardware ethernet D8:BB:C1:85:A1:97;
+	fixed-address 172.20.16.100;
+	option host-name "judge201";
+	option domain-name "acpc.global";
+	ddns-hostname "judge201";
+}
+host judge202 {
+	hardware ethernet D8:BB:C1:85:A1:C6;
+	fixed-address 172.20.16.101;
+	option host-name "judge202";
+	option domain-name "acpc.global";
+	ddns-hostname "judge202";
+}
+host judge203 {
+	hardware ethernet D8:BB:C1:85:A5:E8;
+	fixed-address 172.20.16.102;
+	option host-name "judge203";
+	option domain-name "acpc.global";
+	ddns-hostname "judge203";
+}
+host judge204 {
+	hardware ethernet D8:BB:C1:85:A2:51;
+	fixed-address 172.20.16.103;
+	option host-name "judge204";
+	option domain-name "acpc.global";
+	ddns-hostname "judge204";
+}
+host judge205 {
+	hardware ethernet D8:BB:C1:85:A6:75;
+	fixed-address 172.20.16.104;
+	option host-name "judge205";
+	option domain-name "acpc.global";
+	ddns-hostname "judge205";
+}
+host judge206 {
+	hardware ethernet D8:BB:C1:85:A2:11;
+	fixed-address 172.20.16.105;
+	option host-name "judge206";
+	option domain-name "acpc.global";
+	ddns-hostname "judge206";
+}
+host judge207 {
+	hardware ethernet D8:BB:C1:85:A1:F6;
+	fixed-address 172.20.16.106;
+	option host-name "judge207";
+	option domain-name "acpc.global";
+	ddns-hostname "judge207";
+}
+host judge208 {
+	hardware ethernet D8:BB:C1:85:A2:1C;
+	fixed-address 172.20.16.107;
+	option host-name "judge208";
+	option domain-name "acpc.global";
+	ddns-hostname "judge208";
+}
+host judge209 {
+	hardware ethernet D8:BB:C1:85:a2:13;
+	fixed-address 172.20.16.108;
+	option host-name "judge209";
+	option domain-name "acpc.global";
+	ddns-hostname "judge209";
+}
+host judge210 {
+	hardware ethernet D8:BB:C1:85:A6:46;
+	fixed-address 172.20.16.109;
+	option host-name "judge210";
+	option domain-name "acpc.global";
+	ddns-hostname "judge210";
+}
+host judge211 {
+	hardware ethernet D8:BB:C1:85:A1:66;
+	fixed-address 172.20.16.110;
+	option host-name "judge211";
+	option domain-name "acpc.global";
+	ddns-hostname "judge211";
+}

@@ -1,0 +1,17 @@
+#!/bin/bash
+DAYS="teens ECPC"
+#for i in ${DAYS}
+for i in $(seq 1 10)
+do
+echo "Generating day ${i}"
+sudo perl genPDF.perl 2 Practice "prac_d${i}_h2_e" 297
+
+#sudo perl genPDF.perl 180 Practice "prac_d${i}_h1" 1
+#sudo perl genPDF.perl 96 Practice "prac_d${i}_h2" 201
+#sudo perl genPDF.perl 35 Practice "prac_d${i}_h3" 301
+
+sudo perl genPDF.perl 2 Contest "contest_d${i}_h2_e" 297
+#sudo perl genPDF.perl 180 Contest "contest_d${i}_h1" 1
+#sudo perl genPDF.perl 96 Contest "contest_d${i}_h2" 201
+#sudo perl genPDF.perl 35 Contest "contest_d${i}_h3" 301
+done

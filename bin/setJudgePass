@@ -1,0 +1,8 @@
+#!/bin/bash
+for i in `seq 1 10`
+do
+HOST="judge$i"
+PASS="\\acpc?"
+HPASS=`openssl passwd -1 ${PASS}`
+ssh $HOST "usermod -p '${HPASS}' ${HOST}"
+done    
