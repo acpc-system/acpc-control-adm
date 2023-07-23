@@ -51,7 +51,7 @@ $Page->line(50,50,50,792);
 $Page->line(50,50,562,50);
 $Page->line(562,50,562,792);
 $Page->line(50,792,562,792);
-my $ImgName="/acpc/adm/images/univ_logos/$USERNAME.gif";
+my $ImgName="/acpc/adm/images/oldimages/$USERNAME.gif";
 print $UnixFile "usermod -p `openssl passwd -1 $PASSWORD` $USERNAME\n";
 ##############################
 #### Get the team name of the team number $i

@@ -1,0 +1,21 @@
+usermod -p `openssl passwd -1 C@D39A58` team1
+usermod -p `openssl passwd -1 @BQA1!P4` team2
+usermod -p `openssl passwd -1 9JN!18JNEB` team3
+usermod -p `openssl passwd -1 55B!8DA@` team4
+usermod -p `openssl passwd -1 92^7@JNJN5` team5
+usermod -p `openssl passwd -1 BE9GB9JNJN` team6
+usermod -p `openssl passwd -1 F^HD^%Q!` team7
+usermod -p `openssl passwd -1 B3@@8D4!` team8
+usermod -p `openssl passwd -1 6C43G@%3` team9
+usermod -p `openssl passwd -1 H@663EEG` team10
+usermod -p `openssl passwd -1 @2Q86Q3Q` team11
+usermod -p `openssl passwd -1 6AAA7BDA` team12
+usermod -p `openssl passwd -1 !7GPC9HC` team13
+usermod -p `openssl passwd -1 3E93JN382` team14
+usermod -p `openssl passwd -1 51P887GH` team15
+usermod -p `openssl passwd -1 ^!5FJNP13` team16
+usermod -p `openssl passwd -1 H!QEDA!1` team17
+usermod -p `openssl passwd -1 PF3B437E` team18
+usermod -p `openssl passwd -1 E1HQ195C` team19
+usermod -p `openssl passwd -1 22FC^67E` team20
+cd /var/yp;make;cd -

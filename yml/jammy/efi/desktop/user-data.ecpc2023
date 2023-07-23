@@ -56,4 +56,6 @@ autoinstall:
   updates: security
   late-commands:
    - curtin in-target --target=/target -- sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT=""/GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"/' /etc/default/grub
+   - curtin in-target --target=/target -- apt-get install -y ubuntu-desktop plymouth-theme-ubuntu-logo grub-gfxpayload-lists
+   - curtin in-target --target=/target -- apt-get remove -y --autoremove gnome-initial-setup
   version: 1

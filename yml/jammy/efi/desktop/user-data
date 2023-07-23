@@ -28,7 +28,7 @@ autoinstall:
   locale: en_US.UTF-8
   network:
     ethernets:
-      enp0s3:
+      enp0s31f6:
         dhcp4: true
     version: 2
   proxy: http://proxy.acpc.local:3142

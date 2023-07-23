@@ -31,6 +31,17 @@ chmod +x /home/$curHostName/.config/autostart/set*.desktop
 chown -R $curHostName:judges /home/$curHostName
 chown -R $curHostName:judges /home/$curHostName/.config
 echo $curHostName > /etc/acpcHostname
+################################################### copy Dot Config having clion keys and vscode extensions
+
+#cd /usr/src/
+#wget http://control/prog/common/IDEs/config.tar.gz
+#wget http://control/prog/common/IDEs/vscode_config.tar.gz
+cd /home/$curHostName/
+tar -xzf /usr/src/config.tar.gz 
+tar -xzf /usr/src/vscode_config.tar.gz
+sudo chown -R $curHostName /home/$curHostName/.config
+sudo chown -R $curHostName /home/$curHostName/.vscode
+
 ### Downloading all shortcuts
 cd /home/$curHostName/Desktop
 wget http://control/prog/common/CodeBlocks.desktop
@@ -49,11 +60,21 @@ wget http://control/prog/common/pycharm.desktop
 wget http://control/prog/common/BCompare.desktop
 chmod +rx *.desktop
 cd /home/$curHostName
-wget http://control/prog/common/IDEs/intellij/intelliconfig.tar
-wget http://control/prog/common/IDEs/pycharm/pycharmconfig.tar
-tar xf intelliconfig.tar
-tar xf pycharmconfig.tar
-rm pycharmconfig.tar intelliconfig.tar
+#wget http://control/prog/common/IDEs/intellij/intelliconfig.tar
+#wget http://control/prog/common/IDEs/pycharm/pycharmconfig.tar
+#tar xf intelliconfig.tar
+#tar xf pycharmconfig.tar
+#rm pycharmconfig.tar intelliconfig.tar
+############################################### Allow Launch
+
+sudo chown -R $curHostName /home/$curHostName/Desktop/*.desktop
+DFS=$(sudo ls /home/$curHostName/Desktop/*.desktop)
+
+for f in ${DFS}
+do
+        sudo -u $curHostName dbus-launch gio set "$f"  metadata::trusted true 
+done
+################################### change ownership 
 chown -R $curHostName /home/$curHostName
 
 }

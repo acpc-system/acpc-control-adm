@@ -1,0 +1,5 @@
+ddns-domainname "aecpc.eg";
+ddns-rev-domainname "16.20.172.in-addr.arpa";
+option broadcast-address 172.20.16.255;
+option domain-name "aecpc.eg";
+option domain-name-servers 172.20.16.2;
