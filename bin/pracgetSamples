@@ -1,0 +1,8 @@
+#!/bin/bash
+######### SCript downloads samples directory from judge1 to /tmp in control
+if [ -d /tmp/samples ]
+then
+	rm -Rf /tmp/samples
+fi
+scp -r root@judge2:/home/judge2/Desktop/samples /tmp
+exit 0

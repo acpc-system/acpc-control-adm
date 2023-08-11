@@ -11,143 +11,72 @@
 ############# Eng. Ahmed M. ElSayed
 ###############   ahmed.elsayed@acpcacpc.org
 
-function restoreData {
-oldHostName=$1
-curHostName=$2
-if [ -d /backup/$oldHostName/cur ]
-then
-cp -r /backup/$oldHostName/cur/work/* /home/$curHostName/Desktop/work
-chown -R $curHostName:$curHostName /home/$curHostName/Desktop/work
-fi
-}
-
 function createUserProfile {
 ### Create the local account
-dhclient
-curHostName=`hostname`
+curHostName=$(hostname)
 
 ### Get the team number, so create the user with the id that is team num + 2000, 
 #### so each local team account in each pc has a different uid to be suitable for permissions
 ###### in the web server
-ID=`echo $curHostName|sed 's/team//g'`
-myUID=`expr $ID + 2000`
-useradd -c "ACPC Contestant account - $curHostName" -u $myUID -m $curHostName
-chown -R administrator:administrator /home/administrator/
-#mkdir -p /home/$curHostName/Desktop/work
-#mkdir -p /home/$curHostName/Desktop/samples
+ID=$(echo ${curHostName}|sed 's/team//g')
+myUID=$[ ID + 2000]
+useradd -c "ACPC Contestant account - ${curHostName}" -u ${myUID} -m ${curHostName}
+echo ${curHostName} > /etc/acpcHostname
 ######################## We have here to create the desktop shortcuts
-cd /home
-sudo rm -Rf $curHostName
-tar -xzf /usr/src/home-team.tar.gz
-mv team2 $curHostName
-mkdir -p /home/$curHostName/.config/autostart
-cp /home/administrator/.config/autostart/set*.desktop /home/$curHostName/.config/autostart
-chmod +x /home/$curHostName/.config/autostart/set*.desktop
-chown -R $curHostName:$curHostName /home/$curHostName
-chown -R $curHostName:$curHostName /home/$curHostName/.config
-chown -R $curHostName /home/$curHostName/.vscode/
-echo $curHostName > /etc/acpcHostname
-################################################### copy Dot Config having clion keys and vscode extensions
+#mkdir -p /home/$curHostName/.config/autostart
+#cp /home/administrator/.config/autostart/set*.desktop /home/$curHostName/.config/autostart
+#chmod +x /home/$curHostName/.config/autostart/set*.desktop
 
-#chown -R $curHostName /home/$curHostName/
-#chown -R $curHostName /home/$curHostName/.config/
-#chown -R $curHostName /home/$curHostName/.vscode/
+## Download clion key
+#cd /tmp
+#wget http://control/prog/common/IDEs/clion.key
 
+:<<COMMENTEOL
+## Downloading all shortcuts
+cd /home/$curHostName/Desktop/
+wget http://control/prog/common/teams-desktop-entry/CodeBlocks.desktop
+wget http://control/prog/common/teams-desktop-entry/ECLipse.desktop
+wget http://control/prog/common/teams-desktop-entry/Geany.desktop
+wget http://control/prog/common/teams-desktop-entry/GEdit.desktop
+wget http://control/prog/common/teams-desktop-entry/PC2_Team.desktop
+wget http://control/prog/common/teams-desktop-entry/ScoreBoard.desktop
+wget http://control/prog/common/teams-desktop-entry/STL_Documentation.desktop
+wget http://control/prog/common/teams-desktop-entry/Kill_Block.desktop
+wget http://control/prog/common/teams-desktop-entry/intellij.desktop
+wget http://control/prog/common/teams-desktop-entry/pycharm.desktop
+wget http://control/prog/common/teams-desktop-entry/Clion.desktop
+wget http://control/prog/common/teams-desktop-entry/Calculator.desktop 
+wget http://control/prog/common/teams-desktop-entry/VisualStudioCode.desktop
+#chmod a-x /home/$curHostName/Desktop/*
+COMMENTEOL
 
-### Downloading all shortcuts
-#cd /home/$curHostName/Desktop
-#wget http://control/prog/common/teams-desktop-entry/CodeBlocks.desktop
-#wget http://control/prog/common/teams-desktop-entry/ECLipse.desktop
-#wget http://control/prog/common/teams-desktop-entry/Geany.desktop
-#wget http://control/prog/common/teams-desktop-entry/GEdit.desktop
-#wget http://control/prog/common/teams-desktop-entry/PC2_Team.desktop
-#wget http://control/prog/common/teams-desktop-entry/ScoreBoard.desktop
-#wget http://control/prog/common/teams-desktop-entry/STL_Documentation.desktop
-#wget http://control/prog/common/teams-desktop-entry/Kill_Block.desktop
-#wget http://control/prog/common/teams-desktop-entry/intellij.desktop
-#wget http://control/prog/common/teams-desktop-entry/pycharm.desktop
-#wget http://control/prog/common/teams-desktop-entry/Clion.desktop
-#wget http://control/prog/common/teams-desktop-entry/Calculator.desktop 
-#wget http://control/prog/common/teams-desktop-entry/VisualStudioCode.desktop
-#chmod a+rx *.desktop
-#cd /home/$curHostName
-#chown -R $curHostName /home/$curHostName/*
-#wget http://control/prog/common/IDEs/intellij/intelliconfig.tar
-#wget http://control/prog/common/IDEs/pycharm/pycharmconfig.tar
-#tar xf intelliconfig.tar
-#tar xf pycharmconfig.tar
-#rm pycharmconfig.tar intelliconfig.tar
-############################################### Allow Launch
+cd /home/$curHostName/Desktop
 
-#sudo chown -R $curHostName /home/$curHostName/Desktop/*.desktop
-#DFS=$(sudo ls /home/$curHostName/Desktop/*.desktop)
-#for f in ${DFS}
-#do
-#        sudo -u $curHostName dbus-launch gio set "$f"  metadata::trusted true ; chmod a+x ${f}
-#done
+sleep 10
+DFS=$(sudo ls /home/$curHostName/Desktop/*.desktop)
+for f in ${DFS}
+do
+        sudo -u $curHostName dbus-launch gio set "$f"  metadata::trusted true 
+done
+chmod a+x *.desktop
 ################################### change ownership 
-#chown -R $curHostName /home/$curHostName
 
-}
-
-function mountBackup {
-teamName=$1
-if [ ! -d /backup/$teamName ]
-then 
- mkdir /backup/$teamName
-fi
-mount web:/backup/$teamName /backup/$teamName
-}
-
-function unmountBackup {
-teamName=$1
-umount  /backup/$teamName
-rm -R /backup/$teamName
-}
-
-function mountSamples {
-teamName=$1
-#mount the directory as read only for teams
-mount -o ro web:/home/samples /home/$teamName/Desktop/samples
-}
-
-function unmountSamples {
-teamName=$1
-umount /home/$teamName/Desktop/samples
-rm -R /home/$teamName/Desktop/samples
 }
 dhclient
 curHostName=`hostname`
 if [ ! -f /etc/acpcHostname ]
 then
 	createUserProfile
-	mountBackup $curHostName
-        mountSamples $curHostName
-	/usr/sbin/backupwork &
 	exit 0
 fi
 oldHostName=`cat /etc/acpcHostname`
 if [ $oldHostName != $curHostName ]
 then
- unmountSamples $oldHostName
+# unmountSamples $oldHostName
+ userdel ${oldHostName}
  rm -Rf /home/$oldHostName
  createUserProfile
- mountBackup $oldHostName
- restoreData $oldHostName $curHostName
- unmountBackup $oldHostName
- mountBackup $curHostName
- mountSamples $curHostName
-else
- mountBackup $curHostName
- mountSamples $curHostName
 fi
-if [ ! -f /etc/dhcp/dhclient-exit-hooks.d/setacpchostname ]
-then
-echo 'hostname $new_host_name' > /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
-echo 'echo $new_host_name > /etc/hostname' >> /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
-chmod +x /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
-fi
-
 
 #### The next section, executes any commands only for the 1st time the pc start after install
 #if [ -f /1sttime ]
@@ -162,6 +91,3 @@ fi
 #rm /finalize
 #firewall-cmd --reload
 #fi
-
-/usr/sbin/backupwork &
-

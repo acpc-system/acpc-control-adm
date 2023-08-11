@@ -1,0 +1,21 @@
+#!/bin/bash
+######################### Script that swaps two hosts by their names in dhcp
+######################## The scripts takes two hosts ,swap them
+########################   and then restart dhcp
+if [ $# -lt 2 ]
+then
+	echo "Invalid hosts to swap"
+	exit 1
+fi
+OLDHOST=$1
+NEWHOST=$2
+source /acpc/adm/bin/getSettings
+## 1- Get old host mac address
+OLDMAC=`getMacFromDHCP $OLDHOST`
+NEWMAC=`getMacFromDHCP $NEWHOST`
+tNEWDHCP=`cat /acpc/adm/etc/dhcp/dhcpd.conf.hosts|sed -e "s/$OLDMAC;/$NEWMAC-tmp;/g" -e "s/$NEWMAC;/$OLDMAC-tmp;/g"`
+NEWDHCP=`echo "$tNEWDHCP"|sed 's/-tmp//g'`
+echo "$NEWDHCP" > /tmp/newDHCPFILE
+cp /tmp/newDHCPFILE /acpc/adm/etc/dhcp/dhcpd.conf.hosts
+rm /tmp/newDHCPFILE
+systemctl restart isc-dhcp-server

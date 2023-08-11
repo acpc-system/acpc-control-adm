@@ -1,0 +1,5 @@
+#!/bin/bash
+source /acpc/adm/bin/resetutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+resetLoop "team" $NOOFPCS

@@ -1,0 +1,7 @@
+#!/bin/bash
+PARTS=`blkid|grep ntfs|cut -f"1" -d":"|sed 's/\/dev\///g'`
+for P in $PARTS
+do
+echo "KERNEL==\"$P\", ENV{UDISKS_IGNORE}=\"1\"" >> /etc/udev/rules.d/99-hide-disks.rules
+done
+udevadm control --reload-rules && udevadm trigger

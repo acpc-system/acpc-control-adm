@@ -1,0 +1,20 @@
+#!/bin/bash
+## Script stops the presentation
+if [ ${#} -ne 2 ]
+then
+	echo "Invalid parameters"
+	exit 1
+fi
+for i in $(seq ${1} ${2})
+do
+TEAM="judge${i}"
+echo -n "Fixing Clion on ${TEAM} "
+ssh root@${TEAM} "rm -r /home/${TEAM}/.config/JetBrains/CLion2022.3/"
+scp -r /acpc/prog/CLion2022.3 root@${TEAM}:/home/${TEAM}/.config/JetBrains/
+ssh root@${TEAM} "rm /home/${TEAM}/Desktop/*.desktop.?"
+ssh root@${TEAM} "chown -R ${TEAM} /home/${TEAM}/.config/ ; chown -R ${TEAM} /home/${TEAM}"
+#ssh root@${TEAM} "chown -R ${TEAM} /home/${TEAM}"
+echo " done"
+
+done
+exit 0

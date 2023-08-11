@@ -1,0 +1,16 @@
+#!/bin/bash
+### Loop through all teams, and get the printer installed
+if [ ${#} -ne 2 ]
+then
+	echo "Insufficient parameters"
+	exit 1
+fi
+START=${1}
+END=${2}
+for i in $(seq ${START} ${END})
+do
+	TEAM="team${i}"
+	echo -n "${TEAM} : "
+	ssh root@${TEAM} "lpstat -a"
+done
+exit 0

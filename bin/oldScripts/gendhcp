@@ -2,18 +2,18 @@
 #### Script generates a customized DHCP.CONF file to stdout.
 ### if you want to leave an emptuy table, just leave an empty line in contestantmac file
 #### if you want to change team count from 1 to 101 and so one, change in the HCO -le if conditions to meet your requirments
-HCO=22
-IP=32
+HCO=1
+IP=11
 while read MAC
 do
 	if [ ! -z ${MAC} ]
 	then
 		if [ ${MAC} != "CHANGE" ] 
 		then
-			HOSTNAME="team${HCO}"
+			HOSTNAME="judge${HCO}"
 			echo "host ${HOSTNAME} {"
 		        echo -e "\thardware ethernet ${MAC};"
-		        echo -e "\tfixed-address 10.0.0.${IP};"
+		        echo -e "\tfixed-address 10.0.4.${IP};"
 		        echo -e "\toption host-name \"${HOSTNAME}\";"
 		        echo -e "\toption domain-name \"acpc.local\";"
 		        echo -e "\tddns-hostname \"${HOSTNAME}\";"
@@ -32,4 +32,4 @@ do
 		fi
 	fi
 	HCO=$(expr ${HCO} + 1)
-done < /tmp/ecpc2
+done < /acpc/adm/tmp/macjudge

@@ -1,0 +1,4 @@
+for i in {3001..3040}
+do
+	ssh root@team$i "smbios-token-ctl -i 0x00a2 --activate"
+done

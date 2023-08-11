@@ -1,0 +1,6 @@
+#!/bin/bash
+##### Script to test all teams
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+loopHosts "team" $NOOFPCS

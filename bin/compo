@@ -1,0 +1,147 @@
+host team127 {
+	hardware ethernet 6C:4B:90:E6:52:5C;
+	fixed-address 172.20.16.175;
+	option host-name "team127";
+	option domain-name "acpc.global";
+	ddns-hostname "team127";
+}
+host team128 {
+	hardware ethernet 6C:4B:90:E6:50:B2;
+	fixed-address 172.20.16.176;
+	option host-name "team128";
+	option domain-name "acpc.global";
+	ddns-hostname "team128";
+}
+host team129 {
+	hardware ethernet 6C:4B:90:E6:54:7B;
+	fixed-address 172.20.16.177;
+	option host-name "team129";
+	option domain-name "acpc.global";
+	ddns-hostname "team129";
+}
+host team130 {
+	hardware ethernet 6C:4B:90:E6:50:28;
+	fixed-address 172.20.16.178;
+	option host-name "team130";
+	option domain-name "acpc.global";
+	ddns-hostname "team130";
+}
+host team131 {
+	hardware ethernet 6C:4B:90:E6:63:0E;
+	fixed-address 172.20.16.179;
+	option host-name "team131";
+	option domain-name "acpc.global";
+	ddns-hostname "team131";
+}
+host team132 {
+	hardware ethernet 6C:4B:90:E6:56:2D;
+	fixed-address 172.20.16.180;
+	option host-name "team132";
+	option domain-name "acpc.global";
+	ddns-hostname "team132";
+}
+host team133 {
+	hardware ethernet 6C:4B:90:E6:6A:DB;
+	fixed-address 172.20.16.181;
+	option host-name "team133";
+	option domain-name "acpc.global";
+	ddns-hostname "team133";
+}
+host team134 {
+	hardware ethernet 6C:4B:90:E6:65:13;
+	fixed-address 172.20.16.182;
+	option host-name "team134";
+	option domain-name "acpc.global";
+	ddns-hostname "team134";
+}
+host team135 {
+	hardware ethernet 6C:4B:90:E6:4B:86;
+	fixed-address 172.20.16.183;
+	option host-name "team135";
+	option domain-name "acpc.global";
+	ddns-hostname "team135";
+}
+host team136 {
+	hardware ethernet 6C:4B:90:E6:50:2B;
+	fixed-address 172.20.16.184;
+	option host-name "team136";
+	option domain-name "acpc.global";
+	ddns-hostname "team136";
+}
+host team137 {
+	hardware ethernet 6C:4B:90:E6:6A:12;
+	fixed-address 172.20.16.185;
+	option host-name "team137";
+	option domain-name "acpc.global";
+	ddns-hostname "team137";
+}
+host team138 {
+	hardware ethernet 6C:4B:90:E6:62:C1;
+	fixed-address 172.20.16.186;
+	option host-name "team138";
+	option domain-name "acpc.global";
+	ddns-hostname "team138";
+}
+host team139 {
+	hardware ethernet 6C:4B:90:E6:51:23;
+	fixed-address 172.20.16.187;
+	option host-name "team139";
+	option domain-name "acpc.global";
+	ddns-hostname "team139";
+}
+host team140 {
+	hardware ethernet 6C:4B:90:E6:4F:EC;
+	fixed-address 172.20.16.188;
+	option host-name "team140";
+	option domain-name "acpc.global";
+	ddns-hostname "team140";
+}
+host team141 {
+	hardware ethernet 6C:4B:90:E6:50:52;
+	fixed-address 172.20.16.189;
+	option host-name "team141";
+	option domain-name "acpc.global";
+	ddns-hostname "team141";
+}
+host team142 {
+	hardware ethernet 6C:4B:90:E7:2F:D4;
+	fixed-address 172.20.16.190;
+	option host-name "team142";
+	option domain-name "acpc.global";
+	ddns-hostname "team142";
+}
+host team143 {
+	hardware ethernet 6C:4B:90:E6:51:52;
+	fixed-address 172.20.16.191;
+	option host-name "team143";
+	option domain-name "acpc.global";
+	ddns-hostname "team143";
+}
+host team144 {
+	hardware ethernet 6C:4B:90:E6:63:E9;
+	fixed-address 172.20.16.192;
+	option host-name "team144";
+	option domain-name "acpc.global";
+	ddns-hostname "team144";
+}
+host team145 {
+	hardware ethernet 6C:4B:90:E6:6A:CB;
+	fixed-address 172.20.16.193;
+	option host-name "team145";
+	option domain-name "acpc.global";
+	ddns-hostname "team145";
+}
+host team146 {
+	hardware ethernet 6C:4B:90:E6:62:2C;
+	fixed-address 172.20.16.194;
+	option host-name "team146";
+	option domain-name "acpc.global";
+	ddns-hostname "team146";
+}
+host team147 {
+	hardware ethernet 6C:4B:90:E6:55:B1;
+	fixed-address 172.20.16.195;
+	option host-name "team147";
+	option domain-name "acpc.global";
+	ddns-hostname "team147";
+}

@@ -1,0 +1,28 @@
+#!/bin/bash
+############################# A script that sync the /acpc with the git directory
+#1- Sync the new files from /acpc to the GITDIR
+#2- Scan all files in GITDIR, and removes the files that exists in GITDIR and not found in /acpc
+
+GITDIR="/home/administrator/ACM-ACPC-Git-Repository"
+rsync -az /acpc $GITDIR > /dev/null 2>&1
+RES=$?
+if [ $RES -ne 0 ]
+then
+	echo "Error in sync"
+	exit 1
+fi
+FILES=`find $GITDIR -type f -print`
+for f in $FILES
+do
+	nGITDIR=`echo $GITDIR | sed 's/\//\\\\\//g'`
+	FN=`echo "$f" | sed "s/$nGITDIR//g"`
+	CO=`echo $FN | grep ".git"  |wc -l`
+	if [ $CO -eq 0 ]
+	then
+			if [ ! -f $FN ]
+			then
+				rm $f
+			fi
+	fi
+done
+

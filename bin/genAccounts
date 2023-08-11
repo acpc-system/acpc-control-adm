@@ -1,0 +1,15 @@
+#!/bin/bash
+START="${1}"
+END="${2}"
+#sudo perl genPDF.perl 250 Contest "day 3 contest"
+for i in $(seq ${START} ${END})
+do
+perl genPDF.perl 148 "Practice day ${i}/8" "big hall ${i}-8 practice" 1001
+perl genPDF.perl 148 "Contest day ${i}/8" "big hall ${i}-8 contest" 1001
+
+perl genPDF.perl 98 "Practice day ${i}/8" "small hall ${i}-8 practice" 2001
+perl genPDF.perl 98 "Contest day ${i}/8" "small hall ${i}-8 contest" 2001
+
+perl genPDF.perl 50 "Practice day ${i}/8" "lab ${i}-8 practice" 3001
+perl genPDF.perl 50 "Contest day ${i}/8" "lab ${i}-8 contest" 3001
+done

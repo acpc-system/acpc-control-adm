@@ -4,13 +4,13 @@ then
 	echo "Insufficient parameters"
 	exit 1
 fi
-for i in $(seq ${1} ${2} )
+for i in $(seq $1 $2  )
 do 
 TEAM="team${i}"
 echo "Working with ${TEAM}"
 Fs=$(ssh root@${TEAM} "ls /home/${TEAM}/Desktop/*.desktop")
 for f in ${Fs}
 do
-	ssh root@team${i} "sudo -u team${i} dbus-launch gio set ${f}  metadata::trusted true ; chmod a+x ${f}"
+	ssh root@team${i} "chmod a-x ; sudo -u team${i} dbus-launch gio set ${f}  metadata::trusted true ; chmod a+x ${f}"
 done
 done

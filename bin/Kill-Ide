@@ -1,0 +1,96 @@
+#!/bin/bash
+start=$1
+end=$2
+process=("1-codeblocks" "2-clion" "3-eclipse" "4-vscode" "5-pycharm" "6-geany" "7-intellij" "8-PC2" )
+echo "enter  number of process name to be killed "
+for i in $(seq 0 ${#process[@]})
+do
+ echo "${process[$i]} "
+done
+
+
+read ID
+
+## condition to kill code blocks
+if [ $ID -eq 1 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i
+    P=$(ssh root@$TEAM ps -aux | grep -i codeblocks|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+## condition to kill clion
+
+elif [ $ID -eq 2 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i clion|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+
+elif [ $ID -eq 3 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i eclipse|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+
+elif [ $ID -eq 4 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i VScode|awk '{print $2}')
+   ssh root@$TEAM pkill  code
+  done
+
+
+
+elif [ $ID -eq 5 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i pycharm|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+
+elif [ $ID -eq 6 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i geany|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+elif [ $ID -eq 7 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i intellij|awk '{print $2}')
+   ssh root@$TEAM kill -9 $P
+  done
+
+
+elif [ $ID -eq 8 ]; then
+  for i in $(seq $1 $2)
+  do
+    TEAM=team$i 
+    P=$(ssh root@$TEAM ps -aux | grep -i pc2|awk '{print $2}')
+    ssh root@$TEAM kill -9 $P
+  done
+
+
+else
+
+  echo "wrong input"
+fi

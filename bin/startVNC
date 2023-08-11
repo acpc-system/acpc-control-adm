@@ -1,0 +1,13 @@
+#!/bin/bash
+for i in `seq 3 3`
+do
+TEAM="team$i"
+echo "$TEAM"
+#UID=$(ls -l /run/usr|grep ${TEAM} | awk ' { print $9 } ')
+
+X=$(ssh ${TEAM} "U=`ls -l /run/user | grep ${TEAM}`")
+echo "asd ${X}"
+
+#x11vnc -viewonly -xkb -noxrecord -noxfixes -noxdamage -forever -rfbport 11226 -auth /run/user/$(ls -l /run/user|grep `hostname` | awk ' { print $9 } ')/gdm/Xauthority -display :0 -rfbauth /etc/x11vnc/passwd &"
+#ssh $TEAM "${CMD} &" 
+done

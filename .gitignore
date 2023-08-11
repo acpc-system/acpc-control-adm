@@ -1,3 +1,4 @@
 api/
-adm/var/*
-adm/tmp/*
+var/acpc.local*
+var/pc2passwords
+Team.Archive/*

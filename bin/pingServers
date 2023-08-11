@@ -1,0 +1,34 @@
+#!/bin/bash
+##### Script to test all Servers
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+### Test PC2
+RES=`pingHost pc2`
+echo "PC2 is $RES"
+### Test web
+WEBCOUNT=`getWebMAC|wc -l`
+if [ $WEBCOUNT -eq 1 ]
+then
+ RES=`pingHost web`
+ echo "web is $RES"
+else
+ loopHosts "web" $WEBCOUNT
+fi
+### Test Judges
+JUDGECOUNT=`getJudgeMAC|wc -l`
+if [ $JUDGECOUNT -eq 1 ]
+then
+ RES=`pingHost judge`
+ echo "judge is $RES"
+else
+ loopHosts "judge" $JUDGECOUNT
+fi
+### Test Printers
+PRINTCOUNT=`getPrintMAC|wc -l`
+if [ $PRINTCOUNT -eq 1 ]
+then
+ RES=`pingHost print`
+ echo "print is $RES"
+else
+ loopHosts "print" $PRINTCOUNT
+fi

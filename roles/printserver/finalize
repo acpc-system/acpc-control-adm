@@ -64,9 +64,14 @@ cp loginbg.jpg /etc/loginbg.jpg
  ### 110- Configuring the banner page:
  cd /usr/share/cups/banners
  cp confidential confidential.original
- echo 'Job ID: {?job-id}' > confidential
- echo 'From User: {?job-originating-user-name}' >> confidential
- echo 'From Computer: {?job-originating-host-name}' >> confidential
+
+ echo "ACPC Contest team printout" > /usr/share/cups/banners/confidential
+ echo "==========================" >> /usr/share/cups/banners/confidential
+ echo "" >> /usr/share/cups/banners/confidential
+ echo "Job ID          : {?job-id}" >> /usr/share/cups/banners/confidential
+ echo "From User       : {?job-originating-user-name}" >> /usr/share/cups/banners/confidential
+ echo "From Computer   : {?job-originating-host-name}" >> /usr/share/cups/banners/confidential
+
  systemctl restart cups
  cd -
 

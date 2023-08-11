@@ -1,0 +1,24 @@
+#!/bin/bash
+for i in `seq 1 150`
+do
+if [ $i -le 44 ]
+then
+ if [ $i -le 9 ]
+  then
+	TEAM="teama0$i"	
+   else
+	TEAM="teama$i"
+  fi
+else
+ IN=`expr $i - 44`
+ if [ $IN -le 9 ]
+ then
+	TEAM="teamb0$IN"
+ else
+	TEAM="teamb$IN"
+ fi
+fi
+HOMEDIR="team$i"
+ID=` id $HOMEDIR| sed -e 's/(/ /g' -e 's/=/ /g'|awk ' { print $2 } '`
+echo "useradd -d /home/$HOMEDIR -g $HOMEDIR -o -u $ID $TEAM"
+done

@@ -1,0 +1,26 @@
+#!/bin/bash
+############ Script that check live host for installation
+### This script takes the hostname as parameter
+if [ $# -lt 1 ]
+then
+	echo "Invalid parameters"
+fi
+
+source /acpc/adm/bin/checker
+source /acpc/adm/bin/getSettings
+NoOfPC=`getNoOfPCs`	
+HOSTNAME="$1"
+RES=`hostIsBad $HOSTNAME`
+if [ $RES -le 0 ]
+ then
+	HRES=`CheckHostInstallation "$HOSTNAME"`
+	ERRCODE=`echo $HRES | cut -d":" -f 1`
+	MSG=`echo $HRES | cut -d ":" -f 2`
+	if [ $ERRCODE -eq 0 ]
+	then
+		echo "Checking for $HOSTNAME is ok "
+	else
+		#echo "Checking for $HOSTNAME is $MSG"
+		echo "Checking for $HOSTNAME is $HRES" 
+	fi
+fi

@@ -1,0 +1,33 @@
+#!/bin/bash
+echo "** Script that prepare the contest environment"
+echo "   Please, ensure that the webserver is up and running"
+source /acpc/adm/bin/getSettings
+source /acpc/adm/bin/setSettings
+NOOFPC=`getNoOfPCs`
+#### Clean backup directory
+N=`sudo ssh root@web "ls -l /backup|grep -v "^total"|wc -l"`
+if [ $N -ge 1 ]
+then
+ echo "Erasing old backup dirs"
+ sudo ssh root@web "rm -Rf /backup/*"
+fi
+
+### Create new home directory, and set its permissions
+echo "Creating new backup dirs"
+for i in `seq 1 $NOOFPC`
+do
+TEAM="team$i"
+sudo ssh root@web "mkdir /backup/$TEAM;chown -R $TEAM:$TEAM /backup/$TEAM;chmod 770 /backup/$TEAM"
+done
+
+### Deny access to all admin virtual directory hosted under control web server
+#echo "Deny access to control web server"
+#setDenyAccess htaccess.conf
+#setDenyAccess rolesaccess.conf
+#setDenyAccess ubuntuaccess.conf
+#service apache2 restart
+
+echo "Disable USB for all contestants"
+
+
+echo "Done"

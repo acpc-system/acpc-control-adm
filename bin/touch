@@ -1,0 +1,10 @@
+#!/bin/bash
+start=$1
+end=$2
+echo "choose what process to kill" 
+echo "1-clion" 
+read c 
+for i in $(seq $start $end) 
+do 
+process= $(echo "ps -aux | grep -i clion | awk '{print $2}' " kill -9 $process)
+done

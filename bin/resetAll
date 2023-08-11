@@ -1,0 +1,3 @@
+#!/bin/bash
+/acpc/adm/bin/resetTeams
+/acpc/adm/bin/resetServers

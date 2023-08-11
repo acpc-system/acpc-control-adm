@@ -1,0 +1,17 @@
+#!/bin/bash
+## Script stops the presentation
+if [ ${#} -ne 2 ]
+then
+	echo "Invalid parameters"
+	exit 1
+fi
+for i in $(seq ${1} ${2})
+do
+TEAM="team${i}"
+echo -n "Starting presentation at ${TEAM} "
+ssh root@${TEAM} "pkill -9 client.sh && pkill -9 java;export DISPLAY=:0 ; nohup /usr/local/presentations-2.4.727/startclient > /dev/null 2>&1 &"
+#ssh root@${TEAM} "export DISPLAY=:0 && screen -r -S 'pres' '/usr/local/presentations-2.4.727/startclient'"
+echo " done"
+
+done
+exit 0

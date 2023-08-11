@@ -1,0 +1,9 @@
+#!/bin/bash
+for i in $(seq $1 $2 )
+do
+TEAM="team${i}"
+echo "${TEAM}==="
+ssh root@${TEAM} "rm /home/${TEAM}/Desktop/samples/*"
+scp -r /tmp/samples/* root@${TEAM}:/home/${TEAM}/Desktop/samples
+ssh root@${TEAM} "chown -R ${TEAM}:${TEAM} /home/${TEAM}/Desktop/samples/*"
+done

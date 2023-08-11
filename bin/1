@@ -1,0 +1,7 @@
+#!/bin/bash
+for i in ` seq 1 3`
+do
+TEAM="judge$i"
+echo "Working with $TEAM"
+ssh $TEAM "hostnamectl set-hostname $TEAM;rm /etc/acpcHostName;systemctl restart configProfile"
+done

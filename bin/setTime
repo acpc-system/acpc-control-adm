@@ -1,0 +1,17 @@
+#!/bin/bash
+## USed to sync time with control VM
+if [ ${#} -ne 2 ]
+then	
+	echo "Invalid parameters"
+	exit 1
+fi
+
+for i in $(seq ${1} ${2})
+do
+TEAM="team${i}"
+echo -n "Setting time for ${TEAM} : "
+D=$(date)
+ssh root@${TEAM} "date -s \"${D}\""
+echo " .. done"
+done
+

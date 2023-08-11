@@ -1,0 +1,6 @@
+#!/bin/bash
+#/acpc/adm/bin/pingTeams
+#/acpc/adm/bin/pingServers
+/acpc/adm/bin/testHosts 1001 1148|grep dead
+/acpc/adm/bin/testHosts 2001 2096|grep dead
+/acpc/adm/bin/testHosts 3001 3040|grep dead

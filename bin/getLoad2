@@ -1,0 +1,10 @@
+#!/bin/bash
+#GEt contestants load 
+for i in $(seq 201 298)
+	do
+	 TEAM="team${i}"
+	 echo -n "Getting ${TEAM} : "
+	 LOAD=$(ssh root@${TEAM} "uptime")
+	 echo " ${LOAD}"
+	done
+

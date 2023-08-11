@@ -1,0 +1,47 @@
+#!/bin/bash
+################## Script that takes the _PC2_Team.tab  full path
+############### 1- Shuffle it by sorting the 5th col.
+#############	2- Removes the 1st col (null)
+############	3- Let the 1st col counter represents team number
+############	4- Update /acpc/adm/var/ PC2 file with the team name
+############	scripts takes two arguments.
+############	1st: Full path to _PC2_Team.tab
+
+function genPC2File {
+NOOFPC=`getNoOfPCs`
+N=`getRandomTeamN $NOOFPC`
+for i in $N
+do
+LINE=`cat $FULLPATH|sed -n "$i p"`
+echo "$LINE"
+done
+}
+
+if [ $# -le 0 ]
+	then
+		echo "Invalid parameters.Please pass the fill path to _PC2_Team.tab"
+		exit 0
+	fi
+source /acpc/adm/bin/getSettings
+source /acpc/adm/bin/genRandom
+FULLPATH=$1
+if [ ! -f $FULLPATH ]
+	then
+		echo "Cant read $FULLPATH"
+		exit 1
+	fi
+DOMAINNAME=`getdomainname`
+FILE=`genPC2File`
+PC2FILE=`echo "$FILE"|sed "s/null\t//g"|awk ' { print NR"\t"$0} '`
+SEATSFILE="$DOMAINNAME-Seats.txt"
+echo "$PC2FILE" > /acpc/adm/var/_PC2_Team.tab
+SEATS=`echo "$PC2FILE" | cut -d$'\t' -f 1,5`
+echo "Writting seats to $SEATSFILE"
+echo "$SEATS" > /acpc/adm/var/$SEATSFILE
+echo "Done generating the file. "
+echo "1- Dont forget to generate the team names 1st in PC2"
+echo "2- Transfer the file /acpc/adm/var/_PC2_Team.tab to PC2 server"
+echo "3- Transfer the file _PC2_Site.tab to PC2 Server"
+echo "4- Give $SEATSFILE to the hall manager for team seats"
+echo "5- Import the site file into PC2 server"
+echo "6- Import _PC2_Team.tab"

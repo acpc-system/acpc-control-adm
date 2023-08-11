@@ -1,0 +1,16 @@
+#!/bin/bash
+## Script removes /etc/xdg/autostart/cds-client.desktop
+if [ ${#} -ne 2 ]
+then
+	echo "Invalid parameters"
+	exit 1
+fi
+for i in $(seq ${1} ${2})
+do
+TEAM="team${i}"
+echo -n "Removing from  ${TEAM} "
+ssh root@${TEAM} "rm /etc/xdg/autostart/cds-client.desktop"
+echo " done"
+
+done
+exit 0

@@ -1,5 +1,4 @@
 ddns-domainname "acpc.local";
-ddns-rev-domainname "0.0.10.in-addr.arpa";
+ddns-rev-domainname "0.10.in-addr.arpa";
 option domain-name "acpc.local";
 option domain-name-servers 10.0.3.2;
-option broadcast-address 10.0.255.255;

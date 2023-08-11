@@ -1,0 +1,16 @@
+#!/bin/bash
+###SCript prints the MAC address for teams 
+##Parameters, start, and end 
+START=${1}
+END=${2}
+for HOST in $(seq ${START} ${END})
+do
+	RESP=$(curl -s -u "admin:baba123" http://localhost/api/team/${HOST}/get/mac  | jq .status_code)
+	if [ ${RESP} -eq 200 ]
+	then
+		RESP=$(curl -s -u "admin:baba123" http://localhost/api/team/${HOST}/get/mac  | jq .response | awk ' BEGIN { FS=", " } { print $2 } ' | sed 's/"//g')
+		echo "team${HOST},${RESP}"
+	else
+		echo "team${HOST} not exist"
+	fi
+done

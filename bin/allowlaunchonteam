@@ -1,0 +1,8 @@
+#!/bin/bash
+curHostName=`hostname`
+Fs=$( "ls /home/$curHostName/Desktop/*.desktop")
+for f in ${Fs}
+do
+         "chmod a-x /home/$curHostName/Desktop/* && sudo -u team${i} dbus-launch gio set ${f}  metadata::trusted true ; chmod a+x ${f}"
+done
+

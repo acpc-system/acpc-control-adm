@@ -1,0 +1,12 @@
+#!/bin/bash
+source /acpc/adm/bin/pingutil
+source /acpc/adm/bin/getSettings
+NOOFPCS=`getNoOfPCs`
+for i in `seq 2001 2096`
+do
+TEAM="team$i"
+#TEAM=$1
+echo "Working with $TEAM"
+ssh root@$TEAM "reboot"
+
+done

@@ -1,0 +1,16 @@
+#!/bin/bash
+#for i in $(seq 3 9)
+#do
+	#echo "Round ${i}"
+echo "Small hall"
+#sudo ./genPDF.perl 71 "Qualification practice" ecpc2021_day${i}_prac_sh
+sudo ./genPDF.perl 71 "ECPC 2021 Competition" ecpc2021_comp_sh
+
+echo "Large hall"
+#sudo ./genPDF.perl 229 "Qualification practice" ecpc2021_day${i}_prac_lh 101
+sudo ./genPDF.perl 229 "ECPC 2021 Competition" ecpc2021_comp_lh 101
+
+echo "LAB"
+#sudo ./genPDF.perl 320 "Qualification practice" ecpc2021_day${i}_prac_lab 301
+sudo ./genPDF.perl 320 "ECPE 2021 Competition" ecpc2021_comp_lab 301
+#done

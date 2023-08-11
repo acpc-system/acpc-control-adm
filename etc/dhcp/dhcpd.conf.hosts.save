@@ -1,0 +1,1807 @@
+host team1001 {
+	hardware ethernet B0:7B:25:2B:9A:7D;
+	fixed-address 10.0.0.10;
+	option host-name "team1001";
+	option domain-name "acpc.local";
+	ddns-hostname "team1001";
+}
+host team1002 {
+	hardware ethernet b0:7b:25:28:61:13;
+	fixed-address 10.0.0.11;
+	option host-name "team1002";
+	option domain-name "acpc.local";
+	ddns-hostname "team1002";
+}
+host team1003 {
+	hardware ethernet d0:8e:79:01:8b:28;
+	fixed-address 10.0.0.12;
+	option host-name "team1003";
+	option domain-name "acpc.local";
+	ddns-hostname "team1003";
+}
+host team1004 {
+	hardware ethernet d0:8e:79:01:05:60;
+	fixed-address 10.0.0.13;
+	option host-name "team1004";
+	option domain-name "acpc.local";
+	ddns-hostname "team1004";
+}
+host team1005 {
+	hardware ethernet d0:8e:79:04:9b:fc;
+	fixed-address 10.0.0.14;
+	option host-name "team1005";
+	option domain-name "acpc.local";
+	ddns-hostname "team1005";
+}
+host team1006 {
+	hardware ethernet b0:7b:25:28:47:fa;
+	fixed-address 10.0.0.15;
+	option host-name "team1006";
+	option domain-name "acpc.local";
+	ddns-hostname "team1006";
+}
+host team1007 {
+	hardware ethernet d0:8e:79:04:dd:2d;
+	fixed-address 10.0.0.16;
+	option host-name "team1007";
+	option domain-name "acpc.local";
+	ddns-hostname "team1007";
+}
+host team1008 {
+	hardware ethernet b0:7b:25:2b:ba:3f;
+	fixed-address 10.0.0.17;
+	option host-name "team1008";
+	option domain-name "acpc.local";
+	ddns-hostname "team1008";
+}
+host team1009 {
+	hardware ethernet d0:8e:79:01:08:17;
+	fixed-address 10.0.0.18;
+	option host-name "team1009";
+	option domain-name "acpc.local";
+	ddns-hostname "team1009";
+}
+host team1010 {
+	hardware ethernet d0:8e:79:01:07:fe;
+	fixed-address 10.0.0.19;
+	option host-name "team1010";
+	option domain-name "acpc.local";
+	ddns-hostname "team1010";
+}
+host team1011 {
+	hardware ethernet b0:7b:25:2b:7f:38;
+	fixed-address 10.0.0.20;
+	option host-name "team1011";
+	option domain-name "acpc.local";
+	ddns-hostname "team1011";
+}
+host team1012 {
+	hardware ethernet d0:8e:79:05:27:9a;
+	fixed-address 10.0.0.21;
+	option host-name "team1012";
+	option domain-name "acpc.local";
+	ddns-hostname "team1012";
+}
+host team1013 {
+	hardware ethernet d0:8e:79:04:d3:63;
+	fixed-address 10.0.0.22;
+	option host-name "team1013";
+	option domain-name "acpc.local";
+	ddns-hostname "team1013";
+}
+host team1014 {
+	hardware ethernet d0:8e:79:01:6e:10;
+	fixed-address 10.0.0.23;
+	option host-name "team1014";
+	option domain-name "acpc.local";
+	ddns-hostname "team1014";
+}
+host team1015 {
+	hardware ethernet b0:7b:25:28:46:35;
+	fixed-address 10.0.0.24;
+	option host-name "team1015";
+	option domain-name "acpc.local";
+	ddns-hostname "team1015";
+}
+host team1016 {
+	hardware ethernet d0:8e:79:01:cd:6f;
+	fixed-address 10.0.0.25;
+	option host-name "team1016";
+	option domain-name "acpc.local";
+	ddns-hostname "team1016";
+}
+host team1017 {
+	hardware ethernet d0:8e:79:04:dd:c5;
+	fixed-address 10.0.0.26;
+	option host-name "team1017";
+	option domain-name "acpc.local";
+	ddns-hostname "team1017";
+}
+host team1018 {
+	hardware ethernet b0:7b:25:28:5b:de;
+	fixed-address 10.0.0.27;
+	option host-name "team1018";
+	option domain-name "acpc.local";
+	ddns-hostname "team1018";
+}
+host team1019 {
+	hardware ethernet b0:7b:25:2b:af:0a;
+	fixed-address 10.0.0.28;
+	option host-name "team1019";
+	option domain-name "acpc.local";
+	ddns-hostname "team1019";
+}
+host team1020 {
+	hardware ethernet b0:7b:25:24:1b:76;
+	fixed-address 10.0.0.29;
+	option host-name "team1020";
+	option domain-name "acpc.local";
+	ddns-hostname "team1020";
+}
+host team1021 {
+	hardware ethernet d0:8e:79:01:68:65;
+	fixed-address 10.0.0.30;
+	option host-name "team1021";
+	option domain-name "acpc.local";
+	ddns-hostname "team1021";
+}
+host team1022 {
+	hardware ethernet d0:8e:79:00:db:31;
+	fixed-address 10.0.0.31;
+	option host-name "team1022";
+	option domain-name "acpc.local";
+	ddns-hostname "team1022";
+}
+host team1023 {
+	hardware ethernet b0:7b:25:28:61:4d;
+	fixed-address 10.0.0.32;
+	option host-name "team1023";
+	option domain-name "acpc.local";
+	ddns-hostname "team1023";
+}
+host team1024 {
+	hardware ethernet d0:8e:79:00:d6:84;
+	fixed-address 10.0.0.33;
+	option host-name "team1024";
+	option domain-name "acpc.local";
+	ddns-hostname "team1024";
+}
+host team1025 {
+	hardware ethernet b0:7b:25:2b:ba:99;
+	fixed-address 10.0.0.34;
+	option host-name "team1025";
+	option domain-name "acpc.local";
+	ddns-hostname "team1025";
+}
+host team1026 {
+	hardware ethernet b0:7b:25:2b:7e:68;
+	fixed-address 10.0.0.35;
+	option host-name "team1026";
+	option domain-name "acpc.local";
+	ddns-hostname "team1026";
+}
+host team1027 {
+	hardware ethernet b0:7b:25:28:5f:29;
+	fixed-address 10.0.0.36;
+	option host-name "team1027";
+	option domain-name "acpc.local";
+	ddns-hostname "team1027";
+}
+host team1028 {
+	hardware ethernet b0:7b:25:28:56:f8;
+	fixed-address 10.0.0.37;
+	option host-name "team1028";
+	option domain-name "acpc.local";
+	ddns-hostname "team1028";
+}
+host team1029 {
+	hardware ethernet d0:8e:79:01:72:0d;
+	fixed-address 10.0.0.38;
+	option host-name "team1029";
+	option domain-name "acpc.local";
+	ddns-hostname "team1029";
+}
+host team1030 {
+	hardware ethernet b0:7b:25:24:28:19;
+	fixed-address 10.0.0.39;
+	option host-name "team1030";
+	option domain-name "acpc.local";
+	ddns-hostname "team1030";
+}
+host team1031 {
+	hardware ethernet d0:8e:79:00:d3:69;
+	fixed-address 10.0.0.40;
+	option host-name "team1031";
+	option domain-name "acpc.local";
+	ddns-hostname "team1031";
+}
+host team1032 {
+	hardware ethernet b0:7b:25:28:59:68;
+	fixed-address 10.0.0.41;
+	option host-name "team1032";
+	option domain-name "acpc.local";
+	ddns-hostname "team1032";
+}
+host team1033 {
+	hardware ethernet b0:7b:25:2b:80:73;
+	fixed-address 10.0.0.42;
+	option host-name "team1033";
+	option domain-name "acpc.local";
+	ddns-hostname "team1033";
+}
+host team1034 {
+	hardware ethernet d0:8e:79:01:7b:5d;
+	fixed-address 10.0.0.43;
+	option host-name "team1034";
+	option domain-name "acpc.local";
+	ddns-hostname "team1034";
+}
+host team1035 {
+	hardware ethernet b0:7b:25:28:61:23;
+	fixed-address 10.0.0.44;
+	option host-name "team1035";
+	option domain-name "acpc.local";
+	ddns-hostname "team1035";
+}
+host team1036 {
+	hardware ethernet b0:7b:25:28:56:c4;
+	fixed-address 10.0.0.45;
+	option host-name "team1036";
+	option domain-name "acpc.local";
+	ddns-hostname "team1036";
+}
+host team1037 {
+	hardware ethernet d0:8e:79:01:4a:78;
+	fixed-address 10.0.0.46;
+	option host-name "team1037";
+	option domain-name "acpc.local";
+	ddns-hostname "team1037";
+}
+host team1038 {
+	hardware ethernet D0:8E:79:00:DF:FF;
+	fixed-address 10.0.0.47;
+	option host-name "team1038";
+	option domain-name "acpc.local";
+	ddns-hostname "team1038";
+}
+host team1039 {
+	hardware ethernet b0:7b:25:2b:b9:7e;
+	fixed-address 10.0.0.48;
+	option host-name "team1039";
+	option domain-name "acpc.local";
+	ddns-hostname "team1039";
+}
+host team1040 {
+	hardware ethernet d0:8e:79:04:c2:32;
+	fixed-address 10.0.0.49;
+	option host-name "team1040";
+	option domain-name "acpc.local";
+	ddns-hostname "team1040";
+}
+host team1041 {
+	hardware ethernet d0:8e:79:11:c0:e0;
+	fixed-address 10.0.0.50;
+	option host-name "team1041";
+	option domain-name "acpc.local";
+	ddns-hostname "team1041";
+}
+host team1042 {
+	hardware ethernet b0:7b:25:28:66:4c;
+	fixed-address 10.0.0.51;
+	option host-name "team1042";
+	option domain-name "acpc.local";
+	ddns-hostname "team1042";
+}
+host team1043 {
+	hardware ethernet d0:8e:79:00:d8:d1;
+	fixed-address 10.0.0.52;
+	option host-name "team1043";
+	option domain-name "acpc.local";
+	ddns-hostname "team1043";
+}
+host team1044 {
+	hardware ethernet d0:8e:79:00:e0:d8;
+	fixed-address 10.0.0.53;
+	option host-name "team1044";
+	option domain-name "acpc.local";
+	ddns-hostname "team1044";
+}
+host team1045 {
+	hardware ethernet d0:8e:79:00:e6:50;
+	fixed-address 10.0.0.54;
+	option host-name "team1045";
+	option domain-name "acpc.local";
+	ddns-hostname "team1045";
+}
+host team1046 {
+	hardware ethernet b0:7b:25:28:5e:8d;
+	fixed-address 10.0.0.55;
+	option host-name "team1046";
+	option domain-name "acpc.local";
+	ddns-hostname "team1046";
+}
+host team1047 {
+	hardware ethernet b0:7b:25:28:4c:87;
+	fixed-address 10.0.0.56;
+	option host-name "team1047";
+	option domain-name "acpc.local";
+	ddns-hostname "team1047";
+}
+host team1048 {
+	hardware ethernet d0:8e:79:05:26:dc;
+	fixed-address 10.0.0.57;
+	option host-name "team1048";
+	option domain-name "acpc.local";
+	ddns-hostname "team1048";
+}
+host team1049 {
+	hardware ethernet d0:8e:79:11:de:2e;
+	fixed-address 10.0.0.58;
+	option host-name "team1049";
+	option domain-name "acpc.local";
+	ddns-hostname "team1049";
+}
+host team1050 {
+	hardware ethernet b0:7b:25:2b:bc:6e;
+	fixed-address 10.0.0.59;
+	option host-name "team1050";
+	option domain-name "acpc.local";
+	ddns-hostname "team1050";
+}
+host team1051 {
+	hardware ethernet d0:8e:79:05:28:19;
+	fixed-address 10.0.0.60;
+	option host-name "team1051";
+	option domain-name "acpc.local";
+	ddns-hostname "team1051";
+}
+host team1052 {
+	hardware ethernet b0:7b:25:2b:ba:be;
+	fixed-address 10.0.0.61;
+	option host-name "team1052";
+	option domain-name "acpc.local";
+	ddns-hostname "team1052";
+}
+host team1053 {
+	hardware ethernet b0:7b:25:28:5b:75;
+	fixed-address 10.0.0.62;
+	option host-name "team1053";
+	option domain-name "acpc.local";
+	ddns-hostname "team1053";
+}
+host team1054 {
+	hardware ethernet b0:7b:25:2b:ae:d5;
+	fixed-address 10.0.0.63;
+	option host-name "team1054";
+	option domain-name "acpc.local";
+	ddns-hostname "team1054";
+}
+host team1055 {
+	hardware ethernet b0:7b:25:2b:af:38;
+	fixed-address 10.0.0.64;
+	option host-name "team1055";
+	option domain-name "acpc.local";
+	ddns-hostname "team1055";
+}
+host team1056 {
+	hardware ethernet d0:8e:79:00:d1:0d;
+	fixed-address 10.0.0.65;
+	option host-name "team1056";
+	option domain-name "acpc.local";
+	ddns-hostname "team1056";
+}
+host team1057 {
+	hardware ethernet d0:8e:79:01:74:c1;
+	fixed-address 10.0.0.66;
+	option host-name "team1057";
+	option domain-name "acpc.local";
+	ddns-hostname "team1057";
+}
+host team1058 {
+	hardware ethernet d0:8e:79:04:d0:8d;
+	fixed-address 10.0.0.67;
+	option host-name "team1058";
+	option domain-name "acpc.local";
+	ddns-hostname "team1058";
+}
+host team1059 {
+	hardware ethernet d0:8e:79:00:d8:2d;
+	fixed-address 10.0.0.68;
+	option host-name "team1059";
+	option domain-name "acpc.local";
+	ddns-hostname "team1059";
+}
+host team1060 {
+	hardware ethernet b0:7b:25:28:5b:d9;
+	fixed-address 10.0.0.69;
+	option host-name "team1060";
+	option domain-name "acpc.local";
+	ddns-hostname "team1060";
+}
+host team1061 {
+	hardware ethernet d0:8e:79:01:96:13;
+	fixed-address 10.0.0.70;
+	option host-name "team1061";
+	option domain-name "acpc.local";
+	ddns-hostname "team1061";
+}
+host team1062 {
+	hardware ethernet b0:7b:25:28:5d:32;
+	fixed-address 10.0.0.71;
+	option host-name "team1062";
+	option domain-name "acpc.local";
+	ddns-hostname "team1062";
+}
+host team1063 {
+	hardware ethernet d0:8e:79:00:df:b2;
+	fixed-address 10.0.0.72;
+	option host-name "team1063";
+	option domain-name "acpc.local";
+	ddns-hostname "team1063";
+}
+host team1064 {
+	hardware ethernet b0:7b:25:2b:b1:87;
+	fixed-address 10.0.0.73;
+	option host-name "team1064";
+	option domain-name "acpc.local";
+	ddns-hostname "team1064";
+}
+host team1065 {
+	hardware ethernet d0:8e:79:01:72:f3;
+	fixed-address 10.0.0.74;
+	option host-name "team1065";
+	option domain-name "acpc.local";
+	ddns-hostname "team1065";
+}
+host team1066 {
+	hardware ethernet b0:7b:25:2b:ba:98;
+	fixed-address 10.0.0.75;
+	option host-name "team1066";
+	option domain-name "acpc.local";
+	ddns-hostname "team1066";
+}
+host team1067 {
+	hardware ethernet d0:8e:79:11:99:a5;
+	fixed-address 10.0.0.76;
+	option host-name "team1067";
+	option domain-name "acpc.local";
+	ddns-hostname "team1067";
+}
+host team1068 {
+	hardware ethernet b0:7b:25:2b:b9:7f;
+	fixed-address 10.0.0.77;
+	option host-name "team1068";
+	option domain-name "acpc.local";
+	ddns-hostname "team1068";
+}
+host team1069 {
+	hardware ethernet b0:7b:25:2b:b0:c9;
+	fixed-address 10.0.0.78;
+	option host-name "team1069";
+	option domain-name "acpc.local";
+	ddns-hostname "team1069";
+}
+host team1070 {
+	hardware ethernet d0:8e:79:01:70:93;
+	fixed-address 10.0.0.79;
+	option host-name "team1070";
+	option domain-name "acpc.local";
+	ddns-hostname "team1070";
+}
+host team1071 {
+	hardware ethernet d0:8e:79:00:d6:86;
+	fixed-address 10.0.0.80;
+	option host-name "team1071";
+	option domain-name "acpc.local";
+	ddns-hostname "team1071";
+}
+host team1072 {
+	hardware ethernet d0:8e:79:01:86:ce;
+	fixed-address 10.0.0.81;
+	option host-name "team1072";
+	option domain-name "acpc.local";
+	ddns-hostname "team1072";
+}
+host team1073 {
+	hardware ethernet b0:7b:25:2b:79:4b;
+	fixed-address 10.0.0.82;
+	option host-name "team1073";
+	option domain-name "acpc.local";
+	ddns-hostname "team1073";
+}
+host team1074 {
+	hardware ethernet d0:8e:79:04:bc:be;
+	fixed-address 10.0.0.83;
+	option host-name "team1074";
+	option domain-name "acpc.local";
+	ddns-hostname "team1074";
+}
+host team1075 {
+	hardware ethernet b0:7b:25:2b:a9:bd;
+	fixed-address 10.0.0.84;
+	option host-name "team1075";
+	option domain-name "acpc.local";
+	ddns-hostname "team1075";
+}
+host team1076 {
+	hardware ethernet d0:8e:79:00:d4:f0;
+	fixed-address 10.0.0.85;
+	option host-name "team1076";
+	option domain-name "acpc.local";
+	ddns-hostname "team1076";
+}
+host team1077 {
+	hardware ethernet d0:8e:79:05:28:07;
+	fixed-address 10.0.0.86;
+	option host-name "team1077";
+	option domain-name "acpc.local";
+	ddns-hostname "team1077";
+}
+host team1078 {
+	hardware ethernet b0:7b:25:2b:b1:91;
+	fixed-address 10.0.0.87;
+	option host-name "team1078";
+	option domain-name "acpc.local";
+	ddns-hostname "team1078";
+}
+host team1079 {
+	hardware ethernet d0:8e:79:04:d3:97;
+	fixed-address 10.0.0.88;
+	option host-name "team1079";
+	option domain-name "acpc.local";
+	ddns-hostname "team1079";
+}
+host team1080 {
+	hardware ethernet d0:8e:79:04:dd:c4;
+	fixed-address 10.0.0.89;
+	option host-name "team1080";
+	option domain-name "acpc.local";
+	ddns-hostname "team1080";
+}
+host team1081 {
+	hardware ethernet b0:7b:25:28:55:c9;
+	fixed-address 10.0.0.90;
+	option host-name "team1081";
+	option domain-name "acpc.local";
+	ddns-hostname "team1081";
+}
+host team1082 {
+	hardware ethernet b0:7b:25:28:5b:a8;
+	fixed-address 10.0.0.91;
+	option host-name "team1082";
+	option domain-name "acpc.local";
+	ddns-hostname "team1082";
+}
+host team1083 {
+	hardware ethernet b0:7b:25:28:47:a5;
+	fixed-address 10.0.0.92;
+	option host-name "team1083";
+	option domain-name "acpc.local";
+	ddns-hostname "team1083";
+}
+host team1084 {
+	hardware ethernet d0:8e:79:01:72:f0;
+	fixed-address 10.0.0.93;
+	option host-name "team1084";
+	option domain-name "acpc.local";
+	ddns-hostname "team1084";
+}
+host team1085 {
+	hardware ethernet d0:8e:79:11:c3:2c;
+	fixed-address 10.0.0.94;
+	option host-name "team1085";
+	option domain-name "acpc.local";
+	ddns-hostname "team1085";
+}
+host team1086 {
+	hardware ethernet d0:8e:79:00:d2:ad;
+	fixed-address 10.0.0.95;
+	option host-name "team1086";
+	option domain-name "acpc.local";
+	ddns-hostname "team1086";
+}
+host team1087 {
+	hardware ethernet b0:7b:25:2b:af:73;
+	fixed-address 10.0.0.96;
+	option host-name "team1087";
+	option domain-name "acpc.local";
+	ddns-hostname "team1087";
+}
+host team1088 {
+	hardware ethernet b0:7b:25:28:48:a6;
+	fixed-address 10.0.0.97;
+	option host-name "team1088";
+	option domain-name "acpc.local";
+	ddns-hostname "team1088";
+}
+host team1089 {
+	hardware ethernet b0:7b:25:28:58:94;
+	fixed-address 10.0.0.98;
+	option host-name "team1089";
+	option domain-name "acpc.local";
+	ddns-hostname "team1089";
+}
+host team1090 {
+	hardware ethernet b0:7b:25:28:59:fb;
+	fixed-address 10.0.0.99;
+	option host-name "team1090";
+	option domain-name "acpc.local";
+	ddns-hostname "team1090";
+}
+host team1091 {
+	hardware ethernet b0:7b:25:28:5e:82;
+	fixed-address 10.0.0.100;
+	option host-name "team1091";
+	option domain-name "acpc.local";
+	ddns-hostname "team1091";
+}
+host team1092 {
+	hardware ethernet b0:7b:25:28:5c:0b;
+	fixed-address 10.0.0.101;
+	option host-name "team1092";
+	option domain-name "acpc.local";
+	ddns-hostname "team1092";
+}
+host team1093 {
+	hardware ethernet d0:8e:79:01:4a:c7;
+	fixed-address 10.0.0.102;
+	option host-name "team1093";
+	option domain-name "acpc.local";
+	ddns-hostname "team1093";
+}
+host team1094 {
+	hardware ethernet d0:8e:79:04:db:38;
+	fixed-address 10.0.0.103;
+	option host-name "team1094";
+	option domain-name "acpc.local";
+	ddns-hostname "team1094";
+}
+host team1095 {
+	hardware ethernet b0:7b:25:28:49:27;
+	fixed-address 10.0.0.104;
+	option host-name "team1095";
+	option domain-name "acpc.local";
+	ddns-hostname "team1095";
+}
+host team1096 {
+	hardware ethernet d0:8e:79:00:d1:78;
+	fixed-address 10.0.0.105;
+	option host-name "team1096";
+	option domain-name "acpc.local";
+	ddns-hostname "team1096";
+}
+host team1097 {
+	hardware ethernet b0:7b:25:2b:7d:7b;
+	fixed-address 10.0.0.106;
+	option host-name "team1097";
+	option domain-name "acpc.local";
+	ddns-hostname "team1097";
+}
+host team1098 {
+	hardware ethernet d0:8e:79:00:da:59;
+	fixed-address 10.0.0.107;
+	option host-name "team1098";
+	option domain-name "acpc.local";
+	ddns-hostname "team1098";
+}
+host team1099 {
+	hardware ethernet b0:7b:25:28:40:e7;
+	fixed-address 10.0.0.108;
+	option host-name "team1099";
+	option domain-name "acpc.local";
+	ddns-hostname "team1099";
+}
+host team1100 {
+	hardware ethernet b0:7b:25:2b:95:c7;
+	fixed-address 10.0.0.109;
+	option host-name "team1100";
+	option domain-name "acpc.local";
+	ddns-hostname "team1100";
+}
+host team1101 {
+	hardware ethernet b0:7b:25:28:59:b4;
+	fixed-address 10.0.0.110;
+	option host-name "team1101";
+	option domain-name "acpc.local";
+	ddns-hostname "team1101";
+}
+host team1102 {
+	hardware ethernet d0:8e:79:00:e2:85;
+	fixed-address 10.0.0.111;
+	option host-name "team1102";
+	option domain-name "acpc.local";
+	ddns-hostname "team1102";
+}
+host team1103 {
+	hardware ethernet d0:8e:79:11:d2:d4;
+	fixed-address 10.0.0.112;
+	option host-name "team1103";
+	option domain-name "acpc.local";
+	ddns-hostname "team1103";
+}
+host team1104 {
+	hardware ethernet d0:8e:79:04:c3:e5;
+	fixed-address 10.0.0.113;
+	option host-name "team1104";
+	option domain-name "acpc.local";
+	ddns-hostname "team1104";
+}
+host team1105 {
+	hardware ethernet b0:7b:25:2b:bc:54;
+	fixed-address 10.0.0.114;
+	option host-name "team1105";
+	option domain-name "acpc.local";
+	ddns-hostname "team1105";
+}
+host team1106 {
+	hardware ethernet b0:7b:25:28:41:ff;
+	fixed-address 10.0.0.115;
+	option host-name "team1106";
+	option domain-name "acpc.local";
+	ddns-hostname "team1106";
+}
+host team1107 {
+	hardware ethernet d0:8e:79:00:e3:16;
+	fixed-address 10.0.0.116;
+	option host-name "team1107";
+	option domain-name "acpc.local";
+	ddns-hostname "team1107";
+}
+host team1108 {
+	hardware ethernet b0:7b:25:28:61:48;
+	fixed-address 10.0.0.117;
+	option host-name "team1108";
+	option domain-name "acpc.local";
+	ddns-hostname "team1108";
+}
+host team1109 {
+	hardware ethernet b0:7b:25:28:5c:45;
+	fixed-address 10.0.0.118;
+	option host-name "team1109";
+	option domain-name "acpc.local";
+	ddns-hostname "team1109";
+}
+host team1110 {
+	hardware ethernet b0:7b:25:2b:ba:bc;
+	fixed-address 10.0.0.119;
+	option host-name "team1110";
+	option domain-name "acpc.local";
+	ddns-hostname "team1110";
+}
+host team1111 {
+	hardware ethernet d0:8e:79:01:8d:2f;
+	fixed-address 10.0.0.120;
+	option host-name "team1111";
+	option domain-name "acpc.local";
+	ddns-hostname "team1111";
+}
+host team1112 {
+	hardware ethernet b0:7b:25:28:5e:d8;
+	fixed-address 10.0.0.121;
+	option host-name "team1112";
+	option domain-name "acpc.local";
+	ddns-hostname "team1112";
+}
+host team1113 {
+	hardware ethernet b0:7b:25:28:5b:e3;
+	fixed-address 10.0.0.122;
+	option host-name "team1113";
+	option domain-name "acpc.local";
+	ddns-hostname "team1113";
+}
+host team1114 {
+	hardware ethernet d0:8e:79:05:27:09;
+	fixed-address 10.0.0.123;
+	option host-name "team1114";
+	option domain-name "acpc.local";
+	ddns-hostname "team1114";
+}
+host team1115 {
+	hardware ethernet b0:7b:25:28:68:b3;
+	fixed-address 10.0.0.124;
+	option host-name "team1115";
+	option domain-name "acpc.local";
+	ddns-hostname "team1115";
+}
+host team1116 {
+	hardware ethernet d0:8e:79:01:72:d2;
+	fixed-address 10.0.0.125;
+	option host-name "team1116";
+	option domain-name "acpc.local";
+	ddns-hostname "team1116";
+}
+host team1117 {
+	hardware ethernet d0:8e:79:00:d1:59;
+	fixed-address 10.0.0.126;
+	option host-name "team1117";
+	option domain-name "acpc.local";
+	ddns-hostname "team1117";
+}
+host team1118 {
+	hardware ethernet b0:7b:25:2b:b9:4b;
+	fixed-address 10.0.0.127;
+	option host-name "team1118";
+	option domain-name "acpc.local";
+	ddns-hostname "team1118";
+}
+host team1119 {
+	hardware ethernet b0:7b:25:2b:bc:82;
+	fixed-address 10.0.0.128;
+	option host-name "team1119";
+	option domain-name "acpc.local";
+	ddns-hostname "team1119";
+}
+host team1120 {
+	hardware ethernet d0:8e:79:01:6d:cf;
+	fixed-address 10.0.0.129;
+	option host-name "team1120";
+	option domain-name "acpc.local";
+	ddns-hostname "team1120";
+}
+host team1121 {
+	hardware ethernet b0:7b:25:2b:7e:77;
+	fixed-address 10.0.0.130;
+	option host-name "team1121";
+	option domain-name "acpc.local";
+	ddns-hostname "team1121";
+}
+host team1122 {
+	hardware ethernet d0:8e:79:00:e2:26;
+	fixed-address 10.0.0.131;
+	option host-name "team1122";
+	option domain-name "acpc.local";
+	ddns-hostname "team1122";
+}
+host team1123 {
+	hardware ethernet d0:8e:79:01:08:a5;
+	fixed-address 10.0.0.132;
+	option host-name "team1123";
+	option domain-name "acpc.local";
+	ddns-hostname "team1123";
+}
+host team1124 {
+	hardware ethernet d0:8e:79:00:d2:00;
+	fixed-address 10.0.0.133;
+	option host-name "team1124";
+	option domain-name "acpc.local";
+	ddns-hostname "team1124";
+}
+host team1125 {
+	hardware ethernet b0:7b:25:28:68:94;
+	fixed-address 10.0.0.134;
+	option host-name "team1125";
+	option domain-name "acpc.local";
+	ddns-hostname "team1125";
+}
+host team1126 {
+	hardware ethernet d0:8e:79:04:db:80;
+	fixed-address 10.0.0.135;
+	option host-name "team1126";
+	option domain-name "acpc.local";
+	ddns-hostname "team1126";
+}
+host team1127 {
+	hardware ethernet b0:7b:25:28:5c:57;
+	fixed-address 10.0.0.136;
+	option host-name "team1127";
+	option domain-name "acpc.local";
+	ddns-hostname "team1127";
+}
+host team1128 {
+	hardware ethernet b0:7b:25:28:47:c5;
+	fixed-address 10.0.0.137;
+	option host-name "team1128";
+	option domain-name "acpc.local";
+	ddns-hostname "team1128";
+}
+host team1129 {
+	hardware ethernet d0:8e:79:00:db:28;
+	fixed-address 10.0.0.138;
+	option host-name "team1129";
+	option domain-name "acpc.local";
+	ddns-hostname "team1129";
+}
+host team1130 {
+	hardware ethernet d0:8e:79:00:d5:3f;
+	fixed-address 10.0.0.139;
+	option host-name "team1130";
+	option domain-name "acpc.local";
+	ddns-hostname "team1130";
+}
+host team1131 {
+	hardware ethernet d0:8e:79:01:6e:c5;
+	fixed-address 10.0.0.140;
+	option host-name "team1131";
+	option domain-name "acpc.local";
+	ddns-hostname "team1131";
+}
+host team1132 {
+	hardware ethernet b0:7b:25:2b:ae:64;
+	fixed-address 10.0.0.141;
+	option host-name "team1132";
+	option domain-name "acpc.local";
+	ddns-hostname "team1132";
+}
+host team1133 {
+	hardware ethernet d0:8e:79:01:68:b8;
+	fixed-address 10.0.0.142;
+	option host-name "team1133";
+	option domain-name "acpc.local";
+	ddns-hostname "team1133";
+}
+host team1134 {
+	hardware ethernet b0:7b:25:2b:ae:29;
+	fixed-address 10.0.0.143;
+	option host-name "team1134";
+	option domain-name "acpc.local";
+	ddns-hostname "team1134";
+}
+host team1135 {
+	hardware ethernet d0:8e:79:00:d2:f6;
+	fixed-address 10.0.0.144;
+	option host-name "team1135";
+	option domain-name "acpc.local";
+	ddns-hostname "team1135";
+}
+host team1136 {
+	hardware ethernet d0:8e:79:04:c2:8e;
+	fixed-address 10.0.0.145;
+	option host-name "team1136";
+	option domain-name "acpc.local";
+	ddns-hostname "team1136";
+}
+host team1137 {
+	hardware ethernet d0:8e:79:05:27:0d;
+	fixed-address 10.0.0.146;
+	option host-name "team1137";
+	option domain-name "acpc.local";
+	ddns-hostname "team1137";
+}
+host team1138 {
+	hardware ethernet d0:8e:79:05:28:c2;
+	fixed-address 10.0.0.147;
+	option host-name "team1138";
+	option domain-name "acpc.local";
+	ddns-hostname "team1138";
+}
+host team1139 {
+	hardware ethernet d0:8e:79:01:49:31;
+	fixed-address 10.0.0.148;
+	option host-name "team1139";
+	option domain-name "acpc.local";
+	ddns-hostname "team1139";
+}
+host team1140 {
+	hardware ethernet b0:7b:25:2b:7f:76;
+	fixed-address 10.0.0.149;
+	option host-name "team1140";
+	option domain-name "acpc.local";
+	ddns-hostname "team1140";
+}
+host team1141 {
+	hardware ethernet b0:7b:25:24:33:8d;
+	fixed-address 10.0.0.150;
+	option host-name "team1141";
+	option domain-name "acpc.local";
+	ddns-hostname "team1141";
+}
+host team1142 {
+	hardware ethernet b0:7b:25:28:59:af;
+	fixed-address 10.0.0.151;
+	option host-name "team1142";
+	option domain-name "acpc.local";
+	ddns-hostname "team1142";
+}
+host team1143 {
+	hardware ethernet d0:8e:79:04:db:82;
+	fixed-address 10.0.0.152;
+	option host-name "team1143";
+	option domain-name "acpc.local";
+	ddns-hostname "team1143";
+}
+host team1144 {
+	hardware ethernet b0:7b:25:28:47:85;
+	fixed-address 10.0.0.153;
+	option host-name "team1144";
+	option domain-name "acpc.local";
+	ddns-hostname "team1144";
+}
+host team1145 {
+	hardware ethernet d0:8e:79:04:9a:2d;
+	fixed-address 10.0.0.154;
+	option host-name "team1145";
+	option domain-name "acpc.local";
+	ddns-hostname "team1145";
+}
+host team1146 {
+	hardware ethernet d0:8e:79:00:d2:dd;
+	fixed-address 10.0.0.155;
+	option host-name "team1146";
+	option domain-name "acpc.local";
+	ddns-hostname "team1146";
+}
+host team1147 {
+	hardware ethernet b0:7b:25:28:56:06;
+	fixed-address 10.0.0.156;
+	option host-name "team1147";
+	option domain-name "acpc.local";
+	ddns-hostname "team1147";
+}
+host team1148 {
+	hardware ethernet d0:8e:79:01:8a:5d;
+	fixed-address 10.0.0.157;
+	option host-name "team1148";
+	option domain-name "acpc.local";
+	ddns-hostname "team1148";
+}
+host team1149 {
+	hardware ethernet 36:d9:d2:de:f0:eb;
+	fixed-address 10.0.0.158;
+	option host-name "team1149";
+	option domain-name "acpc.local";
+	ddns-hostname "team1149";
+}
+host team2001 {
+        hardware ethernet b0:7b:25:2b:ac:81;
+        fixed-address 10.0.1.11;
+        option host-name "team2001";
+        option domain-name "acpc.local";
+        ddns-hostname "team2001";
+}
+host team2002 {
+        hardware ethernet d0:8e:79:04:c0:eb;
+        fixed-address 10.0.1.12;
+        option host-name "team2002";
+        option domain-name "acpc.local";
+        ddns-hostname "team2002";
+}
+host team2003 {
+        hardware ethernet b0:7b:25:2b:ac:4a;
+        fixed-address 10.0.1.13;
+        option host-name "team2003";
+        option domain-name "acpc.local";
+        ddns-hostname "team2003";
+}
+host team2004 {
+        hardware ethernet b0:7b:25:2b:7f:86;
+        fixed-address 10.0.1.14;
+        option host-name "team2004";
+        option domain-name "acpc.local";
+        ddns-hostname "team2004";
+}
+host team2005 {
+        hardware ethernet d0:8e:79:11:bd:ef;
+        fixed-address 10.0.1.15;
+        option host-name "team2005";
+        option domain-name "acpc.local";
+        ddns-hostname "team2005";
+}
+host team2006 {
+        hardware ethernet d0:8e:79:04:dc:de;
+        fixed-address 10.0.1.16;
+        option host-name "team2006";
+        option domain-name "acpc.local";
+        ddns-hostname "team2006";
+}
+host team2007 {
+        hardware ethernet b0:7b:25:2b:ae:b1;
+        fixed-address 10.0.1.17;
+        option host-name "team2007";
+        option domain-name "acpc.local";
+        ddns-hostname "team2007";
+}
+host team2008 {
+        hardware ethernet b0:7b:25:2b:ad:02;
+        fixed-address 10.0.1.18;
+        option host-name "team2008";
+        option domain-name "acpc.local";
+        ddns-hostname "team2008";
+}
+host team2009 {
+        hardware ethernet b0:7b:25:28:5b:f5;
+        fixed-address 10.0.1.19;
+        option host-name "team2009";
+        option domain-name "acpc.local";
+        ddns-hostname "team2009";
+}
+host team2010 {
+        hardware ethernet d0:8e:79:05:27:2c;
+        fixed-address 10.0.1.20;
+        option host-name "team2010";
+        option domain-name "acpc.local";
+        ddns-hostname "team2010";
+}
+host team2011 {
+        hardware ethernet d0:8e:79:04:96:a8;
+        fixed-address 10.0.1.21;
+        option host-name "team2011";
+        option domain-name "acpc.local";
+        ddns-hostname "team2011";
+}
+host team2012 {
+        hardware ethernet d0:8e:79:01:73:76;
+        fixed-address 10.0.1.22;
+        option host-name "team2012";
+        option domain-name "acpc.local";
+        ddns-hostname "team2012";
+}
+host team2013 {
+        hardware ethernet b0:7b:25:2b:7f:6c;
+        fixed-address 10.0.1.23;
+        option host-name "team2013";
+        option domain-name "acpc.local";
+        ddns-hostname "team2013";
+}
+host team2014 {
+        hardware ethernet b0:7b:25:28:5b:c5;
+        fixed-address 10.0.1.24;
+        option host-name "team2014";
+        option domain-name "acpc.local";
+        ddns-hostname "team2014";
+}
+host team2015 {
+        hardware ethernet d0:8e:79:04:bd:16;
+        fixed-address 10.0.1.25;
+        option host-name "team2015";
+        option domain-name "acpc.local";
+        ddns-hostname "team2015";
+}
+host team2016 {
+        hardware ethernet d0:8e:79:00:d2:df;
+        fixed-address 10.0.1.26;
+        option host-name "team2016";
+        option domain-name "acpc.local";
+        ddns-hostname "team2016";
+}
+host team2017 {
+        hardware ethernet d0:8e:79:01:91:bc;
+        fixed-address 10.0.1.27;
+        option host-name "team2017";
+        option domain-name "acpc.local";
+        ddns-hostname "team2017";
+}
+host team2018 {
+        hardware ethernet b0:7b:25:28:48:0e;
+        fixed-address 10.0.1.28;
+        option host-name "team2018";
+        option domain-name "acpc.local";
+        ddns-hostname "team2018";
+}
+host team2019 {
+        hardware ethernet b0:7b:25:2b:7e:56;
+        fixed-address 10.0.1.29;
+        option host-name "team2019";
+        option domain-name "acpc.local";
+        ddns-hostname "team2019";
+}
+host team2020 {
+        hardware ethernet b0:7b:25:28:49:5e;
+        fixed-address 10.0.1.30;
+        option host-name "team2020";
+        option domain-name "acpc.local";
+        ddns-hostname "team2020";
+}
+host team2021 {
+        hardware ethernet d0:8e:79:04:c1:39;
+        fixed-address 10.0.1.31;
+        option host-name "team2021";
+        option domain-name "acpc.local";
+        ddns-hostname "team2021";
+}
+host team2022 {
+        hardware ethernet b0:7b:25:28:5a:fb;
+        fixed-address 10.0.1.32;
+        option host-name "team2022";
+        option domain-name "acpc.local";
+        ddns-hostname "team2022";
+}
+host team2023 {
+        hardware ethernet b0:7b:25:24:29:04;
+        fixed-address 10.0.1.33;
+        option host-name "team2023";
+        option domain-name "acpc.local";
+        ddns-hostname "team2023";
+}
+host team2024 {
+        hardware ethernet b0:7b:25:2b:b0:04;
+        fixed-address 10.0.1.34;
+        option host-name "team2024";
+        option domain-name "acpc.local";
+        ddns-hostname "team2024";
+}
+host team2025 {
+        hardware ethernet d0:8e:79:11:c5:a6;
+        fixed-address 10.0.1.35;
+        option host-name "team2025";
+        option domain-name "acpc.local";
+        ddns-hostname "team2025";
+}
+host team2026 {
+        hardware ethernet b0:7b:25:28:5c:0f;
+        fixed-address 10.0.1.36;
+        option host-name "team2026";
+        option domain-name "acpc.local";
+        ddns-hostname "team2026";
+}
+host team2027 {
+        hardware ethernet d0:8e:79:00:fc:1b;
+        fixed-address 10.0.1.37;
+        option host-name "team2027";
+        option domain-name "acpc.local";
+        ddns-hostname "team2027";
+}
+host team2028 {
+        hardware ethernet b0:7b:25:2b:7e:45;
+        fixed-address 10.0.1.38;
+        option host-name "team2028";
+        option domain-name "acpc.local";
+        ddns-hostname "team2028";
+}
+host team2029 {
+        hardware ethernet d0:8e:79:00:e3:0d;
+        fixed-address 10.0.1.39;
+        option host-name "team2029";
+        option domain-name "acpc.local";
+        ddns-hostname "team2029";
+}
+host team2030 {
+        hardware ethernet d0:8e:79:04:c4:8d;
+        fixed-address 10.0.1.40;
+        option host-name "team2030";
+        option domain-name "acpc.local";
+        ddns-hostname "team2030";
+}
+host team2031 {
+        hardware ethernet b0:7b:25:28:5b:35;
+        fixed-address 10.0.1.41;
+        option host-name "team2031";
+        option domain-name "acpc.local";
+        ddns-hostname "team2031";
+}
+host team2032 {
+        hardware ethernet d0:8e:79:04:d4:c9;
+        fixed-address 10.0.1.42;
+        option host-name "team2032";
+        option domain-name "acpc.local";
+        ddns-hostname "team2032";
+}
+host team2033 {
+        hardware ethernet b0:7b:25:28:4c:7b;
+        fixed-address 10.0.1.43;
+        option host-name "team2033";
+        option domain-name "acpc.local";
+        ddns-hostname "team2033";
+}
+host team2034 {
+        hardware ethernet d0:8e:79:00:dc:19;
+        fixed-address 10.0.1.44;
+        option host-name "team2034";
+        option domain-name "acpc.local";
+        ddns-hostname "team2034";
+}
+host team2035 {
+        hardware ethernet b0:7b:25:28:5b:0f;
+        fixed-address 10.0.1.45;
+        option host-name "team2035";
+        option domain-name "acpc.local";
+        ddns-hostname "team2035";
+}
+host team2036 {
+        hardware ethernet d0:8e:79:04:c4:0c;
+        fixed-address 10.0.1.46;
+        option host-name "team2036";
+        option domain-name "acpc.local";
+        ddns-hostname "team2036";
+}
+host team2037 {
+        hardware ethernet d0:8e:79:01:6d:8d;
+        fixed-address 10.0.1.47;
+        option host-name "team2037";
+        option domain-name "acpc.local";
+        ddns-hostname "team2037";
+}
+host team2038 {
+        hardware ethernet d0:8e:79:01:49:23;
+        fixed-address 10.0.1.48;
+        option host-name "team2038";
+        option domain-name "acpc.local";
+        ddns-hostname "team2038";
+}
+host team2039 { 
+        hardware ethernet d0:8e:79:04:c1:bb;
+        fixed-address 10.0.1.49;
+        option host-name "team2039";
+        option domain-name "acpc.local";
+        ddns-hostname "team2039";
+}
+host team2040 {
+        hardware ethernet d0:8e:79:01:6d:eb;
+        fixed-address 10.0.1.50;
+        option host-name "team2040";
+        option domain-name "acpc.local";
+        ddns-hostname "team2040";
+}
+host team2041 {
+        hardware ethernet d0:8e:79:00:d6:cc;
+        fixed-address 10.0.1.51;
+        option host-name "team2041";
+        option domain-name "acpc.local";
+        ddns-hostname "team2041";
+}
+host team2042 {
+        hardware ethernet d0:8e:79:04:cc:57;
+        fixed-address 10.0.1.52;
+        option host-name "team2042";
+        option domain-name "acpc.local";
+        ddns-hostname "team2042";
+}
+host team2043 {
+        hardware ethernet d0:8e:79:13:00:e8;
+        fixed-address 10.0.1.53;
+        option host-name "team2043";
+        option domain-name "acpc.local";
+        ddns-hostname "team2043";
+}
+host team2044 {
+        hardware ethernet d0:8e:79:01:06:7b;
+        fixed-address 10.0.1.54;
+        option host-name "team2044";
+        option domain-name "acpc.local";
+        ddns-hostname "team2044";
+}
+host team2045 {
+        hardware ethernet b0:7b:25:2b:96:01;
+        fixed-address 10.0.1.55;
+        option host-name "team2045";
+        option domain-name "acpc.local";
+        ddns-hostname "team2045";
+}
+host team2046 {
+        hardware ethernet b0:7b:25:2b:b4:64;
+        fixed-address 10.0.1.56;
+        option host-name "team2046";
+        option domain-name "acpc.local";
+        ddns-hostname "team2046";
+}
+host team2047 {
+        hardware ethernet d0:8e:79:01:08:bf;
+        fixed-address 10.0.1.57;
+        option host-name "team2047";
+        option domain-name "acpc.local";
+        ddns-hostname "team2047";
+}
+host team2048 {
+        hardware ethernet b0:7b:25:27:ab:e7;
+        fixed-address 10.0.1.58;
+        option host-name "team2048";
+        option domain-name "acpc.local";
+        ddns-hostname "team2048";
+}
+host team2049 {
+        hardware ethernet b0:7b:25:2b:96:ff;
+        fixed-address 10.0.1.59;
+        option host-name "team2049";
+        option domain-name "acpc.local";
+        ddns-hostname "team2049";
+}
+host team2050 {
+        hardware ethernet d0:8e:79:04:d2:85;
+        fixed-address 10.0.1.60;
+        option host-name "team2050";
+        option domain-name "acpc.local";
+        ddns-hostname "team2050";
+}
+host team2051 {
+        hardware ethernet b0:7b:25:28:57:87;
+        fixed-address 10.0.1.61;
+        option host-name "team2051";
+        option domain-name "acpc.local";
+        ddns-hostname "team2051";
+}
+host team2052 {
+        hardware ethernet d0:8e:79:00:d1:a3;
+        fixed-address 10.0.1.62;
+        option host-name "team2052";
+        option domain-name "acpc.local";
+        ddns-hostname "team2052";
+}
+host team2053 {
+        hardware ethernet b0:7b:25:28:5b:48;
+        fixed-address 10.0.1.63;
+        option host-name "team2053";
+        option domain-name "acpc.local";
+        ddns-hostname "team2053";
+}
+host team2054 {
+        hardware ethernet b0:7b:25:2b:af:13;
+        fixed-address 10.0.1.64;
+        option host-name "team2054";
+        option domain-name "acpc.local";
+        ddns-hostname "team2054";
+}
+host team2055 {
+        hardware ethernet b0:7b:25:2b:aa:1d;
+        fixed-address 10.0.1.65;
+        option host-name "team2055";
+        option domain-name "acpc.local";
+        ddns-hostname "team2055";
+}
+host team2056 {
+        hardware ethernet d0:8e:79:01:72:b2;
+        fixed-address 10.0.1.66;
+        option host-name "team2056";
+        option domain-name "acpc.local";
+        ddns-hostname "team2056";
+}
+host team2057 {
+        hardware ethernet b0:7b:25:2b:ba:f9;
+        fixed-address 10.0.1.67;
+        option host-name "team2057";
+        option domain-name "acpc.local";
+        ddns-hostname "team2057";
+}
+host team2058 {
+        hardware ethernet d0:8e:79:04:d4:7d;
+        fixed-address 10.0.1.68;
+        option host-name "team2058";
+        option domain-name "acpc.local";
+        ddns-hostname "team2058";
+}
+host team2059 {
+        hardware ethernet d0:8e:79:04:c6:3a;
+        fixed-address 10.0.1.69;
+        option host-name "team2059";
+        option domain-name "acpc.local";
+        ddns-hostname "team2059";
+}
+host team2060 {
+        hardware ethernet d0:8e:79:00:d8:dd;
+        fixed-address 10.0.1.70;
+        option host-name "team2060";
+        option domain-name "acpc.local";
+        ddns-hostname "team2060";
+}
+host team2061 {
+        hardware ethernet b0:7b:25:28:56:b8;
+        fixed-address 10.0.1.71;
+        option host-name "team2061";
+        option domain-name "acpc.local";
+        ddns-hostname "team2061";
+}
+host team2062 {
+        hardware ethernet b0:7b:25:2b:99:af;
+        fixed-address 10.0.1.72;
+        option host-name "team2062";
+        option domain-name "acpc.local";
+        ddns-hostname "team2062";
+}
+host team2063 {
+        hardware ethernet d0:8e:79:00:e3:04;
+        fixed-address 10.0.1.73;
+        option host-name "team2063";
+        option domain-name "acpc.local";
+        ddns-hostname "team2063";
+}
+host team2064 {
+        hardware ethernet b0:7b:25:2b:96:d4;
+        fixed-address 10.0.1.74;
+        option host-name "team2064";
+        option domain-name "acpc.local";
+        ddns-hostname "team2064";
+}
+host team2065 {
+        hardware ethernet d0:8e:79:01:96:9a;
+        fixed-address 10.0.1.75;
+        option host-name "team2065";
+        option domain-name "acpc.local";
+        ddns-hostname "team2065";
+}
+host team2066 {
+        hardware ethernet d0:8e:79:04:dc:08;
+        fixed-address 10.0.1.76;
+        option host-name "team2066";
+        option domain-name "acpc.local";
+        ddns-hostname "team2066";
+}
+host team2067 {
+        hardware ethernet b0:7b:25:2b:ba:73;
+        fixed-address 10.0.1.77;
+        option host-name "team2067";
+        option domain-name "acpc.local";
+        ddns-hostname "team2067";
+}
+host team2068 {
+        hardware ethernet d0:8e:79:01:08:08;
+        fixed-address 10.0.1.78;
+        option host-name "team2068";
+        option domain-name "acpc.local";
+        ddns-hostname "team2068";
+}
+host team2069 {
+        hardware ethernet d0:8e:79:00:e4:6e;
+        fixed-address 10.0.1.79;
+        option host-name "team2069";
+        option domain-name "acpc.local";
+        ddns-hostname "team2069";
+}
+host team2070 {
+        hardware ethernet b0:7b:25:28:61:2f;
+        fixed-address 10.0.1.80;
+        option host-name "team2070";
+        option domain-name "acpc.local";
+        ddns-hostname "team2070";
+}
+host team2071 {
+        hardware ethernet d0:8e:79:01:8c:37;
+        fixed-address 10.0.1.81;
+        option host-name "team2071";
+        option domain-name "acpc.local";
+        ddns-hostname "team2071";
+}
+host team2072 {
+        hardware ethernet b0:7b:25:28:5e:65;
+        fixed-address 10.0.1.82;
+        option host-name "team2072";
+        option domain-name "acpc.local";
+        ddns-hostname "team2072";
+}
+host team2073 {
+        hardware ethernet d0:8e:79:05:28:b9;
+        fixed-address 10.0.1.83;
+        option host-name "team2073";
+        option domain-name "acpc.local";
+        ddns-hostname "team2073";
+}
+host team2074 {
+        hardware ethernet b0:7b:25:2b:a9:65;
+        fixed-address 10.0.1.84;
+        option host-name "team2074";
+        option domain-name "acpc.local";
+        ddns-hostname "team2074";
+}
+host team2075 {
+        hardware ethernet d0:8e:79:01:70:ac;
+        fixed-address 10.0.1.85;
+        option host-name "team2075";
+        option domain-name "acpc.local";
+        ddns-hostname "team2075";
+}
+host team2076 {
+        hardware ethernet d0:8e:79:04:d0:95;
+        fixed-address 10.0.1.86;
+        option host-name "team2076";
+        option domain-name "acpc.local";
+        ddns-hostname "team2076";
+}
+host team2077 {
+        hardware ethernet d0:8e:79:04:a3:a9;
+        fixed-address 10.0.1.87;
+        option host-name "team2077";
+        option domain-name "acpc.local";
+        ddns-hostname "team2077";
+}
+host team2078 {
+        hardware ethernet d0:8e:79:00:d4:6c;
+        fixed-address 10.0.1.88;
+        option host-name "team2078";
+        option domain-name "acpc.local";
+        ddns-hostname "team2078";
+}
+host team2079 {
+        hardware ethernet d0:8e:79:01:6e:b2;
+        fixed-address 10.0.1.89;
+        option host-name "team2079";
+        option domain-name "acpc.local";
+        ddns-hostname "team2079";
+}
+host team2080 {
+        hardware ethernet d0:8e:79:05:27:4e;
+        fixed-address 10.0.1.90;
+        option host-name "team2080";
+        option domain-name "acpc.local";
+        ddns-hostname "team2080";
+}
+host team2081 {
+        hardware ethernet d0:8e:79:00:df:45;
+        fixed-address 10.0.1.91;
+        option host-name "team2081";
+        option domain-name "acpc.local";
+        ddns-hostname "team2081";
+}
+host team2082 {
+        hardware ethernet d0:8e:79:01:6e:7d;
+        fixed-address 10.0.1.92;
+        option host-name "team2082";
+        option domain-name "acpc.local";
+        ddns-hostname "team2082";
+}
+host team2083 {
+        hardware ethernet d0:8e:79:04:bf:8e;
+        fixed-address 10.0.1.93;
+        option host-name "team2083";
+        option domain-name "acpc.local";
+        ddns-hostname "team2083";
+}
+host team2084 {
+        hardware ethernet b0:7b:25:28:5d:21;
+        fixed-address 10.0.1.94;
+        option host-name "team2084";
+        option domain-name "acpc.local";
+        ddns-hostname "team2084";
+}
+host team2085 {
+        hardware ethernet d0:8e:79:00:fe:e0;
+        fixed-address 10.0.1.95;
+        option host-name "team2085";
+        option domain-name "acpc.local";
+        ddns-hostname "team2085";
+}
+host team2086 {
+        hardware ethernet d0:8e:79:01:4a:64;
+        fixed-address 10.0.1.96;
+        option host-name "team2086";
+        option domain-name "acpc.local";
+        ddns-hostname "team2086";
+}
+host team2087 {
+        hardware ethernet d0:8e:79:01:1e:a7;
+        fixed-address 10.0.1.97;
+        option host-name "team2087";
+        option domain-name "acpc.local";
+        ddns-hostname "team2087";
+}
+host team2088 {
+        hardware ethernet d0:8e:79:01:07:7b;
+        fixed-address 10.0.1.98;
+        option host-name "team2088";
+        option domain-name "acpc.local";
+        ddns-hostname "team2088";
+}
+host team2089 {
+        hardware ethernet b0:7b:25:2b:ba:c5;
+        fixed-address 10.0.1.99;
+        option host-name "team2089";
+        option domain-name "acpc.local";
+        ddns-hostname "team2089";
+}
+host team2090 {
+        hardware ethernet d0:8e:79:04:c4:95;
+        fixed-address 10.0.1.100;
+        option host-name "team2090";
+        option domain-name "acpc.local";
+        ddns-hostname "team2090";
+}
+host team2091 {
+        hardware ethernet d0:8e:79:00:d9:0b;
+        fixed-address 10.0.1.101;
+        option host-name "team2091";
+        option domain-name "acpc.local";
+        ddns-hostname "team2091";
+}
+host team2092 {
+        hardware ethernet d0:8e:79:01:74:9d;
+        fixed-address 10.0.1.102;
+        option host-name "team2092";
+        option domain-name "acpc.local";
+        ddns-hostname "team2092";
+}
+host team2093 {
+        hardware ethernet d0:8e:79:00:de:25;
+        fixed-address 10.0.1.103;
+        option host-name "team2093";
+        option domain-name "acpc.local";
+        ddns-hostname "team2093";
+}
+host team2094 {
+        hardware ethernet b0:7b:25:24:20:ad;
+        fixed-address 10.0.1.104;
+        option host-name "team2094";
+        option domain-name "acpc.local";
+        ddns-hostname "team2094";
+}
+host team2095 {
+        hardware ethernet d0:8e:79:01:4a:4b;
+        fixed-address 10.0.1.105;
+        option host-name "team2095";
+        option domain-name "acpc.local";
+        ddns-hostname "team2095";
+}
+host team2096 {
+        hardware ethernet b0:7b:25:2b:b0:21;
+        fixed-address 10.0.1.106;
+        option host-name "team2096";
+        option domain-name "acpc.local";
+        ddns-hostname "team2096";
+}
+host judge1 {
+	hardware ethernet b0:7b:25:28:5b:31;
+	fixed-address 10.0.4.11;
+	option host-name "judge1";
+	option domain-name "acpc.local";
+	ddns-hostname "judge1";
+}
+host udge2 {
+	hardware ethernet d0:8e:79:04:d5:fe;
+	fixed-address 10.0.4.12;
+	option host-name "judge2";
+	option domain-name "acpc.local";
+	ddns-hostname "judge2";
+}
+host judge3 {
+	hardware ethernet d0:8e:79:04:99:0c;
+	fixed-address 10.0.4.13;
+	option host-name "judge3";
+	option domain-name "acpc.local";
+	ddns-hostname "judge3";
+}
+host judge4 {
+	hardware ethernet b0:7b:25:28:5c:7a;
+	fixed-address 10.0.4.14;
+	option host-name "judge4";
+	option domain-name "acpc.local";
+	ddns-hostname "judge4";
+}
+host judge5 {
+	hardware ethernet b0:7b:25:28:5b:84;
+	fixed-address 10.0.4.15;
+	option host-name "judge5";
+	option domain-name "acpc.local";
+	ddns-hostname "judge5";
+}
+host judge6 {
+	hardware ethernet d0:8e:79:05:27:d1;
+	fixed-address 10.0.4.16;
+	option host-name "judge6";
+	option domain-name "acpc.local";
+	ddns-hostname "judge6";
+}
+host judge7 {
+	hardware ethernet b0:7b:25:2b:b4:01;
+	fixed-address 10.0.4.17;
+	option host-name "judge7";
+	option domain-name "acpc.local";
+	ddns-hostname "judge7";
+}
+host judge8 {
+	hardware ethernet b0:7b:25:2b:bc:68;
+	fixed-address 10.0.4.18;
+	option host-name "judge8";
+	option domain-name "acpc.local";
+	ddns-hostname "judge8";
+}
+host judge9 {
+	hardware ethernet b0:7b:25:28:58:1b;
+	fixed-address 10.0.4.19;
+	option host-name "judge9";
+	option domain-name "acpc.local";
+	ddns-hostname "judge9";
+}
+host judge10 {
+	hardware ethernet d0:8e:79:01:67:9e;
+	fixed-address 10.0.4.20;
+	option host-name "judge10";
+	option domain-name "acpc.local";
+	ddns-hostname "judge10";
+}
+host judge11 {
+        hardware ethernet d0:8e:79:00:d5:3d;
+        fixed-address 10.0.1.211;
+        option host-name "judge11";
+        option domain-name "acpc.local";
+        ddns-hostname "judge11";
+}
+
+host judge13 {
+        hardware ethernet d0:8e:79:00:dd:9d;
+        fixed-address 10.0.4.23;
+        option host-name "judge13";
+        option domain-name "acpc.local";
+        ddns-hostname "judge13";
+}
+host judge14 {
+        hardware ethernet d0:8e:79:00:f3:0c;
+        fixed-address 10.0.4.24;
+        option host-name "judge14";
+        option domain-name "acpc.local";
+        ddns-hostname "judge14";
+}

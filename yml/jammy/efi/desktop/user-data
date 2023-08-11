@@ -31,7 +31,7 @@ autoinstall:
       enp0s31f6:
         dhcp4: true
     version: 2
-  proxy: http://proxy.acpc.local:3142
+  proxy: http://10.0.3.9:3142
   source:
     id: ubuntu-server
     search_drivers: false

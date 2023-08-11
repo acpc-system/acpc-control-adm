@@ -1,0 +1,145 @@
+#!/bin/bash
+#### Check if the acpcHostname is found, read it and compare to the current hostname
+### If, they are the same, dont do anything
+### If, the file is not found,this means 1st time run the PC,
+###	add to it current hostname, create the home directory and set profile settings, and if there is a backup, restore it
+### else, if it is found anad has a value different than the current,
+###	delete the home directory for the old user,
+###	And repeat the steps as the file is not found
+
+################################ Script is written by:
+############# Eng. Ahmed M. ElSayed
+###############   ahmed.elsayed@acpcacpc.org
+
+
+function restoreData {
+oldHostName=$1
+curHostName=$2
+if [ -d /backup/$oldHostName/cur ]
+then
+cp -r /backup/$oldHostName/cur/work/* /home/$curHostName/Desktop/work
+chown -R $curHostName:$curHostName /home/$curHostName/Desktop/work
+fi
+}
+
+function createUserProfile {
+### Create the local account
+
+curHostName=`hostname`
+
+### Get the team number, so create the user with the id that is team num + 2000, 
+#### so each local team account in each pc has a different uid to be suitable for permissions
+###### in the web server
+ID=`echo $curHostName|sed 's/team//g'`
+myUID=`expr $ID + 2000`
+useradd -c "ACPC Contestant account - $curHostName" -u $myUID -m $curHostName
+
+mkdir -p /home/$curHostName/Desktop/work
+mkdir -p /home/$curHostName/Desktop/samples
+######################## We have here to create the desktop shortcuts
+mkdir -p /home/$curHostName/.config/autostart
+cp /home/administrator/.config/autostart/set*.desktop /home/$curHostName/.config/autostart
+chmod +x /home/$curHostName/.config/autostart/set*.desktop
+chown -R $curHostName:$curHostName /home/$curHostName
+chown -R $curHostName:$curHostName /home/$curHostName/.config
+echo $curHostName > /etc/acpcHostname
+### Downloading all shortcuts
+cd /home/$curHostName/Desktop
+wget http://control/prog/common/CodeBlocks.desktop
+wget http://control/prog/common/ECLipse.desktop
+wget http://control/prog/common/Geany.desktop
+wget http://control/prog/common/GEdit.desktop
+wget http://control/prog/common/PC2_Team.desktop
+wget http://control/prog/common/ScoreBoard.desktop
+wget http://control/prog/common/STL_Documentation.desktop
+wget http://control/prog/common/Kill_Block.desktop
+wget http://control/prog/common/intellij.desktop
+wget http://control/prog/common/pycharm.desktop
+##wget http://control/prog/common/Net_Beans.desktop 
+wget http://control/prog/common/Clion.desktop
+#wget http://control/prog/common/Kotlin.desktop
+wget http://control/prog/common/Calculator.desktop 
+chmod +rx *.desktop
+cd /home/$curHostName
+wget http://control/prog/common/IDEs/intellij/intelliconfig.tar
+wget http://control/prog/common/IDEs/pycharm/pycharmconfig.tar
+tar xf intelliconfig.tar
+tar xf pycharmconfig.tar
+rm pycharmconfig.tar intelliconfig.tar
+chown -R $curHostName /home/$curHostName
+}
+
+function mountBackup {
+teamName=$1
+if [ ! -d /backup/$teamName ]
+then 
+ mkdir /backup/$teamName
+fi
+mount web:/backup/$teamName /backup/$teamName
+}
+
+function unmountBackup {
+teamName=$1
+umount  /backup/$teamName
+rm -R /backup/$teamName
+}
+
+function mountSamples {
+teamName=$1
+#mount the directory as read only for teams
+mount -o ro web:/home/samples /home/$teamName/Desktop/samples
+}
+
+function unmountSamples {
+teamName=$1
+umount /home/$teamName/Desktop/samples
+rm -R /home/$teamName/Desktop/samples
+}
+curHostName=`hostname`
+if [ ! -f /etc/acpcHostname ]
+then
+	createUserProfile
+	mountBackup $curHostName
+        mountSamples $curHostName
+	/usr/sbin/backupwork &
+	exit 0
+fi
+oldHostName=`cat /etc/acpcHostname`
+if [ $oldHostName != $curHostName ]
+then
+ unmountSamples $oldHostName
+ rm -Rf /home/$oldHostName
+ createUserProfile
+ mountBackup $oldHostName
+ restoreData $oldHostName $curHostName
+ unmountBackup $oldHostName
+ mountBackup $curHostName
+ mountSamples $curHostName
+else
+ mountBackup $curHostName
+ mountSamples $curHostName
+fi
+if [ ! -f /etc/dhcp/dhclient-exit-hooks.d/setacpchostname ]
+then
+echo 'hostname $new_host_name' > /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
+echo 'echo $new_host_name > /etc/hostname' >> /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
+chmod +x /etc/dhcp/dhclient-exit-hooks.d/setacpchostname
+fi
+
+
+#### The next section, executes any commands only for the 1st time the pc start after install
+if [ -f /1sttime ]
+then
+#151- Download firewalld direct rules, as permanent
+wget http://control/roles/contestant/iptables.rules > /firewall.logs 2>&1
+chmod +x iptables.rules >> /firewall.logs 2>&1
+systemctl restart firewalld     >> /firewall.logs 2>&1
+./iptables.rules        >> /firewall.logs 2>&1
+rm iptables.rules       >> /firewall.logs 2>&1
+rm /1sttime
+rm /finalize
+firewall-cmd --reload
+fi
+
+/usr/sbin/backupwork &
+
